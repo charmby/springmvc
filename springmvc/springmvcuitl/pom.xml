@@ -7,9 +7,7 @@
     <artifactId>springmvc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>com.gsafety</groupId>
   <artifactId>springmvcuitl</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>springmvcuitl</name>
   <url>http://maven.apache.org</url>
   <properties>
