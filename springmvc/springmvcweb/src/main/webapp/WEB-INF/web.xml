@@ -1,7 +1,38 @@
 <!DOCTYPE web-app PUBLIC
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
-
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+
+	<!-- 使用Spring MVC,配置DispatcherServlet是第一步。DispatcherServlet是一个Servlet（这个Servlet从HttpServlet继承而来）,所以可以配置多个DispatcherServlet。DispatcherServlet是前置控制器，配置在web.xml文件中的。负责拦截匹配的请求，Servlet拦截匹配规则要自已定义，把拦截下来的请求，依据“某某规则”分发到目标Controller(我们写的Action)来处理。“某某规则”：是根据你使用了哪个HandlerMapping接口的实现类的不同而不同。 
+		<servlet-name> mvc-dispatcher</servlet-name>这个Servlet的名字是mvc-dispatcher，可以有多个DispatcherServlet，是通过名字来区分的。每一个DispatcherServlet有自己的WebApplicationContext上下文对象。同时保存的ServletContext中和Request对象中。 
+		上边的web.xml为例 1.<servlet>定义了一个名字为mvc-dispatcher的servlet，其中<load-on-startup>1</load-on-startup>是启动顺序，让这个Servlet随Servlet容器一起启动。 
+		2.<servlet-mapping>定义了哪个servlet应该处理什么样的url匹配，上例中定义mvc-dispatcher这个servlet来处理所有匹配“/”的url， 
+		<url-pattern>/</url-pattern>，会匹配到类似“/welcome”这样的路径型url，不会匹配到模式为*.jsp这样的后缀型url”。 
+		3.<context-param>元素含有一对参数名和参数值，用作应用的ServletContext上下文初始化参数。参数名在整个Web应用中必须是惟一的。 
+		这里contextConfigLocation这个参数名，是被spring定义好的，会去加载spring的配置文件 -->
+
+
+	<display-name>springmvc学习项目</display-name>
+	<servlet>
+		<servlet-name>mvc-dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>mvc-dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<!-- <param-value>/WEB-INF/mvc-dispatcher-servlet.xml</param-value> -->
+		<param-value>classpath:mvc-dispatcher-servlet.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+
 </web-app>
