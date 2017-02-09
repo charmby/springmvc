@@ -14,6 +14,11 @@
 	<url>http://maven.apache.org</url>
 	<dependencies>
 
+	<dependency>
+		<groupId>com.gsafety</groupId>
+		<artifactId>springmvccore</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
 	</dependencies>
 	<build>
 		<finalName>springmvcweb</finalName>
