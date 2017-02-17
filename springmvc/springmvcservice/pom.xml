@@ -7,20 +7,17 @@
     <artifactId>springmvc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>com.gsafety</groupId>
   <artifactId>springmvcservice</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>springmvcservice</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
+  <dependency>
+  	<groupId>com.gsafety</groupId>
+  	<artifactId>springmvccore</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  </dependency>
   </dependencies>
 </project>
