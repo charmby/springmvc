@@ -27,5 +27,7 @@
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-
+	<!-- 处理器 -->
+	<bean name="/hello"
+		class="com.gsafety.controller.HelloWorldController" />
 </beans>
