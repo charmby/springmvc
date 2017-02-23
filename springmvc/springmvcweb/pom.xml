@@ -21,5 +21,10 @@
 			<artifactId>springmvccontroller</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>com.gsafety</groupId>
+			<artifactId>springmvcbakcontroller</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>
