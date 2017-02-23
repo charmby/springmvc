@@ -1,23 +1,32 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.gsafety</groupId>
-    <artifactId>springmvc</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  <artifactId>springmvccore</artifactId>
-  <name>springmvccore</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-    
-  </properties>
-  <dependencies>
-  	<dependency>
-  		<groupId>com.gsafety</groupId>
-  		<artifactId>springmvcuitl</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  	</dependency>
-  </dependencies>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.gsafety</groupId>
+		<artifactId>springmvc</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>springmvccore</artifactId>
+	<name>springmvccore</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>com.gsafety</groupId>
+			<artifactId>springmvcuitl</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+		</dependency>
+	</dependencies>
 </project>
