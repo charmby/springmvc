@@ -28,6 +28,8 @@
 		<module>springmvcweb</module>
 		<module>springmvcservice</module>
     <module>springmvccontroller</module>
+    <module>springmvcbakservice</module>
+    <module>springmvcbakcontroller</module>
   </modules>
 	<dependencyManagement>
 		<dependencies>
