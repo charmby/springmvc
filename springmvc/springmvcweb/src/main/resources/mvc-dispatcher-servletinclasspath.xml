@@ -7,18 +7,25 @@
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<context:component-scan base-package="com.gsafety" />
 
-	<context:component-scan base-package="com.lei.demo.controller" />
-	<!-- 以上配置视图解析中，属性“prefix”和属性“suffix”负责组装呈现视图的前缀和后缀，再配合自己写的controller，此例是“HelloController.java”中的return 
-		”hello“，那么对应关系就是如下： [prefix]+[controller return]+[stuffix]="/WEB-INF/pages/"+"hello"+".jsp"=/WEB-INF/pages/hello.jsp -->
+	<!-- BeanNameUrlHandlerMapping：表示将请求的 URL 和 Bean 名字映射，如 URL 为 “上下文/hello” 
+		，则 Spring 配置文件 必须有一个名字为“/hello”的 Bean，上下文默认忽略。 -->
+	<bean
+		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+	<!-- SimpleControllerHandlerAdapter：表示所有实现了 org.springframework.web.servlet.mvc.Controller 
+		接口的 Bean 可以作为 Spring Web MVC 中的处理器。如果需要其他类型的处理器可以通过实现 HadlerAdapter 来解决 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+	<!-- InternalResourceViewResolver：用于支持 Servlet、JSP 视图解析； viewClass：JstlView 
+		表示 JSP 模板页面需要使用 JSTL 标签库，classpath 中必须包含 jstl 的相关 jar 包； prefix 和 suffix：查找视图页面的前缀和后缀（前缀[逻辑视图名]后缀） 
+		，比如传进来的逻辑视图名为 hello，则该该 jsp 视图页面应该存放在“WEB-INF/jsp/hello.jsp” ； -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix">
-			<value>/WEB-INF/pages/</value>
-		</property>
-		<property name="suffix">
-			<value>.jsp</value>
-		</property>
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
 	</bean>
 
 </beans>
