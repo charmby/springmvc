@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gsafety</groupId>
 	<artifactId>springmvc</artifactId>
@@ -21,19 +22,25 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.spring.version>3.2.4.RELEASE</project.spring.version>
+		<project.log4j.version>1.2.17</project.log4j.version>
 	</properties>
 	<modules>
 		<module>springmvcuitl</module>
 		<module>springmvccore</module>
 		<module>springmvcweb</module>
 		<module>springmvcservice</module>
-    <module>springmvccontroller</module>
-    <module>springmvcbakservice</module>
-    <module>springmvcbakcontroller</module>
-  </modules>
+		<module>springmvccontroller</module>
+		<module>springmvcbakservice</module>
+		<module>springmvcbakcontroller</module>
+	</modules>
 	<dependencyManagement>
 		<dependencies>
-
+			<!-- https://mvnrepository.com/artifact/log4j/log4j -->
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${project.log4j.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>jstl</groupId>
 				<artifactId>jstl</artifactId>
@@ -85,6 +92,10 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
 		</dependency>
 	</dependencies>
 </project>
