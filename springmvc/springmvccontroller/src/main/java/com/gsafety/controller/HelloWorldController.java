@@ -3,6 +3,7 @@ package com.gsafety.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
@@ -21,8 +22,22 @@ ModelAndView：包含了视图要实现的模型数据和逻辑视图名；“mv
  * @author Thinkpad
  *
  */
+@RestController
 public class HelloWorldController implements Controller {
-
+	private String name;
+	private String age;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getAge() {
+		return age;
+	}
+	public void setAge(String age) {
+		this.age = age;
+	}
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -30,6 +45,10 @@ public class HelloWorldController implements Controller {
 		// 2、绑定参数到命令对象
 		// 3、将命令对象传入业务对象进行业务处理
 		// 4、选择下一个页面
+		String name2 = this.getName();
+		System.out.println(name2);
+		String  age2 = this.getAge();
+		System.out.println(age2);
 		ModelAndView mv = new ModelAndView();
 		//添加模型数据，可以是任意的po对象。
 		mv.addObject("message", "hello world!");
