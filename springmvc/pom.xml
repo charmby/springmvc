@@ -40,8 +40,8 @@
 		<project.log4j.version>1.2.17</project.log4j.version>
 		<project.servlet-api.version>3.1.0</project.servlet-api.version>
 		<project.jsp-api.version>2.3.2-b02</project.jsp-api.version>
-		<springfoxversion>2.6.1</springfoxversion>
-		<jacksonversion>2.6.6</jacksonversion>
+		<springfox.swagger.version>2.6.1</springfox.swagger.version>
+		<jackson.version>2.6.6</jackson.version>
 	</properties>
 	<modules>
 		<module>springmvcuitl</module>
@@ -54,30 +54,47 @@
 	</modules>
 	<dependencyManagement>
 		<dependencies>
+
+			<!-- springfox-swagger2 可以将代码中的注解转换为符合 Swagger 的 API 规范的 swagger.json 
+				文件, -->
 			<dependency>
 				<groupId>io.springfox</groupId>
 				<artifactId>springfox-swagger2</artifactId>
-				<version>${springfoxversion}</version>
+				<version>${springfox.swagger.version}</version>
 				<scope>compile</scope>
 			</dependency>
-			<dependency>
-				<groupId>com.fasterxml.jackson.core</groupId>
-				<artifactId>jackson-databind</artifactId>
-				<version>${jacksonversion}</version>
-			</dependency>
-
+			<!-- springfox-swagger-ui 提供了将 swagger.json 转换为 html 页面的服务. -->
 			<dependency>
 				<groupId>io.springfox</groupId>
 				<artifactId>springfox-swagger-ui</artifactId>
-				<version>${springfoxversion}</version>
+				<version>${springfox.swagger.version}</version>
 			</dependency>
 
 			<!--petStore是官方提供的一个代码参考, 可用于后期写文档时进行参考, 可不加 -->
 			<dependency>
 				<groupId>io.springfox</groupId>
 				<artifactId>springfox-petstore</artifactId>
-				<version>${springfoxversion}</version>
+				<version>${springfox.swagger.version}</version>
 			</dependency>
+
+			<!--jackson用于将springfox返回的文档对象转换成JSON字符串 -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+
+
 
 
 			<!-- servlet-api -->
@@ -161,18 +178,24 @@
 			<artifactId>springfox-swagger2</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-petstore</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
 		</dependency>
 	</dependencies>
 </project>
