@@ -26,6 +26,6 @@
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 
-
-
+<!-- 引入springfox的swagger2 -->
+<bean class="com.swagger.doc.MySwaggerConfig" />
 </beans>
