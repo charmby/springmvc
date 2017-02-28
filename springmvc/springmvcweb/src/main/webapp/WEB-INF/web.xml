@@ -38,29 +38,24 @@
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
+		<!-- 普通配置形式的使用 -->
+		<!-- <init-param> <param-name>contextConfigLocation</param-name> <param-value>classpath*:mvc-dispatcher-servletinclasspath.xml</param-value> 
+			</init-param> -->
+		<!-- 注解形式的使用 仅能存在一个 -->
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath*:mvc-dispatcher-servletinclasspath.xml</param-value>
+			<param-value>classpath*:annotationspringmvc-config.xml</param-value>
 			<!-- 默认是/WEB-INF/[servlet名字]-servlet.xml -->
 		</init-param>
 	</servlet>
-
-
-
 
 	<servlet-mapping>
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:mvc-dispatcher-servletinclasspath.xml</param-value>
-	</context-param>
-
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
 
 </web-app>
