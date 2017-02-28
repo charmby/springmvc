@@ -3,6 +3,7 @@ package com.gsafety.util;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -13,8 +14,9 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@EnableSwagger2  
-@ComponentScan(basePackages = {"com.gsafety.**.controller"})  
+@EnableSwagger2
+@EnableWebMvc
+@ComponentScan(basePackages = {"com.gsafety"})  
 @Configuration  
 public class SpringFoxConfig extends WebMvcConfigurationSupport{  
   

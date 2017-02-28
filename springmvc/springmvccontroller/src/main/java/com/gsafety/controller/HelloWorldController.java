@@ -1,11 +1,28 @@
 package com.gsafety.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
+
+import com.gsafety.po.BlogArticleBeen;
+import com.gsafety.po.JSONResult;
+import com.gsafety.po.PageInfoBeen;
 
 /**
  * 开发处理器/页面控制器
@@ -22,6 +39,8 @@ ModelAndView：包含了视图要实现的模型数据和逻辑视图名；“mv
  * @author Thinkpad
  *
  */
+@Api(value = "contacts-api", description = "有关于用户的CURD操作", position = 5)  
+@RequestMapping(value = "/v1/api")
 @RestController
 public class HelloWorldController implements Controller {
 	private String name;
@@ -56,7 +75,38 @@ public class HelloWorldController implements Controller {
 		mv.setViewName("hello");
 		return mv;
 	}
-
-
-
+	//这里使用POST @RequestBody必须使用POST才能接收，这里方便讲解
+	@ApiOperation(value = "一个测试API", notes = "第一个测试API")
+	@ResponseBody
+	@RequestMapping(value = "/test/{path}", method = RequestMethod.POST)
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "blogArticleBeen", value = "文档对象", required = true, paramType = "body", dataType = "BlogArticleBeen"),
+		@ApiImplicitParam(name = "path", value = "url上的数据", required = true, paramType = "path", dataType = "Long"),
+		@ApiImplicitParam(name = "query", value = "query类型参数", required = true, paramType = "query", dataType = "String"),
+		@ApiImplicitParam(name = "apiKey", value = "header中的数据", required = true, paramType = "header", dataType = "String")
+	})
+	@ApiResponses(value = { 
+			@ApiResponse(code = 200, message = "更新成功"),  
+			@ApiResponse(code = 404, message = "找不到页面"),  
+			@ApiResponse(code = 500, message = "内部报错")}  
+			)  
+	public JSONResult test(@RequestBody BlogArticleBeen blogArticleBeen,
+			@PathVariable Long path,
+			String query,
+			@RequestHeader String apiKey,
+			PageInfoBeen pageInfoBeen){
+		System.out.println("blogArticleBeen.getLastUpdateTime():"+blogArticleBeen.getLastUpdateTime());
+		System.out.println("blogArticleBeen.getSorter():"+blogArticleBeen.getSorter());
+		System.out.println("path:"+path);
+		System.out.println("query:"+query);
+		System.out.println("apiKey:"+apiKey);
+		System.out.println("pageInfoBeen.getNowPage():"+pageInfoBeen.getNowPage());
+		System.out.println("pageInfoBeen.getPageSize():"+pageInfoBeen.getPageSize());
+		JSONResult jsonResult = new JSONResult();
+		jsonResult.setMessage("success");
+		jsonResult.setMessageCode(null);
+		jsonResult.setCode(0);
+		jsonResult.setBody(null);
+		return jsonResult;
+	}
 }
