@@ -12,7 +12,7 @@
 	<!-- 开启注解模式驱动 -->
 	<mvc:annotation-driven />
 	<!-- 扫包 -->
-	<context:component-scan base-package="com.gsafety.*.controller.*,com.gsafety.*.po.*" />
+	<context:component-scan base-package="com.gsafety.controller,com.gsafety.**.controller,com.gsafety.po,com.gsafety.**.po" />
 	<!-- 静态资源过滤 -->
 	<mvc:resources location="/resources/" mapping="/resources/**" />
 

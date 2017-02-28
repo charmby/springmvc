@@ -41,7 +41,7 @@ ModelAndView：包含了视图要实现的模型数据和逻辑视图名；“mv
  */
 @Api(value = "contacts-api", description = "有关于用户的CURD操作", position = 5)  
 @RequestMapping(value = "/v1/api")
-@RestController
+@RestController(value="/hello")
 public class HelloWorldController implements Controller {
 	private String name;
 	private String age;
@@ -108,5 +108,9 @@ public class HelloWorldController implements Controller {
 		jsonResult.setCode(0);
 		jsonResult.setBody(null);
 		return jsonResult;
+	}
+	@RequestMapping(value="/testmapping")
+	public void testRequestMapping(){
+		System.out.println("dsfdsfdsa");
 	}
 }
