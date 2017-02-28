@@ -72,6 +72,14 @@
 				<version>${springfoxversion}</version>
 			</dependency>
 
+			<!--petStore是官方提供的一个代码参考, 可用于后期写文档时进行参考, 可不加 -->
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-petstore</artifactId>
+				<version>${springfoxversion}</version>
+			</dependency>
+
+
 			<!-- servlet-api -->
 			<dependency>
 				<groupId>javax.servlet</groupId>
@@ -160,6 +168,11 @@
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-petstore</artifactId>
 		</dependency>
 	</dependencies>
 </project>
