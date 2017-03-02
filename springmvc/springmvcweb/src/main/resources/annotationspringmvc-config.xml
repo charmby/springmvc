@@ -22,7 +22,7 @@
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- 制定页面存放的路径 -->
-		<property name="prefix" value="/WEB-INF/pages"></property>
+		<property name="prefix" value="/WEB-INF/pages/"></property>
 		<!-- 文件的后缀 -->
 		<property name="suffix" value=".jsp"></property>
 	</bean>
