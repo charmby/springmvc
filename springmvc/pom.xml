@@ -56,6 +56,9 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
+				
+			<!-- 	1.javadoc:javadoc在聚合父项目中生成site的api页面
+				2.javadoc:jar 在target中生成doc.jar包。 -->
 				<configuration>
 					<aggregate>true</aggregate>
 					<encoding>UTF-8</encoding>
