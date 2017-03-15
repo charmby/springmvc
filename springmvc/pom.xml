@@ -7,13 +7,38 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<description>父类的springmvc</description>
+
+	<properties>
+		<!-- 文件拷贝时的编码 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!-- 编译时的编码 -->
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+		<project.spring.version>4.2.6.RELEASE</project.spring.version>
+		<project.log4j.version>1.2.17</project.log4j.version>
+		<project.servlet-api.version>3.1.0</project.servlet-api.version>
+		<project.jsp-api.version>2.3.2-b02</project.jsp-api.version>
+		<springfox.swagger.version>2.6.1</springfox.swagger.version>
+		<jackson.version>2.6.6</jackson.version>
+		<checkstyle.config.location>checkstyle.xml</checkstyle.config.location>
+	</properties>
+	<modules>
+		<module>springmvcuitl</module>
+		<module>springmvccore</module>
+		<module>springmvcweb</module>
+		<module>springmvcservice</module>
+		<module>springmvccontroller</module>
+		<module>springmvcbakservice</module>
+		<module>springmvcbakcontroller</module>
+	</modules>
+
 	<build>
 		<pluginManagement>
 			<plugins>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					 <version>3.5.1</version>
+					<version>3.5.1</version>
 				</plugin>
 
 				<plugin>
@@ -26,7 +51,11 @@
 					<artifactId>maven-javadoc-plugin</artifactId>
 					<version>2.9.1</version>
 				</plugin>
-
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>findbugs-maven-plugin</artifactId>
+					<version>2.5.1</version>
+				</plugin>
 			</plugins>
 
 		</pluginManagement>
@@ -56,39 +85,36 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				
-			<!-- 	1.javadoc:javadoc在聚合父项目中生成site的api页面
-				2.javadoc:jar 在target中生成doc.jar包。 -->
+
+				<!-- 1.javadoc:javadoc在聚合父项目中生成site的api页面 2.javadoc:jar 在target中生成doc.jar包。 -->
 				<configuration>
 					<aggregate>true</aggregate>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.10</version>
+				<executions>
+					<execution>
+						<id>checkstyle</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<failOnViolation>true</failOnViolation>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 
 		</plugins>
+
 	</build>
-	<properties>
-		  <!-- 文件拷贝时的编码 -->  
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>  
-        <!-- 编译时的编码 -->  
-        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>  
-		<project.spring.version>4.2.6.RELEASE</project.spring.version>
-		<project.log4j.version>1.2.17</project.log4j.version>
-		<project.servlet-api.version>3.1.0</project.servlet-api.version>
-		<project.jsp-api.version>2.3.2-b02</project.jsp-api.version>
-		<springfox.swagger.version>2.6.1</springfox.swagger.version>
-		<jackson.version>2.6.6</jackson.version>
-	</properties>
-	<modules>
-		<module>springmvcuitl</module>
-		<module>springmvccore</module>
-		<module>springmvcweb</module>
-		<module>springmvcservice</module>
-		<module>springmvccontroller</module>
-		<module>springmvcbakservice</module>
-		<module>springmvcbakcontroller</module>
-	</modules>
+
 	<dependencyManagement>
 		<dependencies>
 
