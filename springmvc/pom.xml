@@ -56,10 +56,17 @@
 					<artifactId>findbugs-maven-plugin</artifactId>
 					<version>2.5.1</version>
 				</plugin>
+				<!-- 生成javadoc文档包的插件 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>2.9.1</version>
+				</plugin>
 			</plugins>
 
 		</pluginManagement>
 		<plugins>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -82,10 +89,10 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- 生成javadoc文档包的插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-
 				<!-- 1.javadoc:javadoc在聚合父项目中生成site的api页面 2.javadoc:jar 在target中生成doc.jar包。 -->
 				<configuration>
 					<aggregate>true</aggregate>
