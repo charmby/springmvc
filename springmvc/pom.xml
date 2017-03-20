@@ -98,6 +98,15 @@
 					<aggregate>true</aggregate>
 					<encoding>UTF-8</encoding>
 				</configuration>
+	<!-- 			配置该参数，当install时，所有的项目都会生成jar的javadocsources -->
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 
