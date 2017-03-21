@@ -19,8 +19,5 @@
 	<!-- 配置<context:component-sacn base-package="xxxx">后，spring就会自动扫描注解。扫描指定包下所有内容。 -->
 	<context:component-scan
 		base-package="com.gsafety.**.service.**,com.gsafety.**.dao.**">
-		<context:exclude-filter type="regex"
-			expression="com\.gsafety\.util\..*" />
-
 	</context:component-scan>
 </beans>
