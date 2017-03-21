@@ -14,7 +14,6 @@
   	<dependency>
   		<groupId>com.gsafety</groupId>
   		<artifactId>springmvcbakservice</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>
 </project>

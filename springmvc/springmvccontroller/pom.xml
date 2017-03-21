@@ -13,7 +13,6 @@
   	<dependency>
   		<groupId>com.gsafety</groupId>
   		<artifactId>springmvcservice</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>
 </project>

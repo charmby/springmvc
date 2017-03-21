@@ -18,7 +18,6 @@
 		<dependency>
 			<groupId>com.gsafety</groupId>
 			<artifactId>springmvcuitl</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
