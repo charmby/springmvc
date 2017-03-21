@@ -98,7 +98,7 @@
 					<aggregate>true</aggregate>
 					<encoding>UTF-8</encoding>
 				</configuration>
-	<!-- 			配置该参数，当install时，所有的项目都会生成jar的javadocsources -->
+				<!-- 配置该参数，当install时，所有的项目都会生成jar的javadocsources -->
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
@@ -208,6 +208,32 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-webmvc</artifactId>
 				<version>${project.spring.version}</version>
+			</dependency>
+			<!-- 本项目的版本的依赖管理 -->
+			<dependency>
+				<groupId>com.gsafety</groupId>
+				<artifactId>springmvccontroller</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.gsafety</groupId>
+				<artifactId>springmvcbakcontroller</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.gsafety</groupId>
+				<artifactId>springmvcbakcontroller</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.gsafety</groupId>
+				<artifactId>springmvcservice</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.gsafety</groupId>
+				<artifactId>springmvcbakservice</artifactId>
+				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
