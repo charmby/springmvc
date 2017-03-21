@@ -235,6 +235,16 @@
 				<artifactId>springmvcbakservice</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.gsafety</groupId>
+				<artifactId>springmvccore</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.gsafety</groupId>
+				<artifactId>springmvcuitl</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
