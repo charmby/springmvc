@@ -22,9 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
-import com.gsafety.po.BlogArticleBeen;
+import com.gsafety.po.BlogArticle;
 import com.gsafety.po.JSONResult;
-import com.gsafety.po.PageInfoBeen;
+import com.gsafety.po.PageInfo;
 import com.gsafety.po.Result;
 import com.gsafety.po.User;
 
@@ -94,11 +94,11 @@ public class HelloWorldController implements Controller {
 			@ApiResponse(code = 404, message = "找不到页面"),  
 			@ApiResponse(code = 500, message = "内部报错")}  
 			)  
-	public JSONResult test(@RequestBody BlogArticleBeen blogArticleBeen,
+	public JSONResult test(@RequestBody BlogArticle blogArticleBeen,
 			@PathVariable Long path,
 			String query,
 			@RequestHeader String apiKey,
-			PageInfoBeen pageInfoBeen){
+			PageInfo pageInfoBeen){
 		System.out.println("blogArticleBeen.getLastUpdateTime():"+blogArticleBeen.getLastUpdateTime());
 		System.out.println("blogArticleBeen.getSorter():"+blogArticleBeen.getSorter());
 		System.out.println("path:"+path);

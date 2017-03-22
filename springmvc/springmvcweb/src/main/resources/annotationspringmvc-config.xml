@@ -14,13 +14,18 @@
 	<!-- 扫包 -->
 	<context:component-scan
 		base-package="com.gsafety.controller,com.gsafety.**.controller,com.gsafety.po,com.gsafety.**.po" />
+
+	<!-- 还需要在spring-mvc.xml中添加映射静态的配置： -->
+
+	<mvc:default-servlet-handler />
+
 	<!-- 静态资源过滤 -->
 	<mvc:resources location="/resources/" mapping="/resources/**" />
 
-	<beans:bean class="com.gsafety.util.SwaggerConfiguration" />
+	<bean class="com.gsafety.util.SwaggerConfiguration" />
 	<!-- swagger ui resources -->
-	<mvc:resources mapping="/webjars/**"
-		location="classpath:/META-INF/resources/webjars" />
+	<!-- <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars" 
+		/> -->
 
 
 	<!-- 视图渲染 jsp/freemaker/velocity -->
@@ -33,5 +38,5 @@
 	</bean>
 
 	<!-- 引入springfox的swagger2 -->
-	<bean class="com.gsafety.util.SpringFoxConfig" />
+	<!-- <bean class="com.gsafety.util.SpringFoxConfig" /> -->
 </beans>

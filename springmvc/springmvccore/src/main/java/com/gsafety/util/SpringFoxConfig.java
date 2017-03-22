@@ -1,13 +1,8 @@
 package com.gsafety.util;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-@Configuration
+/*@Configuration
 @EnableSwagger2
-@ComponentScan(basePackages = {"com.gsafety"})
+@ComponentScan(basePackages = {"com.gsafety"})*/
 public class SpringFoxConfig{  
   
   /*  @Bean  
