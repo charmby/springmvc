@@ -1,9 +1,11 @@
 package com.gsafety.po;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
 
-public class PageInfoBeen {
+@ApiModel(description = "分页信息")
+public class PageInfo {
 	@ApiParam(value = "当前页", required = true)
 	private Integer nowPage;
 	

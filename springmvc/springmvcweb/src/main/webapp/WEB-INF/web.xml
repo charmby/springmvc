@@ -67,4 +67,15 @@
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
+
+
+	<!-- 然后我们还需要把swagger和spring mvc结合起来，首先在web.xml里加入swagger文档的访问路径： -->
+	<!-- swagger ui 的静态资源交由default处理 -->
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/swagger-ui.html</url-pattern>
+	</servlet-mapping>
+
+
+
 </web-app>

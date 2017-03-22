@@ -17,6 +17,11 @@
 	<!-- 静态资源过滤 -->
 	<mvc:resources location="/resources/" mapping="/resources/**" />
 
+	<beans:bean class="com.gsafety.util.SwaggerConfiguration" />
+	<!-- swagger ui resources -->
+	<mvc:resources mapping="/webjars/**"
+		location="classpath:/META-INF/resources/webjars" />
+
 
 	<!-- 视图渲染 jsp/freemaker/velocity -->
 	<bean

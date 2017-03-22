@@ -1,10 +1,16 @@
 package com.gsafety.po;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(description = "用户")
 public class User {
 
-
+	@ApiModelProperty(value = "用户Id", example = "1",position = 1)
 	private  int userId;
+	@ApiModelProperty(value = "姓名", example = "xiao",position = 1)
 	private String userName;
+	@ApiModelProperty(value = "年龄", example = "2",position = 1)
 	private int age;
 
 	public User(String userName, int age) {
