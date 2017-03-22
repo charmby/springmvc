@@ -18,7 +18,7 @@
 		<project.log4j.version>1.2.17</project.log4j.version>
 		<project.servlet-api.version>3.1.0</project.servlet-api.version>
 		<project.jsp-api.version>2.3.2-b02</project.jsp-api.version>
-		<springfox.swagger.version>2.6.0</springfox.swagger.version>
+		<springfox.swagger.version>2.6.1</springfox.swagger.version>
 		<jackson.version>2.6.6</jackson.version>
 		<checkstyle.config.location>checkstyle.xml</checkstyle.config.location>
 	</properties>
