@@ -40,7 +40,12 @@ ModelAndView：包含了视图要实现的模型数据和逻辑视图名；“mv
 ”表示添加模型数据，此处可以是任意 POJO 对象；“mv.setViewName("hello");”表示设置逻辑视图名为“hello”，
 视图解析器会将其解析为具体的视图，如前边的视图解析器 InternalResourceVi。wResolver 会将其解析为
 “WEB-INF/jsp/hello.jsp
- * @author Thinkpad
+
+1、springfox首先扫描@RestController货@Controller注解，有这个注解的才是springmvc的类，才能扫描到springfox的ui中。
+2. 然后springfox 扫描requestmapping中的value值，该值是请求url。
+ 
+  在
+ * @author xiaodonghong
  *
  */
 @Api(value = "欢迎页面API", description = "有关于用户的CURD操作", position = 5)  
