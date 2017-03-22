@@ -18,7 +18,7 @@
 		<project.log4j.version>1.2.17</project.log4j.version>
 		<project.servlet-api.version>3.1.0</project.servlet-api.version>
 		<project.jsp-api.version>2.3.2-b02</project.jsp-api.version>
-		<springfox.swagger.version>2.6.1</springfox.swagger.version>
+		<springfox.swagger.version>2.6.0</springfox.swagger.version>
 		<jackson.version>2.6.6</jackson.version>
 		<checkstyle.config.location>checkstyle.xml</checkstyle.config.location>
 	</properties>
@@ -117,6 +117,12 @@
 
 			<!-- springfox-swagger2 可以将代码中的注解转换为符合 Swagger 的 API 规范的 swagger.json 
 				文件, -->
+			<!-- swagger start -->
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger-common</artifactId>
+				<version>${springfox.swagger.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>io.springfox</groupId>
 				<artifactId>springfox-swagger2</artifactId>
@@ -129,7 +135,11 @@
 				<artifactId>springfox-swagger-ui</artifactId>
 				<version>${springfox.swagger.version}</version>
 			</dependency>
-
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-spi</artifactId>
+				<version>${springfox.swagger.version}</version>
+			</dependency>
 			<!--petStore是官方提供的一个代码参考, 可用于后期写文档时进行参考, 可不加 -->
 			<dependency>
 				<groupId>io.springfox</groupId>
@@ -153,9 +163,6 @@
 				<artifactId>jackson-core</artifactId>
 				<version>${jackson.version}</version>
 			</dependency>
-
-
-
 
 			<!-- servlet-api -->
 			<dependency>
@@ -271,12 +278,22 @@
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 		</dependency>
+		<!-- springfox-swagger-ui 提供了将 swagger.json 转换为 html 页面的服务. -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-spi</artifactId>
+		</dependency>
+		<!--petStore是官方提供的一个代码参考, 可用于后期写文档时进行参考, 可不加 -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-petstore</artifactId>
