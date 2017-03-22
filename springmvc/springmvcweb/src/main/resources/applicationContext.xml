@@ -16,8 +16,8 @@
 		@Component，@Repository，@Service，@Controller，就会将这个对象作为Bean注册进spring容器。 2、在<context:component-scan 
 		base-package=” ” /> 中指定多个包：<context:component-scan base-package="cn.edu.dao.impl,cn.edu.service.impl,cn.edu.action" 
 		/> 多个包逗号隔开。 -->
-	<!-- 配置<context:component-sacn base-package="xxxx">后，spring就会自动扫描注解。扫描指定包下所有内容。 -->
+	<!-- 配置<context:component-sacn base-package="xxxx">后，spring就会自动扫描注解。扫描指定包下所有内容。这个文件只是针对spring，而不是springmvc的注解，并不会扫描springmvc的requestmapping等信息。只会将其中的service component 等注入进去。-->	
 	<context:component-scan
-		base-package="com.gsafety.**.service.**,com.gsafety.**.dao.**">
+		base-package="com.gsafety.**.service.**,com.gsafety.**.dao.**,com.gsafety.**.controller.**,">
 	</context:component-scan>
 </beans>

@@ -9,6 +9,8 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc  
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        
+   <!--      该文件只会扫描springmvc的注释，并不会扫描spring的service等注释 -->
 	<!-- 开启注解模式驱动 -->
 	<mvc:annotation-driven />
 	<!-- 扫包 -->
