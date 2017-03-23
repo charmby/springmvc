@@ -32,10 +32,10 @@ public class SwaggerConfiguration {
 				"springmvc的各项验证信息", // title 标题
 				"springmvc的各项外部接口信息", // description 描述 标题下
 				"1.0.0", // version
-				"http://mylearn/*", // termsOfService
+				"http://localhost:8080/springmvcweb/*", // termsOfService
 				new Contact("肖东红","","xiaodonghong@gsafety.com"), // contact
-				"北京辰安科技股份有限公司", // licence
-				"http://www.apache.org/licenses/LICENSE-2.0.html" // licence url
+				"项目的代码和资料地址", // licence
+				"https://github.com/xiaoyiyibaibai/springmvc" // licence url
 				);
 	}
 }
