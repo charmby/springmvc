@@ -1,6 +1,7 @@
 package com.gsafety.learnjdk8;
 
 import java.util.Arrays;
+import java.util.function.Consumer;
 
 /**
  * lambda表达式语法
