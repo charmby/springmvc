@@ -51,6 +51,22 @@ ModelAndView：包含了视图要实现的模型数据和逻辑视图名；“mv
 @Api(value = "欢迎页面API", description = "有关于用户的CURD操作", position = 5)  
 @RequestMapping(value = "/v1/api")
 @RestController(value="/hello")
+@ApiResponses( value = { 
+		@ApiResponse(code = 100, message = "(继续)请求者应当继续提出请求。服务器返回此代码表示已收到请求的第一部分，正在等待其余部分"),  
+		@ApiResponse(code = 101, message = "(切换协议)请求者已要求服务器切换协议，服务器已确认并准备切换。  "),  
+		@ApiResponse(code = 200, message = "服务器已成功处理了请求"),  
+		@ApiResponse(code = 205, message = "（重置内容） 服务器成功处理了请求，但没有返回任何内容"),  
+		@ApiResponse(code = 301, message = "（永久移动）  请求的网页已永久移动到新位置。 服务器返回此响应（对 GET 或 HEAD 请求的响应）时，会自动将请求者转到新位置。"),  
+		@ApiResponse(code = 304, message = "（未修改） 自从上次请求后，请求的网页未修改过。 服务器返回此响应时，不会返回网页内容。"),  
+		@ApiResponse(code = 307, message = "（临时重定向）  服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求"),  
+		@ApiResponse(code = 400, message = "（错误请求） 服务器不理解请求的语法"),  
+		@ApiResponse(code = 401, message = "（未授权） 请求要求身份验证。 对于需要登录的网页，服务器可能返回此响应。"),  
+		@ApiResponse(code = 403, message = "（禁止） 服务器拒绝请求"),  
+		@ApiResponse(code = 404, message = "（未找到） 服务器找不到请求的网页"),  
+		@ApiResponse(code = 408, message = "（请求超时）  服务器等候请求时发生超时"),  
+		@ApiResponse(code = 414, message = "（请求的 URI 过长） 请求的 URI（通常为网址）过长，服务器无法处理"),  
+		@ApiResponse(code = 500, message = "（服务器内部错误）  服务器遇到错误，无法完成请求")} 
+		)  
 public class HelloWorldController implements Controller {
 	private String name;
 	private String age;
@@ -94,11 +110,6 @@ public class HelloWorldController implements Controller {
 		@ApiImplicitParam(name = "query", value = "query类型参数", required = true, paramType = "query", dataType = "String"),
 		@ApiImplicitParam(name = "apiKey", value = "header中的数据", required = true, paramType = "header", dataType = "String")
 	})
-	@ApiResponses(value = { 
-			@ApiResponse(code = 200, message = "更新成功"),  
-			@ApiResponse(code = 404, message = "找不到页面"),  
-			@ApiResponse(code = 500, message = "内部报错")}  
-			)  
 	public JSONResult test(@RequestBody BlogArticle blogArticleBeen,
 			@PathVariable Long path,
 			String query,

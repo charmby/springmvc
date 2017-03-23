@@ -19,7 +19,7 @@ public class SwaggerConfiguration {
 	@Bean
 	public Docket getApiInfo() {
 		return new Docket(DocumentationType.SWAGGER_2)
-				.groupName("rest接口信息")
+				.groupName("项目所有Restfule接口")
 				.select()   //选择哪些路径和API会生成document
 				.apis(RequestHandlerSelectors.any()) // 对所有api进行监控
 				.paths(PathSelectors.any())  // 对所有路径进行监控
@@ -41,11 +41,22 @@ public class SwaggerConfiguration {
 	@Bean  
     public Docket createRestApi() {  
         return new Docket(DocumentationType.SWAGGER_12)  
-        		 .groupName("测试rest")
+        		 .groupName("测试类Restful接口")
                 .apiInfo(outApiInfo())  
                 .select()  
                 .apis(RequestHandlerSelectors.basePackage("com.gsafety.bak.controller"))  
                 .paths(PathSelectors.any())  
                 .build();  
     }  
+	
+	@Bean
+	public Docket getHelloWorldApiInfo() {
+		return new Docket(DocumentationType.SWAGGER_2)
+				.groupName("仅展示示例欢迎类的Restfule接口")
+				.select()   //选择哪些路径和API会生成document
+				.apis(RequestHandlerSelectors.basePackage("com.gsafety.controller"))   // 对com.gsafety.controller下的api进行监控
+				.paths(PathSelectors.any())  // 对所有路径进行监控
+				.build()
+				.apiInfo(outApiInfo());
+	}
 }
