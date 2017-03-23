@@ -26,9 +26,8 @@
 
 	<bean class="com.gsafety.util.SwaggerConfiguration" />
 	<!-- swagger ui resources -->
-	<!-- <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars" 
-		/> -->
-
+	<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars" 
+		/>
 
 	<!-- 视图渲染 jsp/freemaker/velocity -->
 	<bean
@@ -38,7 +37,4 @@
 		<!-- 文件的后缀 -->
 		<property name="suffix" value=".jsp"></property>
 	</bean>
-
-	<!-- 引入springfox的swagger2 -->
-	<!-- <bean class="com.gsafety.util.SpringFoxConfig" /> -->
 </beans>
