@@ -38,4 +38,14 @@ public class SwaggerConfiguration {
 				"https://github.com/xiaoyiyibaibai/springmvc" // licence url
 				);
 	}
+	@Bean  
+    public Docket createRestApi() {  
+        return new Docket(DocumentationType.SWAGGER_12)  
+        		 .groupName("测试rest")
+                .apiInfo(outApiInfo())  
+                .select()  
+                .apis(RequestHandlerSelectors.basePackage("com.gsafety.bak.controller"))  
+                .paths(PathSelectors.any())  
+                .build();  
+    }  
 }
