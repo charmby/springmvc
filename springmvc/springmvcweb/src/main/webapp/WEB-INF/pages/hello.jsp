@@ -4,6 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%
+String contextPath = "http://"+request.getRemoteHost()t+":"request.getRemotePort()+request.getContextPath();
+System.out.println(contextPath);
+%>
+<link style="text/css" charset="utf-8" href="">
 <title>hello</title>
 </head>
 <body>
