@@ -1,16 +1,18 @@
 package com.gsafety.po;
 
+import com.gsafety.commonabstractclass.AbstractCommonAttr;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(description = "用户")
-public class User {
+@ApiModel(description = "用户",parent= AbstractCommonAttr.class/*,value="用户信息"*/)
+public class User extends AbstractCommonAttr {
 
 	@ApiModelProperty(value = "用户Id", example = "1",position = 1)
 	private  int userId;
-	@ApiModelProperty(value = "姓名", example = "xiao",position = 1)
+	@ApiModelProperty(value = "姓名", example = "xiao",position = 3)
 	private String userName;
-	@ApiModelProperty(value = "年龄", example = "2",position = 1)
+	@ApiModelProperty(value = "年龄", example = "2",position = 2)
 	private int age;
 
 	public User(String userName, int age) {
@@ -41,6 +43,4 @@ public class User {
 	public void setAge(int age) {
 		this.age = age;
 	}
-
-
 }
