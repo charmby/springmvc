@@ -7,7 +7,7 @@
 	String contextPath = "http://"+request.getRemoteHost()+":"+request.getRemotePort()+request.getContextPath();
 	System.out.println(contextPath);
 %>
-<script type="text/javascript" src="jquery/jquery-3.2.0.js"></script>
+<script type="text/javascript" src="jquery/jquery-3.2.0.min.js"></script>
 <script type="text/javascript" src="jqueryui/jquery-ui.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 <link rel="stylesheet" id="s_superplus" type="text/css" href="jqueryui/jquery-ui.css">
