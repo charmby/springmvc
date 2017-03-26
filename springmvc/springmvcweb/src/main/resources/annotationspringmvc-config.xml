@@ -22,17 +22,17 @@
 	<mvc:default-servlet-handler />
 
 	<!-- 静态资源过滤 -->
-	<mvc:resources location="/resources/" mapping="/resources/**" />
+	<!-- <mvc:resources location="/resources/" mapping="/resources/**" /> -->
 	
-	<mvc:resources location="/WEB-INF/theme/blue/" mapping="/blue/**" />
+     <mvc:resources location="/WEB-INF/theme/blue/" mapping="/blue/**" />
 	<mvc:resources location="/WEB-INF/theme/red/" mapping="/red/**" />
 	<mvc:resources location="/WEB-INF/base/css/" mapping="/css/**" />
 	<mvc:resources location="/WEB-INF/base/image/" mapping="/images/**" />
 	
 	<bean class="com.gsafety.util.SwaggerConfiguration" />
 	<!-- swagger ui resources -->
-	<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars" 
-		/>
+	<!-- <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars" 
+		/> -->
 
 	<!-- 视图渲染 jsp/freemaker/velocity -->
 	<bean

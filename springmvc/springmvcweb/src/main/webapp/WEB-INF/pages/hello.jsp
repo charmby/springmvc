@@ -5,10 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-String contextPath = "http://"+request.getRemoteHost()t+":"request.getRemotePort()+request.getContextPath();
+String contextPath = "http://"+request.getRemoteHost()+":"request.getRemotePort()+request.getContextPath();
 System.out.println(contextPath);
 %>
-<link style="text/css" charset="utf-8" href="">
+<link style="text/css" charset="utf-8" href="css/base.css">
 <title>hello</title>
 </head>
 <body>
