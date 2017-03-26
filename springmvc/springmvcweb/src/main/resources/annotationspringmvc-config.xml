@@ -9,11 +9,12 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc  
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-        
-   <!--      该文件只会扫描springmvc的注释，并不会扫描spring的service等注释 -->
+
+	<!-- 该文件只会扫描springmvc的注释，并不会扫描spring的service等注释 -->
 	<!-- 开启注解模式驱动 -->
 	<mvc:annotation-driven />
-	<!-- 扫包 com.gsafety.**.controller代表了   1、com.gsafety.bak.controller； 2、com.gsafety.controller；3、com.gsafety.a.b.xxx.controller 的package路径-->
+	<!-- 扫包 com.gsafety.**.controller代表了 1、com.gsafety.bak.controller； 2、com.gsafety.controller；3、com.gsafety.a.b.xxx.controller 
+		的package路径 -->
 	<context:component-scan
 		base-package="com.gsafety.**.controller,com.gsafety.po,com.gsafety.**.po" />
 
@@ -22,13 +23,16 @@
 	<mvc:default-servlet-handler />
 
 	<!-- 静态资源过滤 -->
-	<!-- <mvc:resources location="/resources/" mapping="/resources/**" /> -->
-	
-     <mvc:resources location="/WEB-INF/theme/blue/" mapping="/blue/**" />
-	<mvc:resources location="/WEB-INF/theme/red/" mapping="/red/**" />
-	<mvc:resources location="/WEB-INF/base/css/" mapping="/css/**" />
-	<mvc:resources location="/WEB-INF/base/image/" mapping="/images/**" />
-	
+	<mvc:resources location="/resources/" mapping="/resources/**" />
+
+	<!-- 怎么都没办法取到下面的静态资源，先放过，以后再处理。 <mvc:resources location="/WEB-INF/theme/blue/" 
+		mapping="/blue/**" /> <mvc:resources location="/WEB-INF/theme/red/" mapping="/red/**" 
+		/> -->
+	<!-- 静态资源必须放在webapps下面，且不能在web-inf下面。 -->
+	<mvc:resources location="/theme/green/" mapping="/green/**" />
+	<mvc:resources location="/theme/yellow/" mapping="/yellow/**" />
+	<mvc:resources location="/WEB-INF/base/" mapping="/base/**" />
+
 	<bean class="com.gsafety.util.SwaggerConfiguration" />
 	<!-- swagger ui resources -->
 	<!-- <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars" 
