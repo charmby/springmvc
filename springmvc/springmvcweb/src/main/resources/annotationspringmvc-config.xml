@@ -31,6 +31,14 @@
 	<!-- 静态资源必须放在webapps下面，且不能在web-inf下面。 -->
 	<mvc:resources location="/theme/green/" mapping="/green/**" />
 	<mvc:resources location="/theme/yellow/" mapping="/yellow/**" />
+	<!-- 引入jQuery的js组件 -->
+    <mvc:resources location="/common/jQuery/" mapping="/jquery/**" />
+	<!-- 引入jQuery ui的js组件 -->
+    <mvc:resources location="/common/jquery-ui-1.12.1/" mapping="/jqueryui/**" />
+	<!-- 引入boostramp组件 -->
+    <mvc:resources location="/common/bootstrap-3.3.7/dist/" mapping="/bootstrap/**" />
+	<!-- 引入字体组件 -->
+    <mvc:resources location="/common/Font-Awesome-3.2.1/css/,/common/Font-Awesome-3.2.1/font/" mapping="/font/**" />
 	<mvc:resources location="/WEB-INF/base/" mapping="/base/**" />
 
 	<bean class="com.gsafety.util.SwaggerConfiguration" />
