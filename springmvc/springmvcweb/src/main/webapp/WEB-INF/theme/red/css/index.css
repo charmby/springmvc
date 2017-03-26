@@ -1,1 +1,6 @@
 @CHARSET "UTF-8";
+html, body, div {
+	margin: 0;
+	padding: 0;
+	background: red;
+}
