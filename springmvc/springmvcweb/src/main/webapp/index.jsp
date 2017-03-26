@@ -23,10 +23,10 @@
       <div class="container">
         <nav class="blog-nav">
           <a class="blog-nav-item active icon-volume-up" href="#">Home</a>
-          <a class="blog-nav-item  " href="#">New features</a>
-          <a class="blog-nav-item" href="#">Press</a>
-          <a class="blog-nav-item " href="#">New hires</a>
-          <a class="blog-nav-item" href="#">About</a>
+          <a class="blog-nav-item  glyphicon-remove-circle" href="#">New features</a>
+          <a class="blog-nav-item glyphicon-camera" href="#">Press</a>
+          <a class="blog-nav-item glyphicon-envelope" href="#">New hires</a>
+          <a class="blog-nav-item glyphicon-minus" href="#">About</a>
         </nav>
       </div>
     </div>
