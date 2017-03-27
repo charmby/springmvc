@@ -61,13 +61,14 @@
 		<!-- 文件的后缀 -->
 		<property name="suffix" value=".jsp"></property>
 	</bean>
+	<!-- 拦截器入口 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean class="com.gsafety.util.interceptor.LogHandlerInterceptorAdapter"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
-
+	<!-- 拦截器结束 -->
 
 
 	<!-- 处理异常信息 -->
