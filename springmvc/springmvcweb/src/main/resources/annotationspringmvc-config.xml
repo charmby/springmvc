@@ -32,15 +32,20 @@
 	<mvc:resources location="/theme/green/" mapping="/green/**" />
 	<mvc:resources location="/theme/yellow/" mapping="/yellow/**" />
 	<!-- 引入jQuery的js组件 -->
-    <mvc:resources location="/common/jQuery/" mapping="/jquery/**" />
+	<mvc:resources location="/common/jQuery/" mapping="/jquery/**" />
 	<!-- 引入jQuery ui的js组件 -->
-    <mvc:resources location="/common/jquery-ui-1.12.1/" mapping="/jqueryui/**" />
+	<mvc:resources location="/common/jquery-ui-1.12.1/"
+		mapping="/jqueryui/**" />
 	<!-- 引入boostramp组件 -->
-    <mvc:resources location="/common/bootstrap-3.3.7/dist/" mapping="/bootstrap/**" />
+	<mvc:resources location="/common/bootstrap-3.3.7/dist/"
+		mapping="/bootstrap/**" />
 	<!-- 引入字体组件 -->
-    <mvc:resources location="/common/Font-Awesome-3.2.1/css/,/common/Font-Awesome-3.2.1/font/" mapping="/font/**" />
+	<mvc:resources
+		location="/common/Font-Awesome-3.2.1/css/,/common/Font-Awesome-3.2.1/font/"
+		mapping="/font/**" />
 	<!-- 引入bootstrap字体组件 -->
-    <mvc:resources location="/common/bootstrap-3.3.7/dist/fonts/" mapping="/fonts/**" />
+	<mvc:resources location="/common/bootstrap-3.3.7/dist/fonts/"
+		mapping="/fonts/**" />
 	<mvc:resources location="/WEB-INF/base/" mapping="/base/**" />
 
 	<bean class="com.gsafety.util.SwaggerConfiguration" />
@@ -56,4 +61,27 @@
 		<!-- 文件的后缀 -->
 		<property name="suffix" value=".jsp"></property>
 	</bean>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.gsafety.util.interceptor.LogHandlerInterceptorAdapter"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+
+
+	<!-- 处理异常信息 -->
+
+	<!-- <bean id="restExceptionResolver" class="com.stormpath.spring.web.servlet.handler.RestExceptionHandler"> 
+		  <property name="order" value="100"></property>   <property name="errorResolver"> 
+		    <bean class="com.stormpath.spring.web.servlet.handler.DefaultRestErrorResolver"> 
+		      <property name="localeResolver" ref="localeResolver"></property>       <property 
+		name="defaultMoreInfoUrl" value="mailto:xiaodonghong@gsafety.com"></property> 
+		      <property name="exceptionMappingDefinitions">         <map>           <!– 
+		404 –>           <entry key="com.gsafety.UnknownResourceException" value="404, 
+		_exmsg"></entry>           <!– 500 (catch all): –>           <entry key="Throwable" 
+		value="500, error.internal"></entry>         </map>       </property>     </bean> 
+		  </property> </bean> -->
+	<!-- 处理异常信息 -->
+
 </beans>
