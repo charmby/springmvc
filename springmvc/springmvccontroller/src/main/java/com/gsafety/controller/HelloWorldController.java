@@ -49,7 +49,7 @@ ModelAndView：包含了视图要实现的模型数据和逻辑视图名；“mv
  *
  */
 @Api(value = "欢迎页面API", description = "有关于用户的CURD操作", position = 5)  
-@RequestMapping(value = "/v1/api")
+@RequestMapping(value = "/hello/api")
 @RestController(value="/hello")
 @ApiResponses( value = { 
 		@ApiResponse(code = 100, message = "(继续)请求者应当继续提出请求。服务器返回此代码表示已收到请求的第一部分，正在等待其余部分"),  
