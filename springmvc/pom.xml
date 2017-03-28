@@ -116,7 +116,12 @@
 
 	<dependencyManagement>
 		<dependencies>
-
+			<!-- testng的jar包 -->
+			<dependency>
+				<groupId>org.testng</groupId>
+				<artifactId>testng</artifactId>
+				<version>6.11</version>
+			</dependency>
 			<!-- springfox-swagger2 可以将代码中的注解转换为符合 Swagger 的 API 规范的 swagger.json 
 				文件, -->
 			<!-- swagger start -->
@@ -155,7 +160,7 @@
 				<artifactId>jackson-annotations</artifactId>
 				<version>${jackson.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-databind</artifactId>
@@ -313,5 +318,11 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+		</dependency>
+
 	</dependencies>
 </project>
