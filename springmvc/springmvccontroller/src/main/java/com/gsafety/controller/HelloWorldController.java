@@ -1,16 +1,7 @@
 package com.gsafety.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -27,6 +18,14 @@ import com.gsafety.po.JSONResult;
 import com.gsafety.po.PageInfo;
 import com.gsafety.po.Result;
 import com.gsafety.po.User;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 /**
  * 开发处理器/页面控制器
@@ -48,9 +47,9 @@ ModelAndView：包含了视图要实现的模型数据和逻辑视图名；“mv
  * @author xiaodonghong
  *
  */
-@Api(value = "欢迎页面API", description = "有关于用户的CURD操作", position = 5)  
 @RequestMapping(value = "/hello/api")
 @RestController(value="/hello")
+@Api(value = "欢迎页面API", description = "有关于欢迎页面的操作", position = 1)  
 @ApiResponses( value = { 
 		@ApiResponse(code = 100, message = "(继续)请求者应当继续提出请求。服务器返回此代码表示已收到请求的第一部分，正在等待其余部分"),  
 		@ApiResponse(code = 101, message = "(切换协议)请求者已要求服务器切换协议，服务器已确认并准备切换。  "),  
