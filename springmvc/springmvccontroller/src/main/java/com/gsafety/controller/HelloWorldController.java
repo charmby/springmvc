@@ -93,6 +93,7 @@ public class HelloWorldController implements Controller {
 		System.out.println(name2);
 		String  age2 = this.getAge();
 		System.out.println(age2);
+		System.out.println(age2);
 		ModelAndView mv = new ModelAndView();
 		//添加模型数据，可以是任意的po对象。
 		mv.addObject("message", "hello world!");
