@@ -2,6 +2,9 @@ package com.gsafety.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -67,6 +70,7 @@ ModelAndView：包含了视图要实现的模型数据和逻辑视图名；“mv
 		@ApiResponse(code = 500, message = "（服务器内部错误）  服务器遇到错误，无法完成请求")} 
 		)  
 public class HelloWorldController implements Controller {
+	static Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
 	private String name;
 	private String age;
 	public String getName() {
@@ -89,10 +93,8 @@ public class HelloWorldController implements Controller {
 		// 3、将命令对象传入业务对象进行业务处理
 		// 4、选择下一个页面
 		String name2 = this.getName();
-		System.out.println(name2);
+		logger.debug(name2);
 		String  age2 = this.getAge();
-		System.out.println(age2);
-		System.out.println(age2);
 		ModelAndView mv = new ModelAndView();
 		//添加模型数据，可以是任意的po对象。
 		mv.addObject("message", "hello world!");
