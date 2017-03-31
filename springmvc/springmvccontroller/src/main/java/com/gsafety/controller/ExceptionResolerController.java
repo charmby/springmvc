@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 import com.gsafety.UnknownResourceException;
+import com.gsafety.exceptions.common.GsafetyException;
 import com.gsafety.po.Result;
 import com.gsafety.po.User;
 
@@ -67,13 +68,14 @@ public class ExceptionResolerController implements Controller {
 	@ApiResponse(code = 200, message = "success", response = Result.class)
 	@ResponseBody
 	@RequestMapping(value = "queryUserById", method = RequestMethod.GET, produces = "application/json")
-	public Result queryUserById(@ApiParam(name = "userId", required = true, value = "用户Id") @RequestParam("userId") int userId, HttpServletRequest request) {
+	public Result queryUserById(@ApiParam(name = "userId", required = true, value = "用户Id") @RequestParam("userId") int userId, HttpServletRequest request) throws GsafetyException {
 		User user = new User(userId, "haoyifen", 24);
 		Result result = new Result();
 		result.setCode(0);
 		result.setData(user);
 		result.setMessage("success");
-		throw new UnknownResourceException("未找到用户！");
+		//throw new GsafetyException("未找到用户！");
+		throw new GsafetyException("100012", "未找到用户");
 		
 	}
 }
