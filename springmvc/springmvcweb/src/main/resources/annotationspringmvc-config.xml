@@ -118,9 +118,12 @@
 		<!-- 国际化操作拦截器 如果采用基于（请求/Session/Cookie）则必需配置 -->
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
 	</mvc:interceptors>
+	<!-- 实现session国际化 国际化是在后台处理，返回的。 -->
+	<!-- <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" 
+		/> -->
+	<!-- cookies国际化 -->
 	<bean id="localeResolver"
-		class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
-
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />
 	<!-- 请求/Session/Cookie -->
 
 	<!-- 国际化结束 -->
