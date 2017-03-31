@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiResponses;
  * 2017年3月27日 上午11:03:48
  */
 @Api(value = "异常处理页面API", description = "有关于异常处理的操作", position = 2)  
-@RequestMapping(value = "/v1/api")
+@RequestMapping(value = "/exception")
 @RestController(value="/excep")
 @ApiResponses( value = { 
 		@ApiResponse(code = 100, message = "(继续)请求者应当继续提出请求。服务器返回此代码表示已收到请求的第一部分，正在等待其余部分"),  

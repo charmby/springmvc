@@ -128,5 +128,9 @@
 
 	<!-- 国际化结束 -->
 
+<!-- 异常处理开始 -->
+<bean class="com.gsafety.exceptionHandlers.SimpleExceptionHandler"></bean>
+<!-- 异常处理结束 -->
+
 
 </beans>
