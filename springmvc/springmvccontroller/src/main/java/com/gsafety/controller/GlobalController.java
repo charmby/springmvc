@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +19,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-@RestController
+@Controller
 @RequestMapping(value = "/global")
 @Api(value = "国际化示例API", description = "有关于国际化示例的操作", position = 1)  
 @ApiResponses( value = { 
@@ -43,7 +44,7 @@ public class GlobalController {
 /*    @ResponseBody*/
     
     /**
-     * 只有返回moduleandview并且注销 @ResponseBody，请求才能进入到请求页面中。
+     * 只有注销 @ResponseBody，请求才能进入到请求页面中。
      * @param request
      * @param model
      * @return
@@ -67,6 +68,26 @@ public class GlobalController {
 		mv.addObject("date", new Date());
 		mv.setViewName("globaltest");
 		return mv;
+    }
+/*    只有注销 @ResponseBody，请求才能进入到请求页面中。*/
+    @RequestMapping(value="/test2", method = {RequestMethod.GET})
+    public String test2(HttpServletRequest request,Model model){
+        if(!model.containsAttribute("contentModel")){
+            
+            //从后台代码获取国际化信息
+            RequestContext requestContext = new RequestContext(request);
+            model.addAttribute("money", requestContext.getMessage("money"));
+            model.addAttribute("date", requestContext.getMessage("date"));
+
+            
+            FormatModel formatModel=new FormatModel();
+
+            formatModel.setMoney(12345.678);
+            formatModel.setDate(new Date());
+            
+            model.addAttribute("contentModel", formatModel);
+        }
+        return "globaltest";
     }
     
 }
