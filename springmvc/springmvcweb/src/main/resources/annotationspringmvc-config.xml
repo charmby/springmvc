@@ -83,17 +83,14 @@
 
 	<!-- xml和json转化 -->
 
- <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"> 
+	<!-- <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"> 
 		<property name="supportedMediaTypes"> <list> <value>text/html;charset=UTF-8</value> 
-		<value>application/json;charset=UTF-8</value> </list> </property> </bean>
+		<value>application/json;charset=UTF-8</value> </list> </property> </bean> -->
 
-<!-- 	<bean
+	<bean id="mappingJacksonHttpMessageConverter"
 		class="com.gsafety.httpmessageconverter.DefaultJacksonHttpMessageConverter">
-		True only for the blog article - a production system would set this 
-			to false to reduce the number of bytes sent across the wire:
 		<property name="prettyPrint" value="true" />
-	</bean> -->
-
+	</bean>
 
 	<bean id="annotationMethodHandlerExceptionResolver"
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver">
