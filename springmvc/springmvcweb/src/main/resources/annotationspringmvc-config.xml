@@ -78,7 +78,11 @@
 			<mvc:mapping path="/**" />
 			<bean class="com.gsafety.util.interceptor.LogHandlerInterceptorAdapter"></bean>
 		</mvc:interceptor>
+
+
 	</mvc:interceptors>
+
+
 	<!-- 拦截器结束 -->
 
 	<!-- xml和json转化 -->
@@ -109,6 +113,16 @@
 		<property name="useCodeAsDefaultMessage" value="true" />
 	</bean>
 	<!-- 用于接收浏览器的国际化语言 -->
+	<!-- 请求/Session/Cookie -->
+	<mvc:interceptors>
+		<!-- 国际化操作拦截器 如果采用基于（请求/Session/Cookie）则必需配置 -->
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+	</mvc:interceptors>
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+
+	<!-- 请求/Session/Cookie -->
+
 	<!-- 国际化结束 -->
 
 

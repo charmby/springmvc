@@ -1,16 +1,20 @@
 package com.gsafety.controller;
 
 import java.util.Date;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.support.RequestContext;
 
 import com.gsafety.po.FormatModel;
@@ -39,55 +43,66 @@ import io.swagger.annotations.ApiResponses;
 		@ApiResponse(code = 500, message = "（服务器内部错误）  服务器遇到错误，无法完成请求")} 
 		)  
 public class GlobalController {
-    
-    @RequestMapping(value="/test", method = {RequestMethod.GET})
-/*    @ResponseBody*/
-    
-    /**
-     * 只有注销 @ResponseBody，请求才能进入到请求页面中。
-     * @param request
-     * @param model
-     * @return
-     */
-    public ModelAndView test(HttpServletRequest request,Model model){
-        if(!model.containsAttribute("contentModel")){
-            
-            //从后台代码获取国际化信息
-            RequestContext requestContext = new RequestContext(request);
-            model.addAttribute("money", requestContext.getMessage("money"));
-            model.addAttribute("date", requestContext.getMessage("date"));
 
-            FormatModel formatModel=new FormatModel();
-            formatModel.setMoney(12345.678);
-            formatModel.setDate(new Date());
-            model.addAttribute("contentModel", formatModel);
-        }
-        ModelAndView mv = new ModelAndView();
+	@RequestMapping(value="/test", method = {RequestMethod.GET})
+	/*    @ResponseBody*/
+
+	/**
+	 * 只有注销 @ResponseBody，请求才能进入到请求页面中。
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	public ModelAndView test(HttpServletRequest request,Model model){
+		if(!model.containsAttribute("contentModel")){
+
+			//从后台代码获取国际化信息
+			RequestContext requestContext = new RequestContext(request);
+			model.addAttribute("money", requestContext.getMessage("money"));
+			model.addAttribute("date", requestContext.getMessage("date"));
+
+			FormatModel formatModel=new FormatModel();
+			formatModel.setMoney(12345.678);
+			formatModel.setDate(new Date());
+			model.addAttribute("contentModel", formatModel);
+		}
+		ModelAndView mv = new ModelAndView();
 		//添加模型数据，可以是任意的po对象。
 		mv.addObject("money", "1234.56");
 		mv.addObject("date", new Date());
 		mv.setViewName("globaltest");
 		return mv;
-    }
-/*    只有注销 @ResponseBody，请求才能进入到请求页面中。*/
-    @RequestMapping(value="/test2", method = {RequestMethod.GET})
-    public String test2(HttpServletRequest request,Model model){
-        if(!model.containsAttribute("contentModel")){
-            
-            //从后台代码获取国际化信息
-            RequestContext requestContext = new RequestContext(request);
-            model.addAttribute("money", requestContext.getMessage("money"));
-            model.addAttribute("date", requestContext.getMessage("date"));
+	}
+	/*    只有注销 @ResponseBody，请求才能进入到请求页面中。*/
+	@RequestMapping(value="/test2", method = {RequestMethod.GET})
+	public String test2(HttpServletRequest request,Model model,@RequestParam(value="langType", defaultValue="zh" ) String langType){
+		if(!model.containsAttribute("contentModel")){
 
-            
-            FormatModel formatModel=new FormatModel();
+			if(langType.equals("zh")){
+				Locale locale = new Locale("zh", "CN"); 
+				request.getSession().setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME,locale); 
+			}
+			else if(langType.equals("en")){
+				Locale locale = new Locale("en", "US"); 
+				request.getSession().setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME,locale);
+			}
+			else{ 
+				request.getSession().setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME,LocaleContextHolder.getLocale());
+			}
+			//从后台代码获取国际化信息
+			RequestContext requestContext = new RequestContext(request);
+			model.addAttribute("money", requestContext.getMessage("money"));
+			model.addAttribute("date", requestContext.getMessage("date"));
 
-            formatModel.setMoney(12345.678);
-            formatModel.setDate(new Date());
-            
-            model.addAttribute("contentModel", formatModel);
-        }
-        return "globaltest";
-    }
-    
+
+			FormatModel formatModel=new FormatModel();
+
+			formatModel.setMoney(12345.678);
+			formatModel.setDate(new Date());
+
+			model.addAttribute("contentModel", formatModel);
+		}
+		return "globaltest2";
+	}
+
 }
