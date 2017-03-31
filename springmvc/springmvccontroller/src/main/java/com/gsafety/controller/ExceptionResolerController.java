@@ -3,6 +3,7 @@ package com.gsafety.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -74,8 +75,23 @@ public class ExceptionResolerController implements Controller {
 		result.setCode(0);
 		result.setData(user);
 		result.setMessage("success");
-		//throw new GsafetyException("未找到用户！");
 		throw new GsafetyException("100012", "未找到用户");
-		
+	}
+	
+	@ExceptionHandler
+	@ApiOperation(value = "根据 @ExceptionHandler信息", httpMethod = "GET", produces = "application/json")
+	@ApiResponse(code = 200, message = "success", response = Result.class)
+	@ResponseBody
+	@RequestMapping(value = "queryUserByIdExceptionHandler", method = RequestMethod.GET, produces = "application/json")
+	public String queryUserByIdExceptionHandler(@ApiParam(name = "userId", required = true, value = "用户Id") @RequestParam("userId") int userId, HttpServletRequest request) throws GsafetyException {
+		User user = new User(userId, "haoyifen", 24);
+		Result result = new Result();
+		result.setCode(0);
+		result.setData(user);
+		result.setMessage("success");
+		 
+		 //添加自己的异常处理逻辑，如日志记录　　　
+        request.setAttribute("exceptionMessage", new GsafetyException("100012", "未找到用户").getMessage());  
+        return "exception";
 	}
 }
