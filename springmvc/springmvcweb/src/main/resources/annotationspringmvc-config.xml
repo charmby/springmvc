@@ -12,7 +12,18 @@
 
 	<!-- 该文件只会扫描springmvc的注释，并不会扫描spring的service等注释 -->
 	<!-- 开启注解模式驱动 -->
-	<mvc:annotation-driven />
+	<!-- <mvc:annotation-driven /> -->
+	<mvc:annotation-driven>
+		<!-- 定义message转换 -->
+		<mvc:message-converters>
+			<bean
+				class="com.gsafety.httpmessageconverter.DefaultJacksonHttpMessageConverter">
+				<!-- True only for the blog article - a production system would set this 
+					to false to reduce the number of bytes sent across the wire: -->
+				<property name="prettyPrint" value="true" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
 	<!-- 扫包 com.gsafety.**.controller代表了 1、com.gsafety.bak.controller； 2、com.gsafety.controller；3、com.gsafety.a.b.xxx.controller 
 		的package路径 -->
 	<context:component-scan
@@ -72,27 +83,36 @@
 
 	<!-- xml和json转化 -->
 
-	<bean id="mappingJacksonHttpMessageConverter"
-		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-		<property name="supportedMediaTypes">
-			<list>
-				<value>text/html;charset=UTF-8</value>
-				<value>application/json;charset=UTF-8</value>
-			</list>
-		</property>
+ <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"> 
+		<property name="supportedMediaTypes"> <list> <value>text/html;charset=UTF-8</value> 
+		<value>application/json;charset=UTF-8</value> </list> </property> </bean>
+
+<!-- 	<bean
+		class="com.gsafety.httpmessageconverter.DefaultJacksonHttpMessageConverter">
+		True only for the blog article - a production system would set this 
+			to false to reduce the number of bytes sent across the wire:
+		<property name="prettyPrint" value="true" />
+	</bean> -->
+
+
+	<bean id="annotationMethodHandlerExceptionResolver"
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver">
+		<property name="order" value="0" />
 	</bean>
+
 	<!-- 处理异常信息 -->
 
-	<!-- <bean id="restExceptionResolver" class="com.stormpath.spring.web.servlet.handler.RestExceptionHandler"> 
-		  <property name="order" value="100"></property>   <property name="errorResolver"> 
-		    <bean class="com.stormpath.spring.web.servlet.handler.DefaultRestErrorResolver"> 
-		      <property name="localeResolver" ref="localeResolver"></property>       <property 
-		name="defaultMoreInfoUrl" value="mailto:xiaodonghong@gsafety.com"></property> 
-		      <property name="exceptionMappingDefinitions">         <map>           <!– 
-		404 –>           <entry key="com.gsafety.UnknownResourceException" value="404, 
-		_exmsg"></entry>           <!– 500 (catch all): –>           <entry key="Throwable" 
-		value="500, error.internal"></entry>         </map>       </property>     </bean> 
-		  </property> </bean> -->
-	<!-- 处理异常信息 -->
+	<!-- 国际化开始 -->
+	<!-- 用于接收浏览器的国际化语言 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<!-- 国际化信息所在的文件名 -->
+		<property name="basename" value="messages" />
+		<!-- 如果在国际化资源文件中找不到对应代码的信息，就用这个代码作为名称 -->
+		<property name="useCodeAsDefaultMessage" value="true" />
+	</bean>
+	<!-- 用于接收浏览器的国际化语言 -->
+	<!-- 国际化结束 -->
+
 
 </beans>
