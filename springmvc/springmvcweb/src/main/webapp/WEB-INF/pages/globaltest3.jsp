@@ -11,6 +11,7 @@
 <body>
 根据session进行国际化： <a href="test3?langType=zh">中文</a> | <a href="test3?langType=en">英文</a><br/>
 
+
     下面展示的是后台获取的国际化信息：<br/>
     ${money}<br/>
     ${date}<br/>
