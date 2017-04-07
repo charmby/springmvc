@@ -5,10 +5,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
-
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,7 +24,9 @@ public class LogHandlerInterceptorAdapter extends HandlerInterceptorAdapter{
 	public void postHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		logger.debug("在LogHandlerInterceptorAdapter拦截器中执行完了"+handler.getClass()+"的拦截！对象为："+modelAndView.getViewName());
+		if(modelAndView!=null){
+			logger.debug("在LogHandlerInterceptorAdapter拦截器中执行完了"+handler.getClass()+"的拦截！对象为："+modelAndView.getViewName());
+		}
 		super.postHandle(request, response, handler, modelAndView);
 	}
 	@Override

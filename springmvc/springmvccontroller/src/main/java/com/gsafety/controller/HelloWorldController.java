@@ -1,16 +1,10 @@
 package com.gsafety.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -27,6 +21,14 @@ import com.gsafety.po.JSONResult;
 import com.gsafety.po.PageInfo;
 import com.gsafety.po.Result;
 import com.gsafety.po.User;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 /**
  * 开发处理器/页面控制器
@@ -48,9 +50,9 @@ ModelAndView：包含了视图要实现的模型数据和逻辑视图名；“mv
  * @author xiaodonghong
  *
  */
-@Api(value = "欢迎页面API", description = "有关于用户的CURD操作", position = 5)  
-@RequestMapping(value = "/v1/api")
+@RequestMapping(value = "/hello/api")
 @RestController(value="/hello")
+@Api(value = "欢迎页面API", description = "有关于欢迎页面的操作", position = 1)  
 @ApiResponses( value = { 
 		@ApiResponse(code = 100, message = "(继续)请求者应当继续提出请求。服务器返回此代码表示已收到请求的第一部分，正在等待其余部分"),  
 		@ApiResponse(code = 101, message = "(切换协议)请求者已要求服务器切换协议，服务器已确认并准备切换。  "),  
@@ -68,6 +70,7 @@ ModelAndView：包含了视图要实现的模型数据和逻辑视图名；“mv
 		@ApiResponse(code = 500, message = "（服务器内部错误）  服务器遇到错误，无法完成请求")} 
 		)  
 public class HelloWorldController implements Controller {
+	static Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
 	private String name;
 	private String age;
 	public String getName() {
@@ -90,9 +93,8 @@ public class HelloWorldController implements Controller {
 		// 3、将命令对象传入业务对象进行业务处理
 		// 4、选择下一个页面
 		String name2 = this.getName();
-		System.out.println(name2);
+		logger.debug(name2);
 		String  age2 = this.getAge();
-		System.out.println(age2);
 		ModelAndView mv = new ModelAndView();
 		//添加模型数据，可以是任意的po对象。
 		mv.addObject("message", "hello world!");
