@@ -14,6 +14,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- 编译时的编码 -->
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+
 		<project.spring.version>4.1.6.RELEASE</project.spring.version>
 		<project.log4j.version>1.2.17</project.log4j.version>
 		<project.servlet-api.version>3.1.0</project.servlet-api.version>
@@ -22,6 +23,7 @@
 		<jackson.version>2.6.6</jackson.version>
 		<checkstyle.config.location>checkstyle.xml</checkstyle.config.location>
 		<project.jdk.compiler.version>1.8</project.jdk.compiler.version>
+		<jackson.codehaus.version>1.7.6</jackson.codehaus.version>
 	</properties>
 	<modules>
 		<module>springmvcuitl</module>
@@ -64,6 +66,11 @@
 					<artifactId>maven-javadoc-plugin</artifactId>
 					<version>2.9.1</version>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.16</version>
+				</plugin>
 			</plugins>
 
 		</pluginManagement>
@@ -97,18 +104,34 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<!-- 1.javadoc:javadoc在聚合父项目中生成site的api页面 2.javadoc:jar 在target中生成doc.jar包。 -->
 				<configuration>
-					<aggregate>true</aggregate>
 					<encoding>UTF-8</encoding>
+					<aggregate>true</aggregate>
+					<charset>UTF-8</charset>
+					<docencoding>UTF-8</docencoding>
 				</configuration>
 				<!-- 配置该参数，当install时，所有的项目都会生成jar的javadocsources -->
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
+						<phase>package</phase>
 						<goals>
 							<goal>jar</goal>
 						</goals>
+						<configuration>
+							<encoding>UTF-8</encoding>
+							<additionalparam>-Xdoclint:none</additionalparam>
+						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<forkMode>once</forkMode>
+					<argLine>-Dfile.encoding=UTF-8</argLine>
+				</configuration>
 			</plugin>
 		</plugins>
 
@@ -116,6 +139,17 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- For JSON rendering: -->
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>${jackson.codehaus.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-core-asl</artifactId>
+				<version>${jackson.codehaus.version}</version>
+			</dependency>
 			<!-- testng的jar包 -->
 			<dependency>
 				<groupId>org.testng</groupId>
@@ -323,6 +357,13 @@
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+		</dependency>
 	</dependencies>
 </project>

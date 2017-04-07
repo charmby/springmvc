@@ -11,7 +11,6 @@ public class RestExceptionHandler extends AbstractHandlerExceptionResolver{
 	@Override
 	protected ModelAndView doResolveException(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2,
 			Exception arg3) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
