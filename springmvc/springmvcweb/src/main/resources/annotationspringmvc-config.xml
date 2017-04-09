@@ -59,7 +59,7 @@
 		mapping="/fonts/**" />
 	<mvc:resources location="/WEB-INF/base/" mapping="/base/**" />
 
-	<bean class="com.gsafety.util.SwaggerConfiguration" />
+	<bean class="com.gsafety.util.swaggerconfig.SwaggerConfiguration" />
 	<!-- swagger ui resources -->
 	<!-- <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars" 
 		/> -->
