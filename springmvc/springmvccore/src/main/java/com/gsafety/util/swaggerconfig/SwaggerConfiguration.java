@@ -21,7 +21,7 @@ public class SwaggerConfiguration {
 	private static Logger logger  = LoggerFactory.getLogger(SwaggerConfiguration.class);
 	@Bean
 	public Docket getApiInfo() {
-		logger.warn("配置了名称为：项目所有Restfule接口 的分组。 过滤了所有的rest请求。");
+		logger.info("配置了名称为：项目所有Restfule接口 的分组。 过滤了所有的rest请求。");
 		return new Docket(DocumentationType.SWAGGER_2)
 				.groupName("项目所有Restfule接口")
 				.select()   //选择哪些路径和API会生成document
@@ -32,7 +32,7 @@ public class SwaggerConfiguration {
 	}
 	
 	private ApiInfo outApiInfo() {
-		logger.warn("swagger的各项信息。");
+		logger.info("swagger的各项信息。");
 		return new ApiInfo(
 				"springmvc的各项验证信息", // title 标题
 				"springmvc的各项外部接口信息", // description 描述 标题下
@@ -45,7 +45,7 @@ public class SwaggerConfiguration {
 	}
 	@Bean  
     public Docket createRestApi() {  
-		logger.warn("配置了名称为：测试类Restful接口  的分组。 过滤了所有com.gsafety.bak.controller中的的rest请求！。");
+		logger.info("配置了名称为：测试类Restful接口  的分组。 过滤了所有com.gsafety.bak.controller中的的rest请求！。");
         return new Docket(DocumentationType.SWAGGER_12)  
         		 .groupName("测试类Restful接口")
                 .apiInfo(outApiInfo())  
@@ -57,7 +57,7 @@ public class SwaggerConfiguration {
 	
 	@Bean
 	public Docket getHelloWorldApiInfo() {
-		logger.warn("配置了名称为：仅展示示例欢迎类的Restfule接口 的分组。 过滤了所有com.gsafety.controller中的的rest请求！。");
+		logger.info("配置了名称为：仅展示示例欢迎类的Restfule接口 的分组。 过滤了所有com.gsafety.controller中的的rest请求！。");
 		return new Docket(DocumentationType.SWAGGER_2)
 				.groupName("仅展示示例欢迎类的Restfule接口")
 				.select()   //选择哪些路径和API会生成document
