@@ -3,3 +3,4 @@
 /.settings/
 /target/
 rebel.xml
+rebel-remote.xml
