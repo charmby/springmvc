@@ -27,6 +27,8 @@
 		<mybatis.version>3.2.6</mybatis.version>
 		<!-- 表示开发的时候引入，发布的时候不会加载此包 -->
 		<junit.version>4.11</junit.version>
+		<mysql.version>5.1.30</mysql.version>
+		<commons-dbcp.version>1.2.2</commons-dbcp.version>
 	</properties>
 	<modules>
 		<module>springmvcuitl</module>
@@ -142,6 +144,19 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- 导入Mysql数据库链接jar包 -->
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql.version}</version>
+			</dependency>
+			<!-- 导入dbcp的jar包，用来在applicationContext.xml中配置数据库 -->
+			<dependency>
+				<groupId>commons-dbcp</groupId>
+				<artifactId>commons-dbcp</artifactId>
+				<version>${commons-dbcp.version}</version>
+			</dependency>
+
 			<!-- 上传组件包 -->
 			<dependency>
 				<groupId>commons-fileupload</groupId>
@@ -374,6 +389,15 @@
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<!-- 导入dbcp的jar包，用来在applicationContext.xml中配置数据库 -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+		</dependency>
 		<!-- 上传组件包 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>

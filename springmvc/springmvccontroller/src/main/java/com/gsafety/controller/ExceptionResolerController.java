@@ -74,7 +74,7 @@ public class ExceptionResolerController implements Controller {
 	@RequestMapping(value = "queryUserById", method = RequestMethod.GET, produces = "application/json")
 	public Result queryUserById(@ApiParam(name = "userId", required = true, value = "用户Id") @RequestParam("userId") int userId, HttpServletRequest request) throws GsafetyException {
 		logger.info("查询用户，并抛出异常，用于测试异常信息！");
-		User user = new User(userId, "haoyifen", 24);
+		User user = new User(userId, "haoyifen", "111");
 		Result result = new Result();
 		result.setCode(0);
 		result.setData(user);
@@ -89,7 +89,7 @@ public class ExceptionResolerController implements Controller {
 	@RequestMapping(value = "queryUserByIdExceptionHandler", method = RequestMethod.GET, produces = "application/json")
 	public String queryUserByIdExceptionHandler(@ApiParam(name = "userId", required = true, value = "用户Id") @RequestParam("userId") int userId, HttpServletRequest request) throws GsafetyException {
 		logger.info("查询用户，并抛出异常，返回exception.jsp页面！");
-		User user = new User(userId, "haoyifen", 24);
+		User user = new User(userId, "haoyifen", "111");
 		Result result = new Result();
 		result.setCode(0);
 		result.setData(user);
