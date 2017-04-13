@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
-import com.gsafety.UnknownResourceException;
 import com.gsafety.exceptions.common.GsafetyException;
 import com.gsafety.po.Result;
 import com.gsafety.po.User;

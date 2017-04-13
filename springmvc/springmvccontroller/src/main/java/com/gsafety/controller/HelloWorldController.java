@@ -141,7 +141,8 @@ public class HelloWorldController implements Controller {
 	@ResponseBody
 	@RequestMapping(value = "queryUserById", method = RequestMethod.GET, produces = "application/json")
 	public Result queryUserById(@ApiParam(name = "userId", required = true, value = "用户Id") @RequestParam("userId") int userId, HttpServletRequest request) {
-		User user = new User(userId, "haoyifen", 24);
+		System.out.println("我是肖东红！！！");
+		User user = new User(userId, "haoyifen2", 24);
 		Result result = new Result();
 		result.setCode(0);
 		result.setData(user);
