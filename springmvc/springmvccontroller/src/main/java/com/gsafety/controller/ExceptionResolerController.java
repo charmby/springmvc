@@ -3,6 +3,8 @@ package com.gsafety.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.mvc.Controller;
 import com.gsafety.exceptions.common.GsafetyException;
 import com.gsafety.po.Result;
 import com.gsafety.po.User;
+import com.gsafety.util.swaggerconfig.SwaggerConfiguration;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -47,7 +50,7 @@ import io.swagger.annotations.ApiResponses;
 		@ApiResponse(code = 500, message = "（服务器内部错误）  服务器遇到错误，无法完成请求")} 
 		)  
 public class ExceptionResolerController implements Controller {
-	
+	private static Logger logger  = LoggerFactory.getLogger(ExceptionResolerController.class);
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -55,7 +58,7 @@ public class ExceptionResolerController implements Controller {
 		// 2、绑定参数到命令对象
 		// 3、将命令对象传入业务对象进行业务处理
 		// 4、选择下一个页面
-		
+		logger.info("调用了测试页面，返回hello.jsp页面！");
 		ModelAndView mv = new ModelAndView();
 		//添加模型数据，可以是任意的po对象。
 		mv.addObject("message", "hello world!");
@@ -69,7 +72,8 @@ public class ExceptionResolerController implements Controller {
 	@ResponseBody
 	@RequestMapping(value = "queryUserById", method = RequestMethod.GET, produces = "application/json")
 	public Result queryUserById(@ApiParam(name = "userId", required = true, value = "用户Id") @RequestParam("userId") int userId, HttpServletRequest request) throws GsafetyException {
-		User user = new User(userId, "haoyifen", 24);
+		logger.info("查询用户，并抛出异常，用于测试异常信息！");
+		User user = new User(userId, "haoyifen", "111");
 		Result result = new Result();
 		result.setCode(0);
 		result.setData(user);
@@ -83,7 +87,8 @@ public class ExceptionResolerController implements Controller {
 	@ResponseBody
 	@RequestMapping(value = "queryUserByIdExceptionHandler", method = RequestMethod.GET, produces = "application/json")
 	public String queryUserByIdExceptionHandler(@ApiParam(name = "userId", required = true, value = "用户Id") @RequestParam("userId") int userId, HttpServletRequest request) throws GsafetyException {
-		User user = new User(userId, "haoyifen", 24);
+		logger.info("查询用户，并抛出异常，返回exception.jsp页面！");
+		User user = new User(userId, "haoyifen", "111");
 		Result result = new Result();
 		result.setCode(0);
 		result.setData(user);
@@ -91,6 +96,7 @@ public class ExceptionResolerController implements Controller {
 		 
 		 //添加自己的异常处理逻辑，如日志记录　　　
         request.setAttribute("exceptionMessage", new GsafetyException("100012", "未找到用户").getMessage());  
+    	logger.info("给request重新定义内容！");
         return "exception";
 	}
 }

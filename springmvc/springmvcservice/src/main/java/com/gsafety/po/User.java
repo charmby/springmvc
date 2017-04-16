@@ -7,40 +7,51 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(description = "用户",parent= AbstractCommonAttr.class/*,value="用户信息"*/)
 public class User extends AbstractCommonAttr {
-
 	@ApiModelProperty(value = "用户Id", example = "1",position = 1)
-	private  int userId;
+    private Integer id;
 	@ApiModelProperty(value = "姓名", example = "xiao",position = 3)
-	private String userName;
-	@ApiModelProperty(value = "年龄", example = "2",position = 2)
-	private int age;
-
-	public User(String userName, int age) {
+    private String userName;
+	@ApiModelProperty(value = "密码",position = 2)
+    private String password;
+    @ApiModelProperty(value = "年龄", example = "2",position = 2)
+    private Integer age;
+    @Override
+	public Integer getId() {
+		return id;
+	}
+	public User(Integer id, String userName, String password) {
+		super();
+		this.id = id;
 		this.userName = userName;
+		this.password = password;
+	}
+	public User(String userName, String password, Integer age) {
+		super();
+		this.userName = userName;
+		this.password = password;
 		this.age = age;
 	}
-	public User(int userId, String userName, int age) {
-		this.userId = userId;
-		this.userName = userName;
-		this.age = age;
+	public void setId(Integer id) {
+		this.id = id;
 	}
-
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+	@Override
 	public String getUserName() {
 		return userName;
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public int getAge() {
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public Integer getAge() {
 		return age;
 	}
-	public void setAge(int age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
+
 }

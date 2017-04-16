@@ -6,14 +6,14 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
@@ -45,8 +45,8 @@ import io.swagger.annotations.ApiResponses;
 		@ApiResponse(code = 500, message = "（服务器内部错误）  服务器遇到错误，无法完成请求")} 
 		)  
 public class GlobalController {
-
-	@RequestMapping(value="/test", method = {RequestMethod.GET})
+	private static Logger logger  = LoggerFactory.getLogger("PubLog");
+	
 	/*    @ResponseBody*/
 
 	/**
@@ -55,7 +55,9 @@ public class GlobalController {
 	 * @param model
 	 * @return
 	 */
+	@RequestMapping(value="/test", method = {RequestMethod.GET})
 	public ModelAndView test(HttpServletRequest request,Model model){
+		logger.warn("测试国际化信息！该情况是springmvc的浏览器决定国际化类型！");
 		if(!model.containsAttribute("contentModel")){
 
 			//从后台代码获取国际化信息
@@ -79,7 +81,7 @@ public class GlobalController {
 	@RequestMapping(value="/test2", method = {RequestMethod.GET})
 	public String test2(HttpServletRequest request,Model model,@RequestParam(value="langType", defaultValue="zh" ) String langType){
 		if(!model.containsAttribute("contentModel")){
-
+			logger.warn("测试国际化信息！该情况是springmvc的session配置决定国际化类型！");
 			if(langType.equals("zh")){
 				Locale locale = new Locale("zh", "CN"); 
 				request.getSession().setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME,locale); 
@@ -120,7 +122,7 @@ public class GlobalController {
 	 @RequestMapping(value="/test3", method = {RequestMethod.GET})
 	    public String test3(HttpServletRequest request, HttpServletResponse response, Model model, @RequestParam(value="langType", defaultValue="zh") String langType){
 	        if(!model.containsAttribute("contentModel")){
-	            
+	        	logger.warn("测试国际化信息！该情况是springmvc的cookie决定国际化类型！");
 	            if(langType.equals("zh")){
 	                Locale locale = new Locale("zh", "CN"); 
 	                //request.getSession().setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME,locale);
