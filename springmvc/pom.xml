@@ -22,7 +22,7 @@
 		<springfox.swagger.version>2.6.1</springfox.swagger.version>
 		<jackson.version>2.6.6</jackson.version>
 		<checkstyle.config.location>checkstyle.xml</checkstyle.config.location>
-		<project.jdk.compiler.version>1.8</project.jdk.compiler.version>
+		<project.jdk.compiler.version>1.7</project.jdk.compiler.version>
 		<jackson.codehaus.version>1.7.6</jackson.codehaus.version>
 		<mybatis.version>3.2.6</mybatis.version>
 		<!-- 表示开发的时候引入，发布的时候不会加载此包 -->
@@ -115,7 +115,7 @@
 					<docencoding>UTF-8</docencoding>
 				</configuration>
 				<!-- 配置该参数，当install时，所有的项目都会生成jar的javadocsources -->
-				<executions>
+<!-- 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
 						<phase>package</phase>
@@ -127,7 +127,7 @@
 							<additionalparam>-Xdoclint:none</additionalparam>
 						</configuration>
 					</execution>
-				</executions>
+				</executions> -->
 			</plugin>
 
 			<plugin>

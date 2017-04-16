@@ -34,7 +34,7 @@
 	<mvc:default-servlet-handler />
 
 	<!-- 静态资源过滤 -->
-	<mvc:resources location="/resources/" mapping="/resources/**" />
+	 <mvc:resources location="/resources/" mapping="/resources/**" />
 
 	<!-- 怎么都没办法取到下面的静态资源，先放过，以后再处理。 <mvc:resources location="/WEB-INF/theme/blue/" 
 		mapping="/blue/**" /> <mvc:resources location="/WEB-INF/theme/red/" mapping="/red/**" 
@@ -60,10 +60,9 @@
 	<mvc:resources location="/WEB-INF/base/" mapping="/base/**" />
 
 	<bean class="com.gsafety.util.swaggerconfig.SwaggerConfiguration" />
-	<!-- swagger ui resources -->
-	<!-- <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars" 
+	<!-- swagger ui resources  -->
+	<!--一定不能放开，否则页面就显示不出来了。 <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars" 
 		/> -->
-
 	<!-- 视图渲染 jsp/freemaker/velocity -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

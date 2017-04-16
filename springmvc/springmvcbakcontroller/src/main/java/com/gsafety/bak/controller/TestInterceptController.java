@@ -32,6 +32,7 @@ public class TestInterceptController  implements Controller{
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		System.out.println("===========TestController");
+		System.out.println("我司肖东红");
 		return new ModelAndView("test");
 	}
 

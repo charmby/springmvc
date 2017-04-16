@@ -23,7 +23,7 @@ public class SwaggerConfiguration {
 	public Docket getApiInfo() {
 		logger.info("配置了名称为：项目所有Restfule接口 的分组。 过滤了所有的rest请求。");
 		return new Docket(DocumentationType.SWAGGER_2)
-				.groupName("项目所有Restfule接口")
+				.groupName("all rest Api")
 				.select()   //选择哪些路径和API会生成document
 				.apis(RequestHandlerSelectors.any()) // 对所有api进行监控
 				.paths(PathSelectors.any())  // 对所有路径进行监控
@@ -47,7 +47,7 @@ public class SwaggerConfiguration {
     public Docket createRestApi() {  
 		logger.info("配置了名称为：测试类Restful接口  的分组。 过滤了所有com.gsafety.bak.controller中的的rest请求！。");
         return new Docket(DocumentationType.SWAGGER_12)  
-        		 .groupName("测试类Restful接口")
+        		 .groupName("test api")
                 .apiInfo(outApiInfo())  
                 .select()  
                 .apis(RequestHandlerSelectors.basePackage("com.gsafety.bak.controller"))  
@@ -59,7 +59,7 @@ public class SwaggerConfiguration {
 	public Docket getHelloWorldApiInfo() {
 		logger.info("配置了名称为：仅展示示例欢迎类的Restfule接口 的分组。 过滤了所有com.gsafety.controller中的的rest请求！。");
 		return new Docket(DocumentationType.SWAGGER_2)
-				.groupName("仅展示示例欢迎类的Restfule接口")
+				.groupName("helloworld api")
 				.select()   //选择哪些路径和API会生成document
 				.apis(RequestHandlerSelectors.basePackage("com.gsafety.controller"))   // 对com.gsafety.controller下的api进行监控
 				.paths(PathSelectors.any())  // 对所有路径进行监控

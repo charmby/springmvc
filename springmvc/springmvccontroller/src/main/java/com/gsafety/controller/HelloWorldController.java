@@ -146,6 +146,7 @@ public class HelloWorldController implements Controller {
 	public Result queryUserById(@ApiParam(name = "userId", required = true, value = "用户Id") @RequestParam("userId") int userId, HttpServletRequest request) {
 		logger.info("进入查询用户方法！");
 		User user = new User(userId, "haoyifen", "111");
+		User user = new User(userId, "haoyifen2", 24);
 		Result result = new Result();
 		result.setCode(0);
 		result.setData(user);
