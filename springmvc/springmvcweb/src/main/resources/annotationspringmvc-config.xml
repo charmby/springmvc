@@ -50,16 +50,15 @@
 	<!-- 引入boostramp组件 -->
 	<mvc:resources location="/common/bootstrap-3.3.7/dist/"
 		mapping="/bootstrap/**" />
-	<!-- 引入字体组件 -->
+	<!-- 引入字体组件  引入bootstrap字体组件-->
+	<!-- 引入bootstrap字体组件 -->
 	<mvc:resources
-		location="/common/Font-Awesome-3.2.1/css/,/common/Font-Awesome-3.2.1/font/"
+		location="/common/Font-Awesome-3.2.1/css/,/common/Font-Awesome-3.2.1/font/,/common/bootstrap-3.3.7/dist/fonts/"
 		mapping="/font/**" />
 	<mvc:resources
 		location="/common/font-awesome/css/,/common/font-awesome/fonts/"
 		mapping="/fonts/**" />
-	<!-- 引入bootstrap字体组件 -->
-	<mvc:resources location="/common/bootstrap-3.3.7/dist/fonts/"
-		mapping="/bootstrapfonts/**" />
+	
 	<mvc:resources location="/WEB-INF/base/" mapping="/base/**" />
 
 	<bean class="com.gsafety.util.swaggerconfig.SwaggerConfiguration" />
