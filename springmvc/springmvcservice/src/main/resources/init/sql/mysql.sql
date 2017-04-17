@@ -4,3 +4,5 @@ CREATE TABLE `user_t` (
 `password` varchar(255) ,
 `age` int(11)
 ) CHARSET=utf8;
+
+insert into user_t values(1,'xiaodonghong','xiaodonghong',20);
