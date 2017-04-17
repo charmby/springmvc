@@ -54,6 +54,9 @@
 	<mvc:resources
 		location="/common/Font-Awesome-3.2.1/css/,/common/Font-Awesome-3.2.1/font/"
 		mapping="/font/**" />
+	<mvc:resources
+		location="/common/font-awesome/css/,/common/font-awesome/fonts/"
+		mapping="/fontsmall/**" />
 	<!-- 引入bootstrap字体组件 -->
 	<mvc:resources location="/common/bootstrap-3.3.7/dist/fonts/"
 		mapping="/fonts/**" />
