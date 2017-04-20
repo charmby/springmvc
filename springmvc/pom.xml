@@ -41,7 +41,7 @@
 		<module>springmvcbakservice</module>
 		<module>springmvcbakcontroller</module>
 		<module>springmvclearn</module>
-<!--     <module>springmvcweb2</module> -->
+        <module>springmvcweb2</module> 
   </modules>
 
 	<build>
