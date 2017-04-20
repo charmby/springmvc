@@ -27,7 +27,7 @@
 		<mysql.version>5.1.30</mysql.version>
 		<commons-dbcp.version>1.2.2</commons-dbcp.version>
 		<plugin.maven-compiler-plugin.version>3.5.1</plugin.maven-compiler-plugin.version>
-		<plugin.maven-surefire-plugin.version>2.19.1</plugin.maven-surefire-plugin.version>
+		<plugin.maven-surefire-plugin.version>2.19</plugin.maven-surefire-plugin.version>
 		<plugin.maven-javadoc-plugin.version>2.10.4</plugin.maven-javadoc-plugin.version>
 		<plugin.maven-source-plugin.version>3.0.0</plugin.maven-source-plugin.version>
 		<plugin.findbugs-maven-plugin.version>3.0.4</plugin.findbugs-maven-plugin.version>

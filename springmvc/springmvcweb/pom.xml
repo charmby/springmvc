@@ -12,9 +12,6 @@
 	<packaging>war</packaging>
 	<name>springmvcweb Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-	<build>
-		<finalName>springmvcweb</finalName>
-	</build>
 	<dependencies>
 		<dependency>
 			<groupId>com.gsafety</groupId>
@@ -24,5 +21,37 @@
 			<groupId>com.gsafety</groupId>
 			<artifactId>springmvcbakcontroller</artifactId>
 		</dependency>
+<!-- 		<dependency>
+			<groupId>com.gsafety</groupId>
+			<artifactId>springmvcweb2</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<packaging>war</packaging>
+		</dependency> -->
 	</dependencies>
+	<build>
+		<finalName>springmvcweb</finalName>
+		<!-- <plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<overlays>
+						<overlay>
+							<groupId>com.gsafety</groupId>
+							<artifactId>springmvcweb2</artifactId>
+							<excludes>
+								<exclude>WEB-INF/classes/images/sampleimage-dependency.jpg</exclude>
+							</excludes>
+						</overlay>
+					</overlays>
+				</configuration>
+			</plugin>
+
+		</plugins> -->
+	</build>
+
+
+
+
 </project>
