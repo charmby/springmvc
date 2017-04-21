@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gsafety</groupId>
 	<artifactId>springmvc</artifactId>
@@ -26,23 +27,18 @@
 		<junit.version>4.11</junit.version>
 		<mysql.version>5.1.30</mysql.version>
 		<commons-dbcp.version>1.2.2</commons-dbcp.version>
-		<plugin.maven-compiler-plugin.version>3.5.1</plugin.maven-compiler-plugin.version>
-		<plugin.maven-surefire-plugin.version>2.19</plugin.maven-surefire-plugin.version>
+		<plugin.maven-compiler-plugin.version>3.6.1</plugin.maven-compiler-plugin.version>
+		<plugin.maven-surefire-plugin.version>2.16</plugin.maven-surefire-plugin.version>
 		<plugin.maven-javadoc-plugin.version>2.10.4</plugin.maven-javadoc-plugin.version>
-		<plugin.maven-source-plugin.version>3.0.0</plugin.maven-source-plugin.version>
+		<plugin.maven-source-plugin.version>2.4</plugin.maven-source-plugin.version>
 		<plugin.findbugs-maven-plugin.version>3.0.4</plugin.findbugs-maven-plugin.version>
 	</properties>
 	<modules>
-	<module>springmvcuitl</module>
-		<module>springmvccore</module>
-		<module>springmvcweb</module>
-		<module>springmvcservice</module>
-		<module>springmvccontroller</module>
-		<module>springmvcbakservice</module>
-		<module>springmvcbakcontroller</module>
-		<module>springmvclearn</module>
-        <module>springmvcweb2</module> 
-  </modules>
+		<!-- <module>springmvcuitl</module> <module>springmvccore</module> <module>springmvcweb</module> 
+			<module>springmvcservice</module> <module>springmvccontroller</module> <module>springmvcbakservice</module> 
+			<module>springmvcbakcontroller</module> <module>springmvclearn</module> <module>springmvcweb2</module> -->
+		<module>springmvcweb3</module>
+	</modules>
 
 	<build>
 		<pluginManagement>
@@ -73,6 +69,11 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>${plugin.maven-surefire-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>3.0.0</version>
 				</plugin>
 			</plugins>
 
@@ -113,19 +114,10 @@
 					<docencoding>UTF-8</docencoding>
 				</configuration>
 				<!-- 配置该参数，当install时，所有的项目都会生成jar的javadocsources -->
-<!-- 				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<phase>package</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-						<configuration>
-							<encoding>UTF-8</encoding>
-							<additionalparam>-Xdoclint:none</additionalparam>
-						</configuration>
-					</execution>
-				</executions> -->
+				<!-- <executions> <execution> <id>attach-javadocs</id> <phase>package</phase> 
+					<goals> <goal>jar</goal> </goals> <configuration> <encoding>UTF-8</encoding> 
+					<additionalparam>-Xdoclint:none</additionalparam> </configuration> </execution> 
+					</executions> -->
 			</plugin>
 
 			<plugin>
@@ -136,6 +128,13 @@
 					<argLine>-Dfile.encoding=UTF-8</argLine>
 				</configuration>
 			</plugin>
+			<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.6</version>
+			</plugin>
+
 		</plugins>
 
 	</build>

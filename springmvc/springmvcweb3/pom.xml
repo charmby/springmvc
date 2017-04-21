@@ -7,14 +7,13 @@
     <artifactId>springmvc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>springmvcweb2</artifactId>
+  <artifactId>springmvcweb3</artifactId>
   <packaging>war</packaging>
-  <name>springmvcweb2 Maven Webapp</name>
+  <name>springmvcweb3 Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
-
   </dependencies>
   <build>
-    <finalName>springmvcweb2</finalName>
+    <finalName>springmvcweb3</finalName>
   </build>
 </project>

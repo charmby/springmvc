@@ -21,34 +21,38 @@
 			<groupId>com.gsafety</groupId>
 			<artifactId>springmvcbakcontroller</artifactId>
 		</dependency>
-<!-- 		<dependency>
+		<dependency>
 			<groupId>com.gsafety</groupId>
 			<artifactId>springmvcweb2</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-			<packaging>war</packaging>
-		</dependency> -->
+			<type>war</type>
+			<scope>runtime</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>springmvcweb</finalName>
-		<!-- <plugins>
+		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>3.0.0</version>
-				<configuration>
+			<!-- 	<configuration>
+					<warName>my-snapshot</warName>
 					<overlays>
 						<overlay>
+							<groupId>com.gsafety</groupId> <artifactId>springmvcweb2</artifactId>
+							<id>my-snapshot</id>
 							<groupId>com.gsafety</groupId>
 							<artifactId>springmvcweb2</artifactId>
 							<excludes>
-								<exclude>WEB-INF/classes/images/sampleimage-dependency.jpg</exclude>
+								<exclude>WEB-INF/lib/*</exclude>
+								<exclude>WEB-INF/web.xml</exclude>
 							</excludes>
 						</overlay>
 					</overlays>
-				</configuration>
+				</configuration> -->
 			</plugin>
 
-		</plugins> -->
+		</plugins>
 	</build>
 
 
