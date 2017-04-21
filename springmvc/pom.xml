@@ -28,15 +28,21 @@
 		<mysql.version>5.1.30</mysql.version>
 		<commons-dbcp.version>1.2.2</commons-dbcp.version>
 		<plugin.maven-compiler-plugin.version>3.6.1</plugin.maven-compiler-plugin.version>
-		<plugin.maven-surefire-plugin.version>2.16</plugin.maven-surefire-plugin.version>
+		<plugin.maven-surefire-plugin.version>2.19</plugin.maven-surefire-plugin.version>
 		<plugin.maven-javadoc-plugin.version>2.10.4</plugin.maven-javadoc-plugin.version>
 		<plugin.maven-source-plugin.version>2.4</plugin.maven-source-plugin.version>
 		<plugin.findbugs-maven-plugin.version>3.0.4</plugin.findbugs-maven-plugin.version>
 	</properties>
 	<modules>
-		<!-- <module>springmvcuitl</module> <module>springmvccore</module> <module>springmvcweb</module> 
-			<module>springmvcservice</module> <module>springmvccontroller</module> <module>springmvcbakservice</module> 
-			<module>springmvcbakcontroller</module> <module>springmvclearn</module> <module>springmvcweb2</module> -->
+		<module>springmvcuitl</module>
+		<module>springmvccore</module>
+		<!-- <module>springmvcweb</module> -->
+		<module>springmvcservice</module>
+		<module>springmvccontroller</module>
+		<module>springmvcbakservice</module>
+		<module>springmvcbakcontroller</module>
+		<module>springmvclearn</module>
+		<module>springmvcweb2</module>
 		<module>springmvcweb3</module>
 	</modules>
 
@@ -70,10 +76,13 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>${plugin.maven-surefire-plugin.version}</version>
 				</plugin>
+				<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-war-plugin</artifactId> 
+					<version>3.0.0</version> </plugin> -->
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-war-plugin</artifactId>
-					<version>3.0.0</version>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.6</version>
 				</plugin>
 			</plugins>
 
@@ -132,7 +141,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.6</version>
 			</plugin>
 
 		</plugins>
