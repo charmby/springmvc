@@ -7,14 +7,13 @@
     <artifactId>springmvc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>springmvcbakcontroller</artifactId>
-  <name>springmvcbakcontroller</name>
+  <artifactId>springmvcweb3</artifactId>
+  <packaging>war</packaging>
+  <name>springmvcweb3 Maven Webapp</name>
   <url>http://maven.apache.org</url>
-  
   <dependencies>
-  	<dependency>
-  		<groupId>com.gsafety</groupId>
-  		<artifactId>springmvcbakservice</artifactId>
-  	</dependency>
   </dependencies>
+  <build>
+    <finalName>springmvcweb3</finalName>
+  </build>
 </project>

@@ -50,6 +50,8 @@
 	<!-- 引入boostramp组件 -->
 	<mvc:resources location="/common/bootstrap-3.3.7/dist/"
 		mapping="/bootstrap/**" />
+	<mvc:resources location="/common/vendor/"
+		mapping="/vendor/**" />
 	<!-- 引入字体组件  引入bootstrap字体组件-->
 	<!-- 引入bootstrap字体组件 -->
 	<mvc:resources

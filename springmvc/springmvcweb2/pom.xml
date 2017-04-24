@@ -7,14 +7,14 @@
     <artifactId>springmvc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>springmvcbakcontroller</artifactId>
-  <name>springmvcbakcontroller</name>
+  <artifactId>springmvcweb2</artifactId>
+  <packaging>war</packaging>
+  <name>springmvcweb2 Maven Webapp</name>
   <url>http://maven.apache.org</url>
-  
   <dependencies>
-  	<dependency>
-  		<groupId>com.gsafety</groupId>
-  		<artifactId>springmvcbakservice</artifactId>
-  	</dependency>
+
   </dependencies>
+  <build>
+    <finalName>springmvcweb2</finalName>
+  </build>
 </project>
