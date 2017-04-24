@@ -4,13 +4,13 @@
 <html>
 <head>
 <%
-String contextPath = "http://"+request.getRemoteHost()+":"request.getRemotePort()+request.getContextPath();
-System.out.println(contextPath);
+/* String contextPath = "http://"+request.getRemoteHost()+":"request.getRemotePort()+request.getContextPath();
+System.out.println(contextPath); */
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>hello</title>
 </head>
 <body>
-	<h1>测试页面！！</h1>
+	<h1>测试页面！2！</h1>
 </body>
 </html>
