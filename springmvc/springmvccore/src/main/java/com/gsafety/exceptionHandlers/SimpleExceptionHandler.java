@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gsafety.UnknownResourceException;
 import com.gsafety.exceptions.common.GsafetyException;
 
 public class SimpleExceptionHandler implements HandlerExceptionResolver {   

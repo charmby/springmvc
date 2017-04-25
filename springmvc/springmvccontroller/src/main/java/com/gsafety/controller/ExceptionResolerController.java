@@ -17,7 +17,6 @@ import org.springframework.web.servlet.mvc.Controller;
 import com.gsafety.exceptions.common.GsafetyException;
 import com.gsafety.po.Result;
 import com.gsafety.po.User;
-import com.gsafety.util.swaggerconfig.SwaggerConfiguration;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

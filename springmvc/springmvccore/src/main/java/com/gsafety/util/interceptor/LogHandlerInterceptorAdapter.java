@@ -1,7 +1,5 @@
 package com.gsafety.util.interceptor;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,7 +13,7 @@ public class LogHandlerInterceptorAdapter extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		Map<String, String[]> requ = request.getParameterMap();
+	/*	Map<String, String[]> requ = request.getParameterMap();*/
 		String msg ="请求："+request.getRequestURL()+ " 进入处理器"+handler.getClass();
 		logger.debug(msg);
 		return super.preHandle(request, response, handler);
