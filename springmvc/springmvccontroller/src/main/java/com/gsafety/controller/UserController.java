@@ -28,8 +28,8 @@ public class UserController {
 	@Resource
 	private IUserService userService;
 
-	@ApiOperation(value = "根据用户id查询用户信息", httpMethod = "GET", produces = "application/json")
-	@ApiResponse(code = 200, message = "success", response = Result.class)
+	@ApiOperation(value = "根据用户id查询用户信息", httpMethod = "GET")
+	@ApiResponse(code = 200, message = "success")
 	@ResponseBody
 	@RequestMapping(value = "/showUser", method = RequestMethod.GET, produces = "application/json")
 	public 		User toIndex(HttpServletRequest request,@ApiParam(name = "id", required = true, value = "用户Id") @RequestParam("id") Integer id,Model model){
