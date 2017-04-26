@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.gsafety.dao.IUserDao;
 import com.gsafety.po.User;
 import com.gsafety.service.IUserService;
+import com.mysql.jdbc.Driver;
 
 @Service("userService")  
 public class UserServiceImpl implements IUserService {  
