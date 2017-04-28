@@ -25,7 +25,7 @@
 		<mybatis.version>3.2.6</mybatis.version>
 		<!-- 表示开发的时候引入，发布的时候不会加载此包 -->
 		<junit.version>4.11</junit.version>
-		<mysql.version>5.1.30</mysql.version>
+		<mysql.version>5.1.21</mysql.version>
 		<commons-dbcp.version>1.2.2</commons-dbcp.version>
 		<plugin.maven-compiler-plugin.version>3.6.1</plugin.maven-compiler-plugin.version>
 		<plugin.maven-surefire-plugin.version>2.19</plugin.maven-surefire-plugin.version>

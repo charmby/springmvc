@@ -32,10 +32,10 @@ public class UserController {
 	@ApiResponse(code = 200, message = "success", response = Result.class)
 	@ResponseBody
 	@RequestMapping(value = "/showUser", method = RequestMethod.GET, produces = "application/json")
-	public String toIndex(HttpServletRequest request,@ApiParam(name = "id", required = true, value = "用户Id") @RequestParam("id") Integer id,Model model){
+	public 		User toIndex(HttpServletRequest request,@ApiParam(name = "id", required = true, value = "用户Id") @RequestParam("id") Integer id,Model model){
 		int userId = Integer.parseInt(request.getParameter("id"));
-		User user = this.userService.getUserById(userId);
+		User user = this.userService.getUserById(id);
 		model.addAttribute("user", user);
-		return "showUser";
+		return 		user;
 	}
 }

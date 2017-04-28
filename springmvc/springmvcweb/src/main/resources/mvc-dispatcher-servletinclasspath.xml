@@ -53,5 +53,7 @@
 		class="com.gsafety.util.interceptor.ExecuteTimeHandlerInterceptor" />
 	<bean id="handlerInterceptor2"
 		class="com.gsafety.util.interceptor.LogHandlerInterceptorAdapter" />
+	<bean id="handlerInterceptor3"
+		class="com.gsafety.util.interceptor.CommonInterceptor" />
 	<!-- 用于测试拦截器 end -->
 </beans>

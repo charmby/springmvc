@@ -19,6 +19,9 @@ public class User extends AbstractCommonAttr {
 	public Integer getId() {
 		return id;
 	}
+    public User(){
+    	
+    }
 	public User(Integer id, String userName, String password) {
 		super();
 		this.id = id;
