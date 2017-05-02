@@ -37,7 +37,7 @@
 	<modules>
 		<module>springmvcuitl</module>
 		<module>springmvccore</module>
-		<!-- <module>springmvcweb</module> -->
+		<module>springmvcweb</module>
 		<module>springmvcservice</module>
 		<module>springmvccontroller</module>
 		<module>springmvcbakservice</module>
