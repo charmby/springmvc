@@ -3,8 +3,7 @@ package com.gsafety.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -45,7 +44,7 @@ ModelAndView：包含了视图要实现的模型数据和逻辑视图名；“mv
 
 1、springfox首先扫描@RestController货@Controller注解，有这个注解的才是springmvc的类，才能扫描到springfox的ui中。
 2. 然后springfox 扫描requestmapping中的value值，该值是请求url。
- 
+
   在
  * @author xiaodonghong
  *
@@ -70,8 +69,7 @@ ModelAndView：包含了视图要实现的模型数据和逻辑视图名；“mv
 		@ApiResponse(code = 500, message = "（服务器内部错误）  服务器遇到错误，无法完成请求")} 
 		)  
 public class HelloWorldController implements Controller {
-	
-	static Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
+	private static  Logger log2 = 	Logger.getLogger(HelloWorldController.class);
 	private String name;
 	private String age;
 	public String getName() {
@@ -94,13 +92,13 @@ public class HelloWorldController implements Controller {
 		// 3、将命令对象传入业务对象进行业务处理
 		// 4、选择下一个页面
 		String name2 = this.getName();
-		logger.info(name2);
+		log2.error(name2);
 		ModelAndView mv = new ModelAndView();
 		//添加模型数据，可以是任意的po对象。
 		mv.addObject("message", "hello world!");
 		mv.addObject("date", "日期数据！");
 		mv.setViewName("hello");
-		logger.info("进入hello.js页面的方法。");
+		log2.error("进入hello.js页面的方法。");
 		return mv;
 	}
 	//这里使用POST @RequestBody必须使用POST才能接收，这里方便讲解
@@ -118,20 +116,20 @@ public class HelloWorldController implements Controller {
 			String query,
 			@RequestHeader String apiKey,
 			PageInfo pageInfoBeen){
-		logger.info("进入hello.js页面的方法。");
-		logger.info("blogArticleBeen.getLastUpdateTime():"+blogArticleBeen.getLastUpdateTime());
-		logger.info("blogArticleBeen.getSorter():"+blogArticleBeen.getSorter());
-		logger.info("path:"+path);
-		logger.info("query:"+query);
-		logger.info("apiKey:"+apiKey);
-		logger.info("pageInfoBeen.getNowPage():"+pageInfoBeen.getNowPage());
-		logger.info("pageInfoBeen.getPageSize():"+pageInfoBeen.getPageSize());
+		log2.error("进入hello.js页面的方法。");
+		log2.error("blogArticleBeen.getLastUpdateTime():"+blogArticleBeen.getLastUpdateTime());
+		log2.error("blogArticleBeen.getSorter():"+blogArticleBeen.getSorter());
+		log2.error("path:"+path);
+		log2.error("query:"+query);
+		log2.error("apiKey:"+apiKey);
+		log2.error("pageInfoBeen.getNowPage():"+pageInfoBeen.getNowPage());
+		log2.error("pageInfoBeen.getPageSize():"+pageInfoBeen.getPageSize());
 		JSONResult jsonResult = new JSONResult();
 		jsonResult.setMessage("success");
 		jsonResult.setMessageCode(null);
 		jsonResult.setCode(0);
 		jsonResult.setBody(null);
-		logger.info(jsonResult.toString());
+		log2.error(jsonResult.toString());
 		return jsonResult;
 	}
 	@RequestMapping(value="/testmapping")
@@ -144,13 +142,13 @@ public class HelloWorldController implements Controller {
 	@ResponseBody
 	@RequestMapping(value = "queryUserById", method = RequestMethod.GET, produces = "application/json")
 	public Result queryUserById(@ApiParam(name = "userId", required = true, value = "用户Id") @RequestParam("userId") int userId, HttpServletRequest request) {
-		logger.info("进入查询用户方法！");
+		log2.error("进入查询用户方法！");
 		User user = new User(userId, "haoyifen", "111");
 		Result result = new Result();
 		result.setCode(0);
 		result.setData(user);
 		result.setMessage("success");
-		logger.info(result.toString());
+		log2.error(result.toString());
 		return result;
 	}
 }

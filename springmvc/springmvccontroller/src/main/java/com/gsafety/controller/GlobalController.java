@@ -6,8 +6,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +23,7 @@ import com.gsafety.po.FormatModel;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+
 
 @Controller
 @RequestMapping(value = "/global")
@@ -45,7 +45,8 @@ import io.swagger.annotations.ApiResponses;
 		@ApiResponse(code = 500, message = "（服务器内部错误）  服务器遇到错误，无法完成请求")} 
 		)  
 public class GlobalController {
-	private static Logger logger  = LoggerFactory.getLogger("PubLog");
+
+      private static  Logger log2 = Logger.getLogger(GlobalController.class);
 	
 	/*    @ResponseBody*/
 
@@ -57,7 +58,8 @@ public class GlobalController {
 	 */
 	@RequestMapping(value="/test", method = {RequestMethod.GET})
 	public ModelAndView test(HttpServletRequest request,Model model){
-		logger.warn("测试国际化信息！该情况是springmvc的浏览器决定国际化类型！");
+
+		log2.error("我是肖东红的log4j的日志apache");
 		if(!model.containsAttribute("contentModel")){
 
 			//从后台代码获取国际化信息
@@ -81,7 +83,9 @@ public class GlobalController {
 	@RequestMapping(value="/test2", method = {RequestMethod.GET})
 	public String test2(HttpServletRequest request,Model model,@RequestParam(value="langType", defaultValue="zh" ) String langType){
 		if(!model.containsAttribute("contentModel")){
-			logger.warn("测试国际化信息！该情况是springmvc的session配置决定国际化类型！");
+
+			log2.error("我是肖东红的log4j的日志apache");
+			
 			if(langType.equals("zh")){
 				Locale locale = new Locale("zh", "CN"); 
 				request.getSession().setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME,locale); 
@@ -121,8 +125,10 @@ public class GlobalController {
 	 */
 	 @RequestMapping(value="/test3", method = {RequestMethod.GET})
 	    public String test3(HttpServletRequest request, HttpServletResponse response, Model model, @RequestParam(value="langType", defaultValue="zh") String langType){
-	        if(!model.containsAttribute("contentModel")){
-	        	logger.warn("测试国际化信息！该情况是springmvc的cookie决定国际化类型！");
+			log2.error("我是肖东红的log4j的日志apache");
+			
+		 if(!model.containsAttribute("contentModel")){
+			 log2.error("测试国际化信息！该情况是springmvc的cookie决定国际化类型！");
 	            if(langType.equals("zh")){
 	                Locale locale = new Locale("zh", "CN"); 
 	                //request.getSession().setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME,locale);
