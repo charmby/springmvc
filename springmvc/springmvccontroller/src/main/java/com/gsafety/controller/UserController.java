@@ -1,9 +1,13 @@
 package com.gsafety.controller;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,6 +45,31 @@ public class UserController {
 		User user = this.userService.getUserById(id);
 		model.addAttribute("user", user);
 		log2.info("返回user对象："+user.toString());
+		showClassLoader();
+		getResource();
 		return 		user;
+	}
+	
+	private void showClassLoader(){
+		ClassLoader cloader = Thread.currentThread().getContextClassLoader();
+		System.out.println(cloader);
+		System.out.println(cloader.getParent());
+
+		
+		System.out.println(cloader.getParent().getParent());
+	}
+	
+	private  void getResource (){
+		org.springframework.core.io.Resource resource = new ClassPathResource("messages.properties");
+		System.out.println(resource);
+	try {
+		File file = 	resource.getFile();
+		System.out.println(file);
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+		
 	}
 }
