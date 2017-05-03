@@ -69,12 +69,17 @@
 		</filter>
 	</appender>
 	
-	<category name="com.gsafety.controller.HelloWorldController"
+	 <!--将各个包中的类日志输出到不同的日志文件中  这样可以便于日志的分类,可以通过这个设置，把业务逻辑的日志添加到数据库。起到过滤的作用
+    -->
+    <!--这段配置的就是说把包名为“com.gsafety.controller”且优先级为debug的日志通过xmlfileAppenderWarn这个appender来处理。
+    -->	
+	
+	<category name="com.gsafety.controller"
 		additivity="false">
 		<priority value="ERROR" />
 		<appender-ref ref="xmlfileAppenderWarn" />
 	</category>
-
+<!-- 在类中可以根据logger的name值，获得loggger以及其输出的位置。 -->
 	<logger name="userBehavior">
 		<level value="ERROR" />
 		<appender-ref ref="xmlfileAppenderWarn" />
