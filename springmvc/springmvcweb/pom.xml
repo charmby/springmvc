@@ -40,10 +40,15 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
-				
-				
+					<overlays>
+						<overlay>
+							<groupId>com.gsafety</groupId>
+							<artifactId>springmvcweb2</artifactId>
+						</overlay>
+					</overlays>
+
 				</configuration>
-				
+
 			</plugin>
 		</plugins>
 	</build>
