@@ -1,12 +1,18 @@
 package com.gsafety.po;
 
+import java.io.Serializable;
+
 import com.gsafety.commonabstractclass.AbstractCommonAttr;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(description = "用户",parent= AbstractCommonAttr.class/*,value="用户信息"*/)
-public class User extends AbstractCommonAttr {
+public class User extends AbstractCommonAttr implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4724893856269070082L;
 	@ApiModelProperty(value = "用户Id", example = "1",position = 1)
     private Integer id;
 	@ApiModelProperty(value = "姓名", example = "xiao",position = 3)
