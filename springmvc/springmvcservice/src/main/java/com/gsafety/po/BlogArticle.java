@@ -3,10 +3,14 @@ package com.gsafety.po;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 @ApiModel(description = "博客信息")
-public class BlogArticle {
+public class BlogArticle implements Externalizable{
 	private Long id;
 	private String name; //标题
 	private String mainPhoto; //封面图片
@@ -137,6 +141,16 @@ public class BlogArticle {
 	}
 	public void setLabelNamesCache(String labelNamesCache) {
 		this.labelNamesCache = labelNamesCache;
+	}
+	@Override
+	public void readExternal(ObjectInput arg0) throws IOException, ClassNotFoundException {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void writeExternal(ObjectOutput arg0) throws IOException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

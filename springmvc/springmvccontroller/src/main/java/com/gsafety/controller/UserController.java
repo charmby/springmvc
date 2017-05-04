@@ -42,8 +42,9 @@ public class UserController {
 	@RequestMapping(value = "/showUser", method = RequestMethod.GET, produces = "application/json")
 	public 		User toIndex(HttpServletRequest request,@ApiParam(name = "id", required = true, value = "用户Id") @RequestParam("id") Integer id,Model model) throws Exception{
 		log2.error(id+"的查询结构！");
-
-		int userId = Integer.parseInt(request.getParameter("id"));
+/*
+ //也可以通过request的方式获得id值
+		int userId = Integer.parseInt(request.getParameter("id"));*/
 		User user = this.userService.getUserById(id);
 		model.addAttribute("user", user);
 		log2.info("返回user对象："+user.toString());
