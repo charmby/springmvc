@@ -156,6 +156,12 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.5</version>
+			</dependency>
+
 			<!-- 导入Mysql数据库链接jar包 -->
 			<dependency>
 				<groupId>mysql</groupId>

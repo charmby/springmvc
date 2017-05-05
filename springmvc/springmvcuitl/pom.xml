@@ -12,9 +12,12 @@
 	<name>springmvcuitl</name>
 	<url>http://maven.apache.org</url>
 	<properties>
-		
+
 	</properties>
 	<dependencies>
-
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
 	</dependencies>
 </project>

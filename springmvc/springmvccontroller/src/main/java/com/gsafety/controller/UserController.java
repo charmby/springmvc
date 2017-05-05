@@ -8,11 +8,17 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Iterator;
+import java.util.Properties;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -22,6 +28,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.gsafety.po.Result;
 import com.gsafety.po.Student;
@@ -49,7 +57,7 @@ public class UserController{
 	@RequestMapping(value = "/showUser", method = RequestMethod.GET, produces = "application/json")
 	public 		User toIndex(HttpServletRequest request,@ApiParam(name = "id", required = true, value = "用户Id") @RequestParam("id") Integer id,Model model) throws Exception{
 		log2.error(id+"的查询结z构！");
-/*
+		/*
  //也可以通过request的方式获得id值
 		int userId = Integer.parseInt(request.getParameter("id"));*/
 		User user = this.userService.getUserById(id);
@@ -59,6 +67,20 @@ public class UserController{
 		getResource();
 		getResourceLoad();
 		demoForSerializable();
+		WebApplicationContext WebApplicationContext = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
+		WebApplicationContext.getServletContext();
+		String applicationname = WebApplicationContext.getApplicationName(); 
+		log2.debug(applicationname);
+		Properties properties = 	System.getProperties();
+		if(properties!=null){
+			Set set = 	properties.keySet();
+			Iterator it = set.iterator();
+			while (it.hasNext()) {  
+				String str = (String) it.next();
+				System.out.println(str);
+				System.out.println(properties.getProperty(str));  
+			}  
+		}
 		return 		user;
 	}
 
@@ -84,7 +106,7 @@ public class UserController{
 	}
 	private  void getResourceLoad () throws IOException{
 
-      ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		org.springframework.core.io.Resource  resources [] = resolver.getResources("classpath*:com/gsafety/**/*.xml");
 		for(org.springframework.core.io.Resource  re :resources ){
 			try {
@@ -97,56 +119,58 @@ public class UserController{
 		}
 
 	}
-	
+
 	private void demoForSerializable(){
 		// TODO 自动生成的方法存根
-        Student stu=new Student("Mike", "male", 22);
-        if(stu instanceof Serializable){
-        	System.out.println(stu);
-        }
-        serialize("C:\\student.dat", stu);
-        
-        System.out.println("序列化完毕");
-        Student stu1=deserialize("C:\\student.dat");
-        System.out.println(stu1.getSname()+"\t"+stu1.getSex()+"\t"+stu1.getAge());
-        System.out.println("反序列化完毕");
-	}
-	
-	public static void serialize(String filename,Student stu){
-        try {
-            FileOutputStream fout=new FileOutputStream(filename);
-            ObjectOutputStream oout =new ObjectOutputStream(fout);
-            oout.writeObject(stu);
-            oout.close();
-            fout.close();
-        } catch (FileNotFoundException e) {
-            // TODO 自动生成的 catch 块
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO 自动生成的 catch 块
-            e.printStackTrace();
-        }
-    }
-    public static Student deserialize(String filename){
-        try {
-            FileInputStream fin=new FileInputStream(filename);
-            ObjectInputStream oin=new ObjectInputStream(fin);
-            Student stu=(Student)oin.readObject();
-            oin.close();
-            fin.close();
-            return stu;
-        } catch (FileNotFoundException e) {
-            // TODO 自动生成的 catch 块
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO 自动生成的 catch 块
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            // TODO 自动生成的 catch 块
-            e.printStackTrace();
-        }
-        return null;
+		Student stu=new Student("Mike", "male", 22);
+		if(stu instanceof Serializable){
+			System.out.println(stu);
+		}
+		serialize("C:\\student.dat", stu);
 
-    }
-	
+		System.out.println("序列化完毕");
+		Student stu1=deserialize("C:\\student.dat");
+		System.out.println(stu1.getSname()+"\t"+stu1.getSex()+"\t"+stu1.getAge());
+		System.out.println("反序列化完毕");
+	}
+
+	public static void serialize(String filename,Student stu){
+		try {
+			FileOutputStream fout=new FileOutputStream(filename);
+			ObjectOutputStream oout =new ObjectOutputStream(fout);
+			oout.writeObject(stu);
+			oout.close();
+			fout.close();
+		} catch (FileNotFoundException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+	}
+	public static Student deserialize(String filename){
+		try {
+			FileInputStream fin=new FileInputStream(filename);
+			ObjectInputStream oin=new ObjectInputStream(fin);
+			Student stu=(Student)oin.readObject();
+			oin.close();
+			fin.close();
+			return stu;
+		} catch (FileNotFoundException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+
+
 }
