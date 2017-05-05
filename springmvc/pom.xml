@@ -35,6 +35,7 @@
 		<aspectj.version>1.5.4</aspectj.version>
 		<maven-jar-plugin.version>2.6</maven-jar-plugin.version>
 		<maven-war-plugin.version>2.2</maven-war-plugin.version>
+		<commons-lang3.version>3.5</commons-lang3.version>
 	</properties>
 	<modules>
 		<module>springmvcuitl</module>
@@ -159,7 +160,7 @@
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
-				<version>3.5</version>
+				<version>${commons-lang3.version}</version>
 			</dependency>
 
 			<!-- 导入Mysql数据库链接jar包 -->
