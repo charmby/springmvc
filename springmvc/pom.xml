@@ -48,6 +48,7 @@
 		<module>springmvclearn</module>
 		<module>springmvcweb2</module>
 		<module>springmvcweb3</module>
+		<module>springmvcshiro</module>
 	</modules>
 
 	<build>
