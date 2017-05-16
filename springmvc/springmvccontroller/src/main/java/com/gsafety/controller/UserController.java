@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.gsafety.commonutil.MathUtils;
 import com.gsafety.po.Result;
 import com.gsafety.po.Student;
 import com.gsafety.po.User;
@@ -67,11 +69,10 @@ public class UserController{
 		getResource();
 		getResourceLoad();
 		demoForSerializable();
-		WebApplicationContext WebApplicationContext = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
-		WebApplicationContext.getServletContext();
-		String applicationname = WebApplicationContext.getApplicationName(); 
-		log2.debug(applicationname);
-		Properties properties = 	System.getProperties();
+		ApplicationContext WebApplicationContext = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
+		MathUtils applicationname =(MathUtils) WebApplicationContext.getBean("mathUtils");
+		applicationname.add(2, 2);
+/*		Properties properties = 	System.getProperties();
 		if(properties!=null){
 			Set set = 	properties.keySet();
 			Iterator it = set.iterator();
@@ -80,7 +81,7 @@ public class UserController{
 				System.out.println(str);
 				System.out.println(properties.getProperty(str));  
 			}  
-		}
+		}*/
 		return 		user;
 	}
 

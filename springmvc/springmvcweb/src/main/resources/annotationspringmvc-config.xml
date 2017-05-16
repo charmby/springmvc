@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans     
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc  
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<!-- 该文件只会扫描springmvc的注释，并不会扫描spring的service等注释 -->
 	<!-- 开启注解模式驱动 -->
@@ -34,7 +36,7 @@
 	<mvc:default-servlet-handler />
 
 	<!-- 静态资源过滤 -->
-	 <mvc:resources location="/resources/" mapping="/resources/**" />
+	<mvc:resources location="/resources/" mapping="/resources/**" />
 
 	<!-- 怎么都没办法取到下面的静态资源，先放过，以后再处理。 <mvc:resources location="/WEB-INF/theme/blue/" 
 		mapping="/blue/**" /> <mvc:resources location="/WEB-INF/theme/red/" mapping="/red/**" 
@@ -50,21 +52,19 @@
 	<!-- 引入boostramp组件 -->
 	<mvc:resources location="/common/bootstrap-3.3.7/dist/"
 		mapping="/bootstrap/**" />
-	<mvc:resources location="/common/vendor/"
-		mapping="/vendor/**" />
-	<!-- 引入字体组件  引入bootstrap字体组件-->
+	<mvc:resources location="/common/vendor/" mapping="/vendor/**" />
+	<!-- 引入字体组件 引入bootstrap字体组件 -->
 	<!-- 引入bootstrap字体组件 -->
 	<mvc:resources
 		location="/common/Font-Awesome-3.2.1/css/,/common/Font-Awesome-3.2.1/font/,/common/bootstrap-3.3.7/dist/fonts/"
 		mapping="/font/**" />
-	<mvc:resources
-		location="/common/font-awesome/css/,/common/font-awesome/fonts/"
+	<mvc:resources location="/common/font-awesome/css/,/common/font-awesome/fonts/"
 		mapping="/fonts/**" />
-	
+
 	<mvc:resources location="/WEB-INF/base/" mapping="/base/**" />
 
 	<bean class="com.gsafety.util.swaggerconfig.SwaggerConfiguration" />
-	<!-- swagger ui resources  -->
+	<!-- swagger ui resources -->
 	<!--一定不能放开，否则页面就显示不出来了。 <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars" 
 		/> -->
 	<!-- 视图渲染 jsp/freemaker/velocity -->
@@ -131,9 +131,30 @@
 
 	<!-- 国际化结束 -->
 
-<!-- 异常处理开始 -->
-<bean class="com.gsafety.exceptionHandlers.SimpleExceptionHandler"></bean>
-<!-- 异常处理结束 -->
+	<!-- 异常处理开始 -->
+	<bean class="com.gsafety.exceptionHandlers.SimpleExceptionHandler"></bean>
+	<!-- 异常处理结束 -->
 
+
+
+
+	<!-- 被代理对象 -->
+	<bean id="math" class="com.gsafety.commonutil.MathUtils"></bean>
+	<!-- 通知 -->
+	<bean id="advices" class="com.gsafety.advice.Advices"></bean>
+
+	<!-- aop配置 -->
+	<aop:config proxy-target-class="false">
+		<!--切面 -->
+		<aop:aspect ref="advices">
+			<!-- 切点 ,在被代理类的什么位置进行通知操作类必须到方法， -->
+			<aop:pointcut expression="execution(* com.gsafety.commonutil.MathUtils.*(..))"
+				id="pointcut1" />
+			<!--连接通知方法与切点 -->
+			<aop:before method="advicesMath" pointcut-ref="pointcut1" />
+			<aop:after method="advicesMath2" pointcut-ref="pointcut1" />
+			<aop:around method="advicesMath" pointcut-ref="pointcut1" />
+		</aop:aspect>
+	</aop:config>
 
 </beans>
