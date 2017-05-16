@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util" 
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans     
         http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -9,6 +11,8 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc  
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/util       
+        http://www.springframework.org/schema/util/spring-util-3.2.xsd 
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 
@@ -18,14 +22,69 @@
 	<mvc:annotation-driven>
 		<!-- 定义message转换 -->
 		<mvc:message-converters>
-			<bean
-				class="com.gsafety.httpmessageconverter.DefaultJacksonHttpMessageConverter">
-				<!-- True only for the blog article - a production system would set this 
-					to false to reduce the number of bytes sent across the wire: -->
-				<property name="prettyPrint" value="true" />
-			</bean>
+			<!-- <bean class="com.gsafety.httpmessageconverter.DefaultJacksonHttpMessageConverter"> 
+				True only for the blog article - a production system would set this to false 
+				to reduce the number of bytes sent across the wire: <property name="prettyPrint" 
+				value="true" /> </bean> -->
+			<ref bean="stringHttpMessageConverter" />
+			<ref bean="fastJsonHttpMessageConverter" />
+			<ref bean="marshallingHttpMessageConverter" />
+
 		</mvc:message-converters>
 	</mvc:annotation-driven>
+
+
+	<bean id="stringHttpMessageConverter"
+		class="org.springframework.http.converter.StringHttpMessageConverter">
+		<constructor-arg value="UTF-8" index="0"></constructor-arg><!-- 
+			避免出现乱码 -->
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/plain;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="fastJsonHttpMessageConverter"
+		class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+
+		<property name="supportedMediaTypes">
+			<list>
+				<value>application/json;charset=UTF-8</value>
+				<value>text/html;charset=UTF-8</value><!-- 避免IE出现下载JSON文件的情况 -->
+			</list>
+		</property>
+		<property name="features">
+			<util:list>
+				<!-- <value>WriteMapNullValue</value> -->
+				<value>QuoteFieldNames</value>
+				<value>WriteDateUseDateFormat</value>
+			</util:list>
+		</property>
+	</bean>
+
+	<bean id="marshallingHttpMessageConverter"
+		class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+		<property name="marshaller" ref="castorMarshaller" />
+		<property name="unmarshaller" ref="castorMarshaller" />
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/xml;charset=UTF-8</value>
+				<value>application/xml;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 返回类型定义 -->
+	<util:list id="messageConverters">
+		<ref bean="stringHttpMessageConverter" />
+		<ref bean="fastJsonHttpMessageConverter" />
+		<ref bean="marshallingHttpMessageConverter" />
+	</util:list>
+
+
+
+
+
 	<!-- 扫包 com.gsafety.**.controller代表了 1、com.gsafety.bak.controller； 2、com.gsafety.controller；3、com.gsafety.a.b.xxx.controller 
 		的package路径 -->
 	<context:component-scan
@@ -130,7 +189,9 @@
 	<!-- 请求/Session/Cookie -->
 
 	<!-- 国际化结束 -->
-
+<!-- 支持上传文件 --> 
+    <bean id="multipartResolver" 
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver" /> 
 	<!-- 异常处理开始 -->
 	<bean class="com.gsafety.exceptionHandlers.SimpleExceptionHandler"></bean>
 	<!-- 异常处理结束 -->
