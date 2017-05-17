@@ -162,19 +162,21 @@
 	</filter-mapping>
 
 	<!-- 自定义根据单点登录的结果设置本系统的用户信息 -->
-<!-- 	<filter>
-		<display-name>AutoSetUserAdapterFilter</display-name>
-		<filter-name>AutoSetUserAdapterFilter</filter-name>
-		<filter-class>com.wsria.demo.filter.AutoSetUserAdapterFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>AutoSetUserAdapterFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping> -->
+	<!-- <filter> <display-name>AutoSetUserAdapterFilter</display-name> <filter-name>AutoSetUserAdapterFilter</filter-name> 
+		<filter-class>com.wsria.demo.filter.AutoSetUserAdapterFilter</filter-class> 
+		</filter> <filter-mapping> <filter-name>AutoSetUserAdapterFilter</filter-name> 
+		<url-pattern>/*</url-pattern> </filter-mapping> -->
 
 	<!-- ======================== 单点登录结束 ======================== -->
 
-
+	<servlet>
+		<servlet-name>helloWorldGetName</servlet-name>
+		<servlet-class>com.gsafety.HelloWorldExample</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>helloWorldGetName</servlet-name>
+		<url-pattern>/hello</url-pattern>
+	</servlet-mapping>
 
 
 </web-app>
