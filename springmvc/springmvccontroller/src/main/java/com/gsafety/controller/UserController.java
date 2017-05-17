@@ -62,9 +62,9 @@ public class UserController{
 		getResource();
 		getResourceLoad();
 		demoForSerializable();
-		ApplicationContext WebApplicationContext = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
+/*		ApplicationContext WebApplicationContext = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
 		MathUtils applicationname =(MathUtils) WebApplicationContext.getBean("mathUtils");
-		applicationname.add(2, 2);
+		applicationname.add(2, 2);*/
 /*		Properties properties = 	System.getProperties();
 		if(properties!=null){
 			Set set = 	properties.keySet();
