@@ -160,6 +160,12 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+				<groupId>org.jasig.cas</groupId>
+				<artifactId>cas-client-core</artifactId>
+				<version>3.1.10</version>
+			</dependency>
+
+			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
 				<version>${commons-lang3.version}</version>
@@ -588,5 +594,9 @@
 			<artifactId>aspectjweaver</artifactId>
 		</dependency>
 		<!-- aspectj支持 结束 -->
+		<dependency>
+			<groupId>org.jasig.cas</groupId>
+			<artifactId>cas-client-core</artifactId>
+		</dependency>
 	</dependencies>
 </project>
