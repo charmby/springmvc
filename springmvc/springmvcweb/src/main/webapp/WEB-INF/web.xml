@@ -162,7 +162,7 @@
 	</filter-mapping>
 
 	<!-- 自定义根据单点登录的结果设置本系统的用户信息 -->
-	<filter>
+<!-- 	<filter>
 		<display-name>AutoSetUserAdapterFilter</display-name>
 		<filter-name>AutoSetUserAdapterFilter</filter-name>
 		<filter-class>com.wsria.demo.filter.AutoSetUserAdapterFilter</filter-class>
@@ -170,7 +170,7 @@
 	<filter-mapping>
 		<filter-name>AutoSetUserAdapterFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	</filter-mapping> -->
 
 	<!-- ======================== 单点登录结束 ======================== -->
 
