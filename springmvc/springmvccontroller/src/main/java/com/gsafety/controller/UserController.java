@@ -13,6 +13,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.jasig.cas.client.authentication.AttributePrincipal;
+import org.jasig.cas.client.util.AssertionHolder;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -52,6 +54,12 @@ public class UserController{
 		/*
  //也可以通过request的方式获得id值
 		int userId = Integer.parseInt(request.getParameter("id"));*/
+		
+		AttributePrincipal principal = 	AssertionHolder.getAssertion().getPrincipal();
+		if(principal!=null){
+			String userName = principal.getName();
+			System.out.println(userName);
+		}
 		User user = this.userService.getUserById(id);
 		model.addAttribute("user", user);
 		log2.info("返回user对象："+user.toString());
@@ -59,10 +67,10 @@ public class UserController{
 		getResource();
 		getResourceLoad();
 		demoForSerializable();
-/*		ApplicationContext WebApplicationContext = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
+		/*		ApplicationContext WebApplicationContext = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
 		MathUtils applicationname =(MathUtils) WebApplicationContext.getBean("mathUtils");
 		applicationname.add(2, 2);*/
-/*		Properties properties = 	System.getProperties();
+		/*		Properties properties = 	System.getProperties();
 		if(properties!=null){
 			Set set = 	properties.keySet();
 			Iterator it = set.iterator();

@@ -1,4 +1,4 @@
-package com.gsafety;
+package com.gsafety.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
