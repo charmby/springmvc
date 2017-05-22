@@ -21,6 +21,14 @@ public class User extends AbstractCommonAttr implements Serializable{
     private String password;
     @ApiModelProperty(value = "年龄", example = "2",position = 2)
     private Integer age;
+    
+    
+    private String phone;
+    
+    private String roles;
+    
+    private String permission;
+    
     @Override
 	public Integer getId() {
 		return id;

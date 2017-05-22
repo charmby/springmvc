@@ -43,9 +43,16 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:applicationContext.xml,classpath*:spring-mybatis.xml</param-value>
-		<!-- 默认是/WEB-INF/applicationContext.xml -->
+		<param-value>classpath*:applicationContext.xml,classpath*:spring-mybatis.xml,classpath*:spring-context-shiro.xml</param-value>
 	</context-param>
+
+
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+
 
 	<servlet>
 		<servlet-name>mvc-dispatcher</servlet-name>
@@ -67,16 +74,16 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
 
 	<!-- 配置 Shiro 的 Filter 开始 -->
-	<!-- <filter> <description>shiro 权限拦截</description> <filter-name>shiroFilter</filter-name> 
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> 
-		<init-param> <param-name>targetFilterLifecycle</param-name> <param-value>true</param-value> 
-		</init-param> </filter> <filter-mapping> <filter-name>shiroFilter</filter-name> 
-		<url-pattern>/*</url-pattern> </filter-mapping> -->
+	<filter>
+		<filter-name>shiroFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>shiroFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	<!-- 配置 Shiro 的 Filter 结束 -->
 
 	<welcome-file-list>
@@ -84,93 +91,42 @@
 	</welcome-file-list>
 
 	<!--用于单点退出，该过滤器用于实现单点登出功能，可选配置 -->
-
-	<listener>
-		<listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
-	</listener>
+	<!-- <listener> <listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class> 
+		</listener> -->
 
 	<!-- 该过滤器用于实现单点登出功能，可选配置。 -->
 
-	<filter>
-		<filter-name>CASSingleSignOutFilter</filter-name>
-		<filter-class>org.jasig.cas.client.session.SingleSignOutFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>CASSingleSignOutFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
+	<!-- <filter> <filter-name>CASSingleSignOutFilter</filter-name> <filter-class>org.jasig.cas.client.session.SingleSignOutFilter</filter-class> 
+		</filter> <filter-mapping> <filter-name>CASSingleSignOutFilter</filter-name> 
+		<url-pattern>/*</url-pattern> </filter-mapping> -->
 	<!-- 该过滤器负责用户的认证工作，必须启用它 -->
-	<filter>
-		<filter-name>CASFilter</filter-name>
-		<filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
-		<init-param>
-			<param-name>casServerLoginUrl</param-name>
-			<param-value>http://localhost:8180/cas/login</param-value>
-			<!--这里的server是服务端的IP -->
-
-		</init-param>
-		<init-param>
-			<param-name>serverName</param-name>
-			<param-value>http://localhost:8280</param-value>
-			<!--这里的server是客户端的地址 -->
-		</init-param>
-
-	</filter>
-
-	<filter-mapping>
-		<filter-name>CASFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	<!-- <filter> <filter-name>CASFilter</filter-name> <filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class> 
+		<init-param> <param-name>casServerLoginUrl</param-name> <param-value>http://localhost:8180/cas/login</param-value> 
+		这里的server是服务端的IP </init-param> <init-param> <param-name>serverName</param-name> 
+		<param-value>http://localhost:8280</param-value> 这里的server是客户端的地址 </init-param> 
+		</filter> <filter-mapping> <filter-name>CASFilter</filter-name> <url-pattern>/*</url-pattern> 
+		</filter-mapping> -->
 
 
 	<!-- 该过滤器负责对Ticket的校验工作，必须启用它 -->
-	<filter>
-
-		<filter-name>CASValidationFilter</filter-name>
-		<filter-class>
-			org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter</filter-class>
-		<init-param>
-			<param-name>casServerUrlPrefix</param-name>
-			<param-value>http://localhost:8180/cas</param-value>
-		</init-param>
-
-		<init-param>
-			<param-name>serverName</param-name>
-			<param-value>http://localhost:8280</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>CASValidationFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	<!-- <filter> <filter-name>CASValidationFilter</filter-name> <filter-class> 
+		org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter</filter-class> 
+		<init-param> <param-name>casServerUrlPrefix</param-name> <param-value>http://localhost:8180/cas</param-value> 
+		</init-param> <init-param> <param-name>serverName</param-name> <param-value>http://localhost:8280</param-value> 
+		</init-param> </filter> <filter-mapping> <filter-name>CASValidationFilter</filter-name> 
+		<url-pattern>/*</url-pattern> </filter-mapping> -->
 
 
 	<!-- 该过滤器负责实现HttpServletRequest请求的包裹， 比如允许开发者通过HttpServletRequest的getRemoteUser()方法获得SSO登录用户的登录名，可选配置。 -->
 
-	<filter>
-		<filter-name>CASHttpServletRequestWrapperFilter</filter-name>
-		<filter-class>org.jasig.cas.client.util.HttpServletRequestWrapperFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>CASHttpServletRequestWrapperFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	<!-- <filter> <filter-name>CASHttpServletRequestWrapperFilter</filter-name> 
+		<filter-class>org.jasig.cas.client.util.HttpServletRequestWrapperFilter</filter-class> 
+		</filter> <filter-mapping> <filter-name>CASHttpServletRequestWrapperFilter</filter-name> 
+		<url-pattern>/*</url-pattern> </filter-mapping> -->
 
 	<!-- 该过滤器使得开发者可以通过org.jasig.cas.client.util.AssertionHolder来获取用户的登录名。 比如AssertionHolder.getAssertion().getPrincipal().getName()。 -->
-	<filter>
-		<filter-name>CASAssertionThreadLocalFilter</filter-name>
-		<filter-class>org.jasig.cas.client.util.AssertionThreadLocalFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>CASAssertionThreadLocalFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
-	<!-- 自定义根据单点登录的结果设置本系统的用户信息 -->
-	<!-- <filter> <display-name>AutoSetUserAdapterFilter</display-name> <filter-name>AutoSetUserAdapterFilter</filter-name> 
-		<filter-class>com.wsria.demo.filter.AutoSetUserAdapterFilter</filter-class> 
-		</filter> <filter-mapping> <filter-name>AutoSetUserAdapterFilter</filter-name> 
+	<!-- <filter> <filter-name>CASAssertionThreadLocalFilter</filter-name> <filter-class>org.jasig.cas.client.util.AssertionThreadLocalFilter</filter-class> 
+		</filter> <filter-mapping> <filter-name>CASAssertionThreadLocalFilter</filter-name> 
 		<url-pattern>/*</url-pattern> </filter-mapping> -->
 
 	<!-- ======================== 单点登录结束 ======================== -->
@@ -183,7 +139,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>helloWorldGetName</servlet-name>
-		<url-pattern>/hello</url-pattern>
+		<url-pattern>/helloWorldGetName</url-pattern>
 	</servlet-mapping>
 
 
