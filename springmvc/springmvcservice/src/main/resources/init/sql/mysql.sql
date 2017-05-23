@@ -9,10 +9,11 @@ CREATE TABLE `user_t` (
 `age` int(11)
 ) CHARSET=utf8;
 
-insert into user_t values(1,'xiaodonghong','xiaodonghong','18765432456',20);
-insert into user_t values(2,'admin','admin','18765532456',18);
-insert into user_t values(2,'sa','1','18765432436',10);
-
+insert into user_t(id,user_name,password,phone,age)  values(1,'xiaodonghong','xiaodonghong','18765432456',20);
+insert into user_t(id,user_name,password,phone,age) values(2,'admin','admin','18765532456',18);
+insert into user_t(id,user_name,password,phone,age)  values(3,'sa','1','18765432436',10);
+insert into user_t(id,user_name,password,phone,age)  values(4,'normal','normal','18765442436',11);
+insert into user_t(id,user_name,password,phone,age)  values(5,'sysadmin','sysadmin','18765431436',12);
 
 
 CREATE TABLE `role_t` ( 
@@ -22,11 +23,13 @@ CREATE TABLE `role_t` (
 `role_desc` varchar(255) 
 ) CHARSET=utf8;
 
-insert into role_t values(1,'sa','sa','超级管理员');
-insert into role_t values(2,'sysadmin','sysadmin','系统管理员');
-insert into role_t values(3,'privadmin','privadmin','权限管理员');
-insert into role_t values(4,'normal','normal','普通用户');
-
+insert into role_t(id,role_name,role_code,role_desc) values(1,'sa','sa','超级管理员');
+insert into role_t(id,role_name,role_code,role_desc) values(2,'sysadmin','sysadmin','系统管理员');
+insert into role_t(id,role_name,role_code,role_desc) values(3,'privadmin','privadmin','权限管理员');
+insert into role_t(id,role_name,role_code,role_desc) values(4,'normal','normal','普通用户');
+insert into role_t(id,role_name,role_code,role_desc) values(5,'normal1','normal1','普通用户');
+insert into role_t(id,role_name,role_code,role_desc) values(6,'normal2','normal2','普通用户');
+insert into role_t(id,role_name,role_code,role_desc) values(7,'normal2','normal3','普通用户');
 
 
 
