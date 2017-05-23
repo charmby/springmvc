@@ -5,10 +5,11 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="age" property="age" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_name, password, age
+    id, user_name, password,phone, age
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -17,20 +18,29 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+   <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from user_t
-    where id = #{id,jdbcType=INTEGER}
+    where user_name = #{userName,jdbcType=VARCHAR}
   </select>
+  
+   <select id="selectByUserNameAndPassword" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_t
+    where user_name = #{userName,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+  </select>
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user_t
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.gsafety.po.User" >
-    insert into user_t (id, user_name, password, 
+    insert into user_t (id, user_name, password,phone, 
       age)
-    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},  #{phone,jdbcType=VARCHAR}, 
       #{age,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.gsafety.po.User" >
@@ -44,6 +54,9 @@
       </if>
       <if test="password != null" >
         password,
+      </if>
+       <if test="phone != null" >
+        phone,
       </if>
       <if test="age != null" >
         age,
@@ -59,6 +72,9 @@
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
+       <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
       <if test="age != null" >
         #{age,jdbcType=INTEGER},
       </if>
@@ -73,6 +89,9 @@
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
+       <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
       <if test="age != null" >
         age = #{age,jdbcType=INTEGER},
       </if>
@@ -83,6 +102,7 @@
     update user_t
     set user_name = #{userName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

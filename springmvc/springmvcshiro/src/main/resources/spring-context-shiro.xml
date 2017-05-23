@@ -13,10 +13,10 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<!-- 缓存 在spring-context配置文件中，还有一个是需要配置-cacheManager,因为shiro的session是自己实现的，所以我们还需要一个缓存框架，所以在spring的配置文件一定要注意配置哦，用的是ehcache -->
 	<!-- 加载配置属性文件 -->
 	<context:property-placeholder
-		ignore-unresolvable="true" location="classpath:shiroconfig.properties" />
+		ignore-unresolvable="true" location="classpath*:shiroconfig.properties" />
 	<bean id="cacheManager"
 		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-		<property name="configLocation" value="classpath:${ehcache.file}"></property>
+		<property name="configLocation" value="classpath:ehcache-setting.xml" />
 	</bean>
 	<!-- Shiro权限过滤过滤器定义 -->
 	<bean name="shiroFilterChainDefinitions" class="java.lang.String">
@@ -24,10 +24,10 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 			<value>
 				/static/** = anon
 				/userfiles/** = anon
-				/page/** = authc
-				/page/** = port[8081]
-				${adminPath}/logout = logout
-				${adminPath}/** = user
+				/pages/** = authc
+				/pages/** = port[8081]
+				/admin/logout = logout
+				/admin/** = user
 			</value>
 		</constructor-arg>
 	</bean>
@@ -36,59 +36,62 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<!-- loginUrl登录页面，successUrl登录成功的页面 -->
-		<property name="loginUrl" value="/page/login.html" />
-		<property name="successUrl" value="/page/index.html" />
+		<property name="loginUrl" value="/pages/login.html" />
+		<property name="successUrl" value="/pages/index.html" />
 		<!-- unauthorizedUrl，系统未认证时跳转的页面 -->
-		<property name="unauthorizedUrl" value=""/>
+		<property name="unauthorizedUrl" value="/pages/blank.html" />
 		<property name="filters">
 			<map>
 				<entry key="cas" value-ref="casFilter" />
 				<entry key="authc" value-ref="formAuthenticationFilter" />
-				<entry key="outdate" value-ref="sessionOutDateFilter" />
+			<!-- 	<entry key="outdate" value-ref="sessionOutDateFilter" /> -->
 			</map>
 		</property>
 		<property name="filterChainDefinitions">
 			<ref bean="shiroFilterChainDefinitions" />
 		</property>
 	</bean>
-<bean id=""sessionOutDateFilter"" class="com.gsafety.shiro.filter.SessionOutDateFilter"/>
+	<bean id="sessionOutDateFilter"
+		class="com.gsafety.shiro.filter.SessionOutDateFilter" />
 
 	<!-- 定义Shiro安全管理配置 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<property name="realm" ref="systemAuthorizingRealm" />
+		<property name="realm" ref="userRealm" />
 		<property name="sessionManager" ref="sessionManager" />
-		<property name="cacheManager" ref="shiroCacheManager" /> 
+		<property name="cacheManager" ref="shiroCacheManager" />
 	</bean>
 
+	<bean id="userRealm" class="com.gsafety.shiro.realms.UserRealm" />
+
 	<!-- 自定义会话管理配置 -->
-	<bean id="sessionManager"
+<!-- 	<bean id="sessionManager"
 		class="com.yonyou.hotusm.common.security.session.SessionManager">
 		<property name="sessionDAO" ref="sessionDAO" />
 
-		<!-- 会话超时时间，单位：毫秒 -->
+		会话超时时间，单位：毫秒
 		<property name="globalSessionTimeout" value="${session.sessionTimeout}" />
 
-		<!-- 定时清理失效会话, 清理用户直接关闭浏览器造成的孤立会话 -->
+		定时清理失效会话, 清理用户直接关闭浏览器造成的孤立会话
 		<property name="sessionValidationInterval" value="${session.sessionTimeoutClean}" />
-		<!-- <property name="sessionValidationSchedulerEnabled" value="false"/> -->
+		<property name="sessionValidationSchedulerEnabled" value="false"/>
 		<property name="sessionValidationSchedulerEnabled" value="true" />
 
 		<property name="sessionIdCookie" ref="sessionIdCookie" />
 		<property name="sessionIdCookieEnabled" value="true" />
-	</bean>
+	</bean> -->
 
 	<!-- 指定本系统SESSIONID, 默认为: JSESSIONID 问题: 与SERVLET容器名冲突, 如JETTY, TOMCAT 等默认JSESSIONID, 
 		当跳出SHIRO SERVLET时如ERROR-PAGE容器会为JSESSIONID重新分配值导致登录会话丢失! -->
-	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
-		<constructor-arg name="name" value="hotusm.session.id" />
-	</bean>
+<!-- 	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<constructor-arg name="name" value="gsafety.session.id" />
+	</bean> -->
 
-	<bean id="sessionDAO"
+<!-- 	<bean id="sessionDAO"
 		class="com.yonyou.hotusm.common.security.session.CacheSessionDAO">
 		<property name="sessionIdGenerator" ref="idGen" />
 		<property name="activeSessionsCacheName" value="activeSessionsCache" />
 		<property name="cacheManager" ref="shiroCacheManager" />
-	</bean>
+	</bean> -->
 
 	<!-- 定义授权缓存管理器 -->
 	<!-- <bean id="shiroCacheManager" class="com.thinkgem.jeesite.common.security.shiro.cache.SessionCacheManager" 

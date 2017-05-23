@@ -5,10 +5,29 @@ CREATE TABLE `user_t` (
 `id`int(11) primary key  AUTO_INCREMENT,  
 `user_name` varchar(255) DEFAULT NULL,  
 `password` varchar(255) ,
+`phone` varchar(255) ,
 `age` int(11)
 ) CHARSET=utf8;
 
-insert into user_t values(1,'xiaodonghong','xiaodonghong',20);
+insert into user_t values(1,'xiaodonghong','xiaodonghong','18765432456',20);
+insert into user_t values(2,'admin','admin','18765532456',18);
+insert into user_t values(2,'sa','1','18765432436',10);
+
+
+
+CREATE TABLE `role_t` ( 
+`id`int(11) primary key  AUTO_INCREMENT,  
+`role_name` varchar(255) DEFAULT NULL,  
+`role_code` varchar(255) ,
+`role_desc` varchar(255) 
+) CHARSET=utf8;
+
+insert into role_t values(1,'sa','sa','超级管理员');
+insert into role_t values(2,'sysadmin','sysadmin','系统管理员');
+insert into role_t values(3,'privadmin','privadmin','权限管理员');
+insert into role_t values(4,'normal','normal','普通用户');
+
+
 
 
 CREATE TABLE person(id INT PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR(20), age INT,address varchar(200),telphone varchar(20),sex int,note varchar(255))CHARSET=utf8;

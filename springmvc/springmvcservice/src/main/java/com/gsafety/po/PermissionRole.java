@@ -2,6 +2,7 @@ package com.gsafety.po;
 
 import java.io.Serializable;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -9,6 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @author xiaodh
  * 2017年5月22日 下午6:32:22
  */
+@ApiModel(description = "权限角色表",value="权限角色表信息")
 public class PermissionRole implements Serializable{
 	private static final long serialVersionUID = 5048469720892243585L;
 	@ApiModelProperty(value = "关系Id", example = "1",position = 1)
@@ -17,7 +19,6 @@ public class PermissionRole implements Serializable{
 	private Integer roleId;
 	@ApiModelProperty(value = "权限Id", example = "3",position = 1)
 	private Integer permitId;
-	
 	public Integer getId() {
 		return id;
 	}

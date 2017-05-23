@@ -2,6 +2,7 @@ package com.gsafety.po;
 
 import java.io.Serializable;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -9,6 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @author xiaodh
  * 2017年5月22日 下午6:19:08
  */
+@ApiModel(description = "用户角色关系",value="用户角色关系信息")
 public class UserRole implements Serializable{
 
 	private static final long serialVersionUID = 5048469720892243585L;

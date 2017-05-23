@@ -3,16 +3,17 @@ package com.gsafety.dao;
 import com.gsafety.po.User;
 
 public interface IUserDao {
-    int deleteByPrimaryKey(Integer id);
+	int deleteByPrimaryKey(Integer id);
 
-    int insert(User record);
+	int insert(User record);
 
-    int insertSelective(User record);
+	int insertSelective(User record);
 
-    User selectByPrimaryKey(Integer id);
-    
-    User selectByUserName(String  userName);
-    int updateByPrimaryKeySelective(User record);
+	User selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKey(User record);
+	User selectByUserName(String  userName);
+	User selectByUserNameAndPassword(String username,String password);
+	int updateByPrimaryKeySelective(User record);
+
+	int updateByPrimaryKey(User record);
 }

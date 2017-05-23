@@ -54,7 +54,7 @@ import io.swagger.annotations.ApiResponse;
 @Api(value = "用户管理界面", description = "有关于用户管理的操作", position = 1)  
 public class UserController{
 	private static Logger log = 	Logger.getLogger(UserController.class);
-	@Resource
+	@Resource(name="userService")
 	private IUserService userService;
 
 	@ApiOperation(value = "根据用户id查询用户信息", httpMethod = "GET", produces = "application/json")
@@ -66,7 +66,7 @@ public class UserController{
 		/*
  //也可以通过request的方式获得id值
 		int userId = Integer.parseInt(request.getParameter("id"));*/
-		
+
 		AttributePrincipal principal = 	AssertionHolder.getAssertion().getPrincipal();
 		if(principal!=null){
 			String userName = principal.getName();
@@ -95,6 +95,41 @@ public class UserController{
 		return 		user;
 	}
 
+
+
+	@ApiOperation(value = "更新用户信息", httpMethod = "post", produces = "application/json")
+	@ApiResponse(code = 200, message = "success")
+	@ResponseBody
+	@RequestMapping(value = "/updateUser", method = RequestMethod.GET, produces = "application/json")
+	public 		int updateUser(HttpServletRequest request,User user) throws Exception{
+		int id =	userService.updateByPrimaryKeySelective(user);
+		return 		id;
+	}
+
+
+	@ApiOperation(value = "新增用户信息", httpMethod = "post", produces = "application/json")
+	@ApiResponse(code = 200, message = "success")
+	@ResponseBody
+	@RequestMapping(value = "/insertUser", method = RequestMethod.GET, produces = "application/json")
+	public 		int insertUser(HttpServletRequest request,User user) throws Exception{
+		int id = userService.insertSelective(user);
+		return 		id;
+	}
+
+
+	@ApiOperation(value = "删除用户信息", httpMethod = "post", produces = "application/json")
+	@ApiResponse(code = 200, message = "success")
+	@ResponseBody
+	@RequestMapping(value = "/deleteUser", method = RequestMethod.GET, produces = "application/json")
+	public 		int deleteUser(HttpServletRequest request,Integer userId) throws Exception{
+		int id = userService.deleteByPrimaryKey(userId);
+		return 	id;
+	}
+	
+	
+	
+	
+	
 	private void showClassLoader(){
 		ClassLoader cloader = Thread.currentThread().getContextClassLoader();
 		System.out.println(cloader);
@@ -189,88 +224,83 @@ public class UserController{
 		log.error(" (3。1)注入SecurityManager.得到SecurityManager实例 并绑定给SecurityUtils  ");
 		SecurityUtils.setSecurityManager(securityManager); // 注入SecurityManager
 		log.error(" (3。2)获取Subject单例对象");
-		
-		 // get the currently executing user:
-        Subject currentUser = SecurityUtils.getSubject();
 
-        // Do some stuff with a Session (no need for a web or EJB container!!!)
-        Session session = currentUser.getSession();
-        session.setAttribute("someKey", "aValue");
-        String value = (String) session.getAttribute("someKey");
-        if (value.equals("aValue")) {
-            log.info("Retrieved the correct value! [" + value + "]");
-        }
+		// get the currently executing user:
+		Subject currentUser = SecurityUtils.getSubject();
 
-        // let's login the current user so we can check against roles and permissions:
-        if (!currentUser.isAuthenticated()) {
-            UsernamePasswordToken token = new   UsernamePasswordToken(username, password);
-            token.setRememberMe(true);
-            try {
-                currentUser.login(token);
-            } catch (UnknownAccountException uae) {
-                log.info("There is no user with username of " + token.getPrincipal());
-            } catch (IncorrectCredentialsException ice) {
-                log.info("Password for account " + token.getPrincipal() + " was incorrect!");
-            } catch (LockedAccountException lae) {
-                log.info("The account for username " + token.getPrincipal() + " is locked.  " +
-                        "Please contact your administrator to unlock it.");
-            }
-            // ... catch more exceptions here (maybe custom ones specific to your application?
-            catch (AuthenticationException ae) {
-                //unexpected condition?  error?
-            }
-        }
+		// Do some stuff with a Session (no need for a web or EJB container!!!)
+		Session session = currentUser.getSession();
+		session.setAttribute("someKey", "aValue");
+		String value = (String) session.getAttribute("someKey");
+		if (value.equals("aValue")) {
+			log.info("Retrieved the correct value! [" + value + "]");
+		}
 
-        //say who they are:
-        //print their identifying principal (in this case, a username):
-        log.info("User [" + currentUser.getPrincipal() + "] logged in successfully.");
+		// let's login the current user so we can check against roles and permissions:
+		if (!currentUser.isAuthenticated()) {
+			UsernamePasswordToken token = new   UsernamePasswordToken(username, password);
+			token.setRememberMe(true);
+			try {
+				currentUser.login(token);
+			} catch (UnknownAccountException uae) {
+				log.info("There is no user with username of " + token.getPrincipal());
+			} catch (IncorrectCredentialsException ice) {
+				log.info("Password for account " + token.getPrincipal() + " was incorrect!");
+			} catch (LockedAccountException lae) {
+				log.info("The account for username " + token.getPrincipal() + " is locked.  " +
+						"Please contact your administrator to unlock it.");
+			}
+			catch (AuthenticationException ae) {
+				//unexpected condition?  error?
+			}
+		}
 
-        //subject检查角色
-        currentUser.checkPermission("lightsaber:weild");
-        
-        //判断拥有权限：user:create  
-        Assert.assertTrue(currentUser.isPermitted("user:create"));  
-        //判断拥有权限：user:update and user:delete  
-        Assert.assertTrue(currentUser.isPermittedAll("user:update", "user:delete"));  
-        //判断没有权限：user:view  
-        Assert.assertFalse(currentUser.isPermitted("user:view"));  
-        
-        
-        
-        //断言拥有权限：user:create  
-        currentUser.checkPermission("user:create");  
-        //断言拥有权限：user:delete and user:update  
-        currentUser.checkPermissions("user:delete", "user:update");  
-        //断言拥有权限：user:view 失败抛出异常  
-        currentUser.checkPermissions("user:view");  
-        
-        
-        //判断subject的角色:
-        if (currentUser.hasRole("schwartz")) {
-            log.info("May the Schwartz be with you!");
-        } else {
-            log.info("Hello, mere mortal.");
-        }
+		//say who they are:
+		//print their identifying principal (in this case, a username):
+		log.info("User [" + currentUser.getPrincipal() + "] logged in successfully.");
 
-        //判断subject的权限
-        if (currentUser.isPermitted("lightsaber:weild")) {
-            log.info("You may use a lightsaber ring.  Use it wisely.");
-        } else {
-            log.info("Sorry, lightsaber rings are for schwartz masters only.");
-        }
+		//subject检查角色
+		currentUser.checkPermission("lightsaber:weild");
 
-        //a (very powerful) Instance Level permission:
-        if (currentUser.isPermitted("winnebago:drive:eagle5")) {
-            log.info("You are permitted to 'drive' the winnebago with license plate (id) 'eagle5'.  " +
-                    "Here are the keys - have fun!");
-        } else {
-            log.info("Sorry, you aren't allowed to drive the 'eagle5' winnebago!");
-        }
+		//判断拥有权限：user:create  
+		Assert.assertTrue(currentUser.isPermitted("user:create"));  
+		//判断拥有权限：user:update and user:delete  
+		Assert.assertTrue(currentUser.isPermittedAll("user:update", "user:delete"));  
+		//判断没有权限：user:view  
+		Assert.assertFalse(currentUser.isPermitted("user:view"));  
 
-        
-        //判断
-        //登出shiro
-       /* currentUser.logout();*/
+
+
+		//断言拥有权限：user:create  
+		currentUser.checkPermission("user:create");  
+		//断言拥有权限：user:delete and user:update  
+		currentUser.checkPermissions("user:delete", "user:update");  
+		//断言拥有权限：user:view 失败抛出异常  
+		currentUser.checkPermissions("user:view");  
+
+
+		//判断subject的角色:
+		if (currentUser.hasRole("schwartz")) {
+			log.info("May the Schwartz be with you!");
+		} else {
+			log.info("Hello, mere mortal.");
+		}
+
+		//判断subject的权限
+		if (currentUser.isPermitted("lightsaber:weild")) {
+			log.info("You may use a lightsaber ring.  Use it wisely.");
+		} else {
+			log.info("Sorry, lightsaber rings are for schwartz masters only.");
+		}
+
+		//a (very powerful) Instance Level permission:
+		if (currentUser.isPermitted("winnebago:drive:eagle5")) {
+			log.info("You are permitted to 'drive' the winnebago with license plate (id) 'eagle5'.  " +
+					"Here are the keys - have fun!");
+		} else {
+			log.info("Sorry, you aren't allowed to drive the 'eagle5' winnebago!");
+		}
+
 		return  new User(username, password, 12);
 	}
 
