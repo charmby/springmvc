@@ -55,7 +55,9 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public User getUserByUserName(String userName) {
 		// TODO Auto-generated method stub
-		return userDao.selectByUserName(userName);
+		Map<String,String> paramMap = new HashMap<String,String>();
+		paramMap.put("userName",userName);
+		return userDao.selectByUserName(paramMap);
 	}
 	@Override
 	public int updateByPrimaryKeySelective(User record) {

@@ -16,7 +16,7 @@ public interface IUserDao {
 
 	User selectByPrimaryKey(Integer id);
 
-	User selectByUserName(@Param("userName")String userName);
+	User selectByUserName(Map<String, String> paramMap);
 	User selectByUserNameAndPassword(String userName,String password);
 	User selectByUserNameAndPasswordByParam(@Param("userName")String userName,@Param("password") String password);
 	User selectByUserNameAndPasswordwhere(Map<String, String> paramMap);
