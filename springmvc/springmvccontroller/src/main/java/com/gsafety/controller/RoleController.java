@@ -1,5 +1,7 @@
 package com.gsafety.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -74,7 +76,14 @@ public class RoleController{
 	}
 	
 	
-	
+	@ApiOperation(value = "获得所有角色信息", httpMethod = "post", produces = "application/json")
+	@ApiResponse(code = 200, message = "success")
+	@ResponseBody
+	@RequestMapping(value = "/getAllRole", method = RequestMethod.GET, produces = "application/json")
+	public 		List<Role> getAllRole() throws Exception{
+		List<Role>  userList =roleService.getAllRole();
+		return 		userList;
+	}
 	
 	
 

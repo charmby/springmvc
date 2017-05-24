@@ -58,13 +58,17 @@ public class UserRealm  extends AuthorizingRealm{
 		//UsernamePasswordToken对象用来存放提交的登录信息  
 		UsernamePasswordToken token=(UsernamePasswordToken) authenticationToken;  
 		//查出是否有此用户  
-		User user=userService.getUserByUserNameAndPassword(token.getUsername(),token.getPassword().toString());  
-		if(user!=null){  
-			//若存在，将此用户存放到登录认证info中  
-			//将正确的用户信息，请求登录用户的用户名和正确的密码，创建AuthenticationInfo对象并返回  
-			SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getUserName(),user.getPassword(),getName());  
-			return info;
-		}  
+		char[] pass= token.getPassword();
+		if(pass!=null){
+			User user=userService.getUserByUserNameAndPassword(token.getUsername(),String.valueOf(pass));  
+			if(user!=null){  
+				//若存在，将此用户存放到登录认证info中  
+				//将正确的用户信息，请求登录用户的用户名和正确的密码，创建AuthenticationInfo对象并返回  
+				SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getUserName(),user.getPassword(),getName());  
+				return info;
+			}  
+		}
+
 		return null;  
 	}  
 

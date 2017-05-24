@@ -1,5 +1,7 @@
 package com.gsafety.service;
 
+import java.util.List;
+
 import com.gsafety.po.Role;
 
 public interface IRoleService {  
@@ -52,6 +54,12 @@ public interface IRoleService {
 	 * @return
 	 */
 	public  int updateByPrimaryKey(Role record);
+	/**
+	 * 获得所有角色新
+	 */
+	
+	public List<Role> getAllRole();
+	
 }  
 
 

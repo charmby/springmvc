@@ -1,5 +1,7 @@
 package com.gsafety.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -53,6 +55,12 @@ public class RoleServiceImpl implements IRoleService {
 	public int updateByPrimaryKey(Role record) {
 		// TODO Auto-generated method stub
 		return roleDao.updateByPrimaryKey(record);
+	}
+
+	@Override
+	public List<Role> getAllRole() {
+		// TODO Auto-generated method stub
+		return roleDao.getAllRole();
 	}  
   
 }  

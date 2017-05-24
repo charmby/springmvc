@@ -17,10 +17,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-cas</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-core</artifactId>
 		</dependency>
 		<dependency>
@@ -48,6 +44,11 @@
 			<groupId>com.gsafety</groupId>
 			<artifactId>springmvcservice</artifactId>
 		</dependency>
+		  <!-- shiro-cas集成依赖包 -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-cas</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>

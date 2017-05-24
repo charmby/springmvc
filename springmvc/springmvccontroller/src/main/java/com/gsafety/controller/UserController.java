@@ -1,13 +1,12 @@
 package com.gsafety.controller;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -15,18 +14,18 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.DisabledAccountException;
+import org.apache.shiro.authc.ExcessiveAttemptsException;
+import org.apache.shiro.authc.ExpiredCredentialsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.jasig.cas.client.authentication.AttributePrincipal;
 import org.jasig.cas.client.util.AssertionHolder;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,8 +38,6 @@ import com.gsafety.po.Result;
 import com.gsafety.po.Student;
 import com.gsafety.po.User;
 import com.gsafety.service.IUserService;
-import com.gsafety.shiro.api.ShiroApiUtil;
-import com.gsafety.shiro.cons.ShiroInUseCons;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -61,41 +58,28 @@ public class UserController{
 	@ApiResponse(code = 200, message = "success", response = Result.class)
 	@ResponseBody
 	@RequestMapping(value = "/showUser", method = RequestMethod.GET, produces = "application/json")
-	public 		User toIndex(HttpServletRequest request,@ApiParam(name = "id", required = true, value = "用户Id") @RequestParam("id") Integer id,Model model) throws Exception{
+	public 		User toIndex(HttpServletRequest request,@ApiParam(name = "id", required = true, value = "用户Id") @RequestParam("id") Integer id) throws Exception{
 		log.error(id+"的查询结z构！");
-		/*
- //也可以通过request的方式获得id值
-		int userId = Integer.parseInt(request.getParameter("id"));*/
 
 		AttributePrincipal principal = 	AssertionHolder.getAssertion().getPrincipal();
 		if(principal!=null){
 			String userName = principal.getName();
 			System.out.println(userName);
 		}
-		User user = this.userService.getUserById(id);
-		model.addAttribute("user", user);
-		log.info("返回user对象："+user.toString());
-		showClassLoader();
-		getResource();
-		getResourceLoad();
-		demoForSerializable();
-		/*		ApplicationContext WebApplicationContext = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
-		MathUtils applicationname =(MathUtils) WebApplicationContext.getBean("mathUtils");
-		applicationname.add(2, 2);*/
-		/*		Properties properties = 	System.getProperties();
-		if(properties!=null){
-			Set set = 	properties.keySet();
-			Iterator it = set.iterator();
-			while (it.hasNext()) {  
-				String str = (String) it.next();
-				System.out.println(str);
-				System.out.println(properties.getProperty(str));  
-			}  
-		}*/
+		User user = this.userService.getUserById(id);;
+
 		return 		user;
 	}
 
 
+	@ApiOperation(value = "获得所有用户信息", httpMethod = "post", produces = "application/json")
+	@ApiResponse(code = 200, message = "success")
+	@ResponseBody
+	@RequestMapping(value = "/getAllUser", method = RequestMethod.GET, produces = "application/json")
+	public 		List<User> getAllUser() throws Exception{
+		List<User>  userList =userService.getAllUser();
+		return 		userList;
+	}
 
 	@ApiOperation(value = "更新用户信息", httpMethod = "post", produces = "application/json")
 	@ApiResponse(code = 200, message = "success")
@@ -125,21 +109,21 @@ public class UserController{
 		int id = userService.deleteByPrimaryKey(userId);
 		return 	id;
 	}
-	
-	
-	
-	
-	
-	private void showClassLoader(){
+
+
+
+
+
+/*	private void showClassLoader(){
 		ClassLoader cloader = Thread.currentThread().getContextClassLoader();
 		System.out.println(cloader);
 		System.out.println(cloader.getParent());
 
 
 		System.out.println(cloader.getParent().getParent());
-	}
+	}*/
 
-	private  void getResource (){
+/*	private  void getResource (){
 		org.springframework.core.io.Resource resource = new ClassPathResource("messages.properties");
 		System.out.println(resource);
 		try {
@@ -148,22 +132,22 @@ public class UserController{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 	private  void getResourceLoad () throws IOException{
 
-		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-		org.springframework.core.io.Resource  resources [] = resolver.getResources("classpath*:com/gsafety/**/*.xml");
-		for(org.springframework.core.io.Resource  re :resources ){
+		//ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+		//org.springframework.core.io.Resource  resources [] = resolver.getResources("classpath*:com/gsafety/**/*.xml");
+/*		for(org.springframework.core.io.Resource  re :resources ){
 			try {
 				File file = 	re.getFile();
 				System.out.println(file);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
+		}*/
 
 	}
-
+/*
 	private void demoForSerializable(){
 		Student stu=new Student("Mike", "male", 22);
 		if(stu instanceof Serializable){
@@ -176,7 +160,7 @@ public class UserController{
 		System.out.println(stu1.getSname()+"\t"+stu1.getSex()+"\t"+stu1.getAge());
 		System.out.println("反序列化完毕");
 	}
-
+*/
 	public static void serialize(String filename,Student stu){
 		try {
 			FileOutputStream fout=new FileOutputStream(filename);
@@ -209,22 +193,93 @@ public class UserController{
 
 	}
 
+	@ApiOperation(value = "获取shiro的登录信息", httpMethod = "GET", produces = "application/json")
+	@ApiResponse(code = 200, message = "success", response = Result.class)
+	@ResponseBody
+	@RequestMapping(value = "/login", method = RequestMethod.GET, produces = "application/json")
+	public 		User login(Model model,HttpServletRequest request,@ApiParam(name = "userName", required = true, value = "用户名") @RequestParam("userName") String  userName,@ApiParam(name = "password", required = true, value = "密码") @RequestParam("password")String  password) throws Exception{
+		    User user = null;
+		    String msg = "";  
+		    String result = "";
+		    System.out.println(userName);  
+		    System.out.println(password);  
+		    UsernamePasswordToken token = new UsernamePasswordToken(userName, password);  
+		    token.setRememberMe(true);  
+		    Subject subject = SecurityUtils.getSubject();  
+		    try {  
+		    	/**
+		    	 * 在login的时候。校验登录
+		    	 */
+		        subject.login(token);  
+		        
+		        user.setUserName(token.getUsername());
+		        user.setPassword(token.getPassword().toString());
+		        
+		        user = userService.getUserByUserName(token.getUsername());
+		        if (subject.isAuthenticated()) {  
+		        	result =  "redirect:/";  
+		        } else {  
+		        	result =  "login";  
+		        }  
+		    } catch (IncorrectCredentialsException e) {  
+		        msg = "登录密码错误. Password for account " + token.getPrincipal() + " was incorrect.";  
+		        model.addAttribute("message", msg);  
+		        System.out.println(msg);  
+		    } catch (ExcessiveAttemptsException e) {  
+		        msg = "登录失败次数过多";  
+		        model.addAttribute("message", msg);  
+		        System.out.println(msg);  
+		    } catch (LockedAccountException e) {  
+		        msg = "帐号已被锁定. The account for username " + token.getPrincipal() + " was locked.";  
+		        model.addAttribute("message", msg);  
+		        System.out.println(msg);  
+		    } catch (DisabledAccountException e) {  
+		        msg = "帐号已被禁用. The account for username " + token.getPrincipal() + " was disabled.";  
+		        model.addAttribute("message", msg);  
+		        System.out.println(msg);  
+		    } catch (ExpiredCredentialsException e) {  
+		        msg = "帐号已过期. the account for username " + token.getPrincipal() + "  was expired.";  
+		        model.addAttribute("message", msg);  
+		        System.out.println(msg);  
+		    } catch (UnknownAccountException e) {  
+		        msg = "帐号不存在. There is no user with username of " + token.getPrincipal();  
+		        model.addAttribute("message", msg);  
+		        System.out.println(msg);  
+		    } catch (UnauthorizedException e) {  
+		        msg = "您没有得到相应的授权！" + e.getMessage();  
+		        model.addAttribute("message", msg);  
+		        System.out.println(msg);  
+		    }  
+		System.out.println(result);
+		return user;
+	}
+	
+	@ApiOperation(value = "根据用户名获取用户信息", httpMethod = "GET", produces = "application/json")
+	@ApiResponse(code = 200, message = "success", response = Result.class)
+	@ResponseBody
+	@RequestMapping(value = "/selectUserByUserName", method = RequestMethod.GET, produces = "application/json")
+	public  User selectUserByUserName(String userName){
+		User user = userService.getUserByUserName(userName);
+		return user;
+	}
+	
+	
 	@ApiOperation(value = "根据用户名和密码获取用户信息", httpMethod = "GET", produces = "application/json")
 	@ApiResponse(code = 200, message = "success", response = Result.class)
 	@ResponseBody
 	@RequestMapping(value = "/showUserByUserNameAndPassWord", method = RequestMethod.GET, produces = "application/json")
 	public 		User toIndex(HttpServletRequest request,@ApiParam(name = "username", required = true, value = "用户名") @RequestParam("username") String  username,@ApiParam(name = "password", required = true, value = "密码") @RequestParam("password")String  password) throws Exception{
 		log.error("用户名："+username+"；密码："+password);
-		// （1）使用用户的登录信息创建令牌.token可以理解为用户令牌，登录的过程被抽象为Shiro验证令牌是否具有合法身份以及相关权限。
-		log.error("（1）使用用户的登录信息创建令牌.token可以理解为用户令牌，登录的过程被抽象为Shiro验证令牌是否具有合法身份以及相关权限。");
-		log.error("(2) 获取SecurityManager对象");
-		SecurityManager securityManager = (SecurityManager) ShiroApiUtil.getShiroSecurityManagerExistIniFile(ShiroInUseCons.APP_REAMLE_INI);
-		//（2）执行登陆动作
-		log.error("(3)执行登陆动作");
-		log.error(" (3。1)注入SecurityManager.得到SecurityManager实例 并绑定给SecurityUtils  ");
-		SecurityUtils.setSecurityManager(securityManager); // 注入SecurityManager
-		log.error(" (3。2)获取Subject单例对象");
-
+		User user2 = userService.selectByUserNameAndPasswordwhere(username,password);
+		System.out.println(user2);
+		User user = userService.getUserByUserNameAndPassword(username, password);
+		
+		System.out.println(user.toString());
+		
+		User user3 = userService.selectByUserNameAndPasswordByParam(username, password);
+		
+		System.out.println(user3.toString());
+		
 		// get the currently executing user:
 		Subject currentUser = SecurityUtils.getSubject();
 

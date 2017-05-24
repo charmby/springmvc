@@ -1,5 +1,7 @@
 package com.gsafety.dao;
 
+import java.util.List;
+
 import com.gsafety.po.Role;
 
 public interface IRoleDao {
@@ -17,4 +19,6 @@ public interface IRoleDao {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+     List<Role> getAllRole() ;
+    
 }
