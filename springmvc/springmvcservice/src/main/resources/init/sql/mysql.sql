@@ -32,6 +32,33 @@ insert into role_t(id,role_name,role_code,role_desc) values(6,'normal2','normal2
 insert into role_t(id,role_name,role_code,role_desc) values(7,'normal2','normal3','普通用户');
 
 
+
+CREATE TABLE `user_role_t` ( 
+`id`int(11) primary key  AUTO_INCREMENT,  
+`role_id` int(11)  ,  
+`user_id` int(11) 
+) CHARSET=utf8;
+
+ALTER TABLE `user_role_t` ADD  FOREIGN KEY (`role_id`) REFERENCES `role_t`(`id`); 
+ALTER TABLE `user_role_t` ADD  FOREIGN KEY (`user_id`) REFERENCES `user_t`(`id`); 
+
+
+
+
+
+CREATE TABLE `permission_role_t` ( 
+`id`int(11) primary key  AUTO_INCREMENT,  
+`role_id` int(11)  ,  
+`permission_id` int(11) 
+) CHARSET=utf8;
+
+ALTER TABLE `permission_role_t` ADD  FOREIGN KEY (`role_id`) REFERENCES `role_t`(`id`); 
+ALTER TABLE `permission_role_t` ADD  FOREIGN KEY (`permission_id`) REFERENCES `permission_t`(`id`); 
+
+
+ ALTER TABLE `user_role_t` ADD CONSTRAINT fk_user_role_user_id FOREIGN KEY (`user_id`) REFERENCES `user_t`(`id`); 
+
+
 CREATE TABLE person(id INT PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR(20), age INT,address varchar(200),telphone varchar(20),sex int,note varchar(255))CHARSET=utf8;
 INSERT INTO person(NAME, age,address,telphone,sex) VALUES('孤傲苍狼', 27,"北京市海淀区洪城路223号","18765906543",1);
 INSERT INTO person(NAME, age,address,telphone,sex) VALUES('白虎神皇', 27,"上海市滨海新区34路","18609876554",0);

@@ -18,27 +18,32 @@ public class UserRole implements Serializable{
 	@ApiModelProperty(value = "关系Id", example = "1",position = 1)
     private Integer id;
 	@ApiModelProperty(value = "角色Id", example = "2",position = 1)
-	private Integer roleId;
+	private Role roleId;
 	@ApiModelProperty(value = "用户Id", example = "3",position = 1)
-	private Integer userId;
+	private User userId;
 	
 	public Integer getId() {
 		return id;
 	}
-	public Integer getUserId() {
-		return userId;
-	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public Integer getRoleId() {
+
+	public Role getRoleId() {
 		return roleId;
 	}
-	public void setRoleId(Integer roleId) {
+
+	public void setRoleId(Role roleId) {
 		this.roleId = roleId;
 	}
 
+	public User getUserId() {
+		return userId;
+	}
+
+	public void setUserId(User userId) {
+		this.userId = userId;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
 }

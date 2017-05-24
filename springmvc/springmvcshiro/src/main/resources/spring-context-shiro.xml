@@ -15,10 +15,13 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<bean name="shiroFilterChainDefinitions" class="java.lang.String">
 		<constructor-arg>
 			<value>
+			    /index.html = anon
 				/static/** = anon
 				/userfiles/** = anon
+				/pages/login.html = anon
+				/pages/index.html = anon
+				/pages/blank.html = anon
 				/pages/** = authc
-				/pages/** = port[8081]
 				/admin/logout = logout
 				/admin/** = user
 			</value>
@@ -34,6 +37,16 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 		<property name="successUrl" value="/pages/index.html" />
 		<!-- unauthorizedUrl，系统未认证时跳转的页面 -->
 		<property name="unauthorizedUrl" value="/pages/blank.html" />
+
+		<property name="filters">
+			<map>
+				<!-- <entry key="authc" value-ref="baseFormAuthenticationFilter"/> -->
+				<!-- 是否启用验证码检验 -->
+				<entry key="cas" value-ref="casFilter" />
+			</map>
+		</property>
+
+
 		<property name="filterChainDefinitions">
 			<ref bean="shiroFilterChainDefinitions" />
 		</property>
@@ -43,15 +56,15 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="userRealm" />
 	</bean>
- <!-- shiro-cas登录过滤器 -->
-    <bean id="casFilter" class="org.apache.shiro.cas.CasFilter">
-        <!-- 配置验证错误时的失败页面 ，这里配置为登录页面 -->
-        <property name="failureUrl" value="http://192.168.20.248:8080/cas/login?service=http://127.0.0.1:8080/nhmz/shiro-cas" />
-    </bean>
-    <!-- 退出登录过滤器 -->
-    <bean id="logout" class="org.apache.shiro.web.filter.authc.LogoutFilter">
-        <property name="redirectUrl" value="http://192.168.20.248:8080/cas/logout?service=http://127.0.0.1:8080/nhmz/index.htm" />
-    </bean>
+	<!-- shiro-cas登录过滤器 -->
+	<bean id="casFilter" class="org.apache.shiro.cas.CasFilter"><!-- 配置验证错误时的失败页面 ，这里配置为登录页面 -->
+		<property name="failureUrl"
+			value="http://localhost:8080/cas/login?service=http://localhost:8180/springmvcweb" />
+	</bean>
+	<!-- 退出登录过滤器 -->
+	<bean id="logout" class="org.apache.shiro.web.filter.authc.LogoutFilter"> 
+		<property name="redirectUrl" value="http://localhost:8080/cas/logout?service=http://localhost:8180/springmvcweb/index.html" 
+		/> </bean>
 
 
 </beans>

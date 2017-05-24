@@ -1,11 +1,10 @@
 package com.gsafety.controller;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -35,14 +34,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.testng.Assert;
 
 import com.gsafety.po.Result;
-import com.gsafety.po.Student;
 import com.gsafety.po.User;
 import com.gsafety.service.IUserService;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
 
 
 
@@ -122,17 +115,15 @@ public class UserController{
 		    System.out.println(userName);  
 		    System.out.println(password);  
 		    UsernamePasswordToken token = new UsernamePasswordToken(userName, password);  
-		    token.setRememberMe(true);  
 		    Subject subject = SecurityUtils.getSubject();  
 		    try {  
 		    	/**
 		    	 * 在login的时候。校验登录
 		    	 */
 		        subject.login(token);  
-		        user.setUserName(token.getUsername());
-		        user.setPassword(token.getPassword().toString());
 		        
 		        user = userService.getUserByUserName(token.getUsername());
+		        //是否验证通过 tru：是；false：否则
 		        if (subject.isAuthenticated()) {  
 		        	result =  "redirect:/";  
 		        } else {  
@@ -199,9 +190,10 @@ public class UserController{
 		
 		// get the currently executing user:
 		Subject currentUser = SecurityUtils.getSubject();
-
+		
 		// Do some stuff with a Session (no need for a web or EJB container!!!)
 		Session session = currentUser.getSession();
+		
 		session.setAttribute("someKey", "aValue");
 		String value = (String) session.getAttribute("someKey");
 		if (value.equals("aValue")) {
@@ -211,7 +203,7 @@ public class UserController{
 		// let's login the current user so we can check against roles and permissions:
 		if (!currentUser.isAuthenticated()) {
 			UsernamePasswordToken token = new   UsernamePasswordToken(username, password);
-			token.setRememberMe(true);
+			//token.setRememberMe(true);
 			try {
 				currentUser.login(token);
 			} catch (UnknownAccountException uae) {
@@ -226,7 +218,6 @@ public class UserController{
 				//unexpected condition?  error?
 			}
 		}
-
 		//say who they are:
 		//print their identifying principal (in this case, a username):
 		log.info("User [" + currentUser.getPrincipal() + "] logged in successfully.");
@@ -273,6 +264,8 @@ public class UserController{
 			log.info("Sorry, you aren't allowed to drive the 'eagle5' winnebago!");
 		}
 
+		currentUser.logout();
+		
 		return  new User(username, password, 12);
 	}
 
