@@ -1,6 +1,7 @@
 package com.gsafety.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.gsafety.po.Role;
 
@@ -14,7 +15,7 @@ public interface IRoleDao {
 
     Role selectByPrimaryKey(Integer id);
     
-    Role selectByRoleName(String  roleName);
+    Role selectByRoleName(Map<String,String>  paramName);
     
     int updateByPrimaryKeySelective(Role record);
 

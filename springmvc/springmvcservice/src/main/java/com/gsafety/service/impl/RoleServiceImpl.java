@@ -1,6 +1,8 @@
 package com.gsafety.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -41,8 +43,9 @@ public class RoleServiceImpl implements IRoleService {
 
 	@Override
 	public Role selectByRoleName(String roleName) {
-		// TODO Auto-generated method stub
-		return roleDao.selectByRoleName(roleName);
+		Map<String,String> paramMap = new HashMap<String,String>();
+		paramMap.put("roleName",roleName);
+		return roleDao.selectByRoleName(paramMap);
 	}
 
 	@Override
