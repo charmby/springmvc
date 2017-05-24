@@ -25,17 +25,17 @@ import io.swagger.annotations.ApiResponse;
 
 @RestController
 @RequestMapping("/role")
-@Api(value = "橘色管理界面", description = "有关于用户管理的操作", position = 1)  
+@Api(value = "橘色管理界面", description = "有关于角色管理的操作", position = 1)  
 public class RoleController{
 	private static Logger log = 	Logger.getLogger(RoleController.class);
 	@Resource(name="roleService")
 	private IRoleService roleService;
 
-	@ApiOperation(value = "根据用户id查询用户信息", httpMethod = "GET", produces = "application/json")
+	@ApiOperation(value = "根据角色id查询角色信息", httpMethod = "GET", produces = "application/json")
 	@ApiResponse(code = 200, message = "success")
 	@ResponseBody
-	@RequestMapping(value = "/showRole", method = RequestMethod.GET, produces = "application/json")
-	public 		Role toIndex(HttpServletRequest request,@ApiParam(name = "id", required = true, value = "用户Id") @RequestParam("id") Integer id,Model model) throws Exception{
+	@RequestMapping(value = "/getRoleById", method = RequestMethod.GET, produces = "application/json")
+	public 		Role toIndex(HttpServletRequest request,@ApiParam(name = "id", required = true, value = "角色Id") @RequestParam("id") Integer id,Model model) throws Exception{
 		log.error(id+"的查询结z构！");
 		Role role = this.roleService.getRoleById(id);
 		model.addAttribute("role", role);

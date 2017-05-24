@@ -17,8 +17,13 @@ public class Permission implements Serializable {
     private Integer id;
 	@ApiModelProperty(value = "权限名称", example = "admin",position = 2)
     private String permissionName;
+	@ApiModelProperty(value = "权限编码", example = "",position = 3)
+    private String permissionCode;
+	@ApiModelProperty(value = "权限url", example = "",position = 4)
+    private String permissionUrl;
 	@ApiModelProperty(value = "权限描述",position = 3)
 	private String permissionDesc;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -36,6 +41,18 @@ public class Permission implements Serializable {
 	}
 	public void setPermissionDesc(String permissionDesc) {
 		this.permissionDesc = permissionDesc;
+	}
+	public String getPermissionCode() {
+		return permissionCode;
+	}
+	public void setPermissionCode(String permissionCode) {
+		this.permissionCode = permissionCode;
+	}
+	public String getPermissionUrl() {
+		return permissionUrl;
+	}
+	public void setPermissionUrl(String permissionUrl) {
+		this.permissionUrl = permissionUrl;
 	}
 
 	

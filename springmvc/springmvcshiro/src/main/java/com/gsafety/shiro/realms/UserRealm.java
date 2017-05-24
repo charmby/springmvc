@@ -13,12 +13,22 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
 import com.gsafety.po.User;
+import com.gsafety.service.IPermissionService;
+import com.gsafety.service.IRoleService;
 import com.gsafety.service.IUserService;
 
 public class UserRealm  extends AuthorizingRealm{
 
-	@Resource
+	@Resource(name="userService")
 	private IUserService userService;
+	
+	
+	@Resource(name="roleService")
+	private IRoleService roleService;
+	
+	@Resource(name="permissionService")
+	private IPermissionService permissionService;
+	
 
 	@Override
 	public String getName() {
@@ -36,7 +46,7 @@ public class UserRealm  extends AuthorizingRealm{
 		User user=userService.getUserByUserName(loginName);  
 		if(user!=null){  
 			//权限信息对象info,用来存放查出的用户的所有的角色（role）及权限（permission）  
-			SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();  
+			SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();  	
 			/*            //用户的角色集合  
             info.setRoles(user.getRolesName());  
             //用户的角色对应的所有权限，如果只使用角色定义访问权限，下面的四行可以不要  

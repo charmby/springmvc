@@ -57,7 +57,7 @@ public class UserController{
 	@ApiOperation(value = "根据用户id查询用户信息", httpMethod = "GET", produces = "application/json")
 	@ApiResponse(code = 200, message = "success", response = Result.class)
 	@ResponseBody
-	@RequestMapping(value = "/showUser", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/getUserById", method = RequestMethod.GET, produces = "application/json")
 	public 		User toIndex(HttpServletRequest request,@ApiParam(name = "id", required = true, value = "用户Id") @RequestParam("id") Integer id) throws Exception{
 		log.error(id+"的查询结z构！");
 
@@ -111,88 +111,6 @@ public class UserController{
 	}
 
 
-
-
-
-/*	private void showClassLoader(){
-		ClassLoader cloader = Thread.currentThread().getContextClassLoader();
-		System.out.println(cloader);
-		System.out.println(cloader.getParent());
-
-
-		System.out.println(cloader.getParent().getParent());
-	}*/
-
-/*	private  void getResource (){
-		org.springframework.core.io.Resource resource = new ClassPathResource("messages.properties");
-		System.out.println(resource);
-		try {
-			File file = 	resource.getFile();
-			System.out.println(file);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}*/
-	private  void getResourceLoad () throws IOException{
-
-		//ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-		//org.springframework.core.io.Resource  resources [] = resolver.getResources("classpath*:com/gsafety/**/*.xml");
-/*		for(org.springframework.core.io.Resource  re :resources ){
-			try {
-				File file = 	re.getFile();
-				System.out.println(file);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}*/
-
-	}
-/*
-	private void demoForSerializable(){
-		Student stu=new Student("Mike", "male", 22);
-		if(stu instanceof Serializable){
-			System.out.println(stu);
-		}
-		serialize("C:\\student.dat", stu);
-
-		System.out.println("序列化完毕");
-		Student stu1=deserialize("C:\\student.dat");
-		System.out.println(stu1.getSname()+"\t"+stu1.getSex()+"\t"+stu1.getAge());
-		System.out.println("反序列化完毕");
-	}
-*/
-	public static void serialize(String filename,Student stu){
-		try {
-			FileOutputStream fout=new FileOutputStream(filename);
-			ObjectOutputStream oout =new ObjectOutputStream(fout);
-			oout.writeObject(stu);
-			oout.close();
-			fout.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	public static Student deserialize(String filename){
-		try {
-			FileInputStream fin=new FileInputStream(filename);
-			ObjectInputStream oin=new ObjectInputStream(fin);
-			Student stu=(Student)oin.readObject();
-			oin.close();
-			fin.close();
-			return stu;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return null;
-
-	}
-
 	@ApiOperation(value = "获取shiro的登录信息", httpMethod = "GET", produces = "application/json")
 	@ApiResponse(code = 200, message = "success", response = Result.class)
 	@ResponseBody
@@ -211,7 +129,6 @@ public class UserController{
 		    	 * 在login的时候。校验登录
 		    	 */
 		        subject.login(token);  
-		        
 		        user.setUserName(token.getUsername());
 		        user.setPassword(token.getPassword().toString());
 		        

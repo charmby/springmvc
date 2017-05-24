@@ -32,10 +32,23 @@ insert into role_t(id,role_name,role_code,role_desc) values(6,'normal2','normal2
 insert into role_t(id,role_name,role_code,role_desc) values(7,'normal2','normal3','普通用户');
 
 
-
 CREATE TABLE person(id INT PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR(20), age INT,address varchar(200),telphone varchar(20),sex int,note varchar(255))CHARSET=utf8;
 INSERT INTO person(NAME, age,address,telphone,sex) VALUES('孤傲苍狼', 27,"北京市海淀区洪城路223号","18765906543",1);
 INSERT INTO person(NAME, age,address,telphone,sex) VALUES('白虎神皇', 27,"上海市滨海新区34路","18609876554",0);
+
+
+CREATE TABLE `permission_t` ( 
+`id`int(11) primary key  AUTO_INCREMENT,  
+`permission_name` varchar(255) DEFAULT NULL,  
+`permission_code` varchar(255) ,
+`permission_url` varchar(255) ,
+`permission_desc`  varchar(255) 
+) CHARSET=utf8;
+
+insert into permission_t(id,permission_name,permission_code,permission_url,permission_desc) values(1,'新增用户','user:insertUser','/user/insertUser','过滤新增用户的url');
+insert into permission_t(id,permission_name,permission_code,permission_url,permission_desc) values(2,'根据用户名查询用户','user:selectUserByUserName','/user/selectUserByUserName','根据用户名查询用户');
+insert into permission_t(id,permission_name,permission_code,permission_url,permission_desc) values(3,'根据用户名和密码获取用户信息','user:showUserByUserNameAndPassWord','/user/showUserByUserNameAndPassWord','根据用户名和密码获取用户信息');
+insert into permission_t(id,permission_name,permission_code,permission_url,permission_desc) values(4,'删除用户','user:deleteUser','/user/deleteUser','删除用户');
 
 
 

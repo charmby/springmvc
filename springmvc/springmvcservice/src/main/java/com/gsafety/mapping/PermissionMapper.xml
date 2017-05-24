@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gsafety.dao.IPermissionDao">
+	<resultMap id="BaseResultMap" type="com.gsafety.po.Permission">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="permission_name" property="permissionName" jdbcType="VARCHAR" />
+		<result column="permission_code" property="permissionCode" jdbcType="VARCHAR" />
+		<result column="permission_url" property="permissionUrl" jdbcType="VARCHAR" />
+		<result column="permission_desc" property="permissionDesc" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, permission_name, permission_code,permission_url, permission_desc
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from permission_t
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByPermissionCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from permission_t
+		where permission_code =#{permissionCode,jdbcType=VARCHAR}
+	</select>
+
+	<select id="getAllPermission" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from permission_t
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from permission_t
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.gsafety.po.Permission">
+		insert into permission_t (id,permission_name,permission_code, permission_url,permission_desc)
+		values (#{id,jdbcType=INTEGER},
+		#{permissionName,jdbcType=VARCHAR},
+		#{permissionCode,jdbcType=VARCHAR},
+		#{permissionUrl,jdbcType=VARCHAR},
+		#{permissionDesc,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.gsafety.po.Permission">
+		insert into permission_t
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="permissionCode != null">
+				permission_code,
+			</if>
+			<if test="permissionName != null">
+				permission_name,
+			</if>
+			<if test="permissionUrl != null">
+				permission_url,
+			</if>
+			<if test="permissionDesc != null">
+				permission_desc,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="permissionCode != null">
+				#{permissionCode,jdbcType=VARCHAR},
+			</if>
+			<if test="permissionName != null">
+				#{permissionName,jdbcType=VARCHAR},
+			</if>
+			<if test="permissionUrl != null">
+				#{permissionUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="permissionDesc != null">
+				#{permissionDesc,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.gsafety.po.Permission">
+		update permission_t
+		<set>
+			<if test="permissionCode != null">
+				permission_code = #{permissionCode,jdbcType=VARCHAR},
+			</if>
+			<if test="permissionName != null">
+				permission_name = #{permissionName,jdbcType=VARCHAR},
+			</if>
+			<if test="permissionUrl != null">
+				permission_url = #{permissionUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="permissionDesc != null">
+				permission_desc = #{permissionDesc,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.gsafety.po.Permission">
+		update permission_t
+		set
+		permission_code = #{permissionCode,jdbcType=VARCHAR},
+		permission_name =#{permissionName,jdbcType=VARCHAR},
+		permission_url = #{permissionUrl,jdbcType=VARCHAR},
+		permission_desc = #{permissionDesc,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>
