@@ -29,7 +29,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from role_t
-		where role_name = #{roleName,jdbcType=INTEGER}
+		where role_name = #{roleName,jdbcType=VARCHAR}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from role_t
