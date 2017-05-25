@@ -54,6 +54,8 @@ public class UserRealm  extends AuthorizingRealm{
             for (Role role : roleList) {  
                 info.addStringPermissions(role.getPermissionsName());  
             }  */
+			
+			
 			return info;  
 		}  
 		return null;  

@@ -43,23 +43,23 @@
 						<h3 class="panel-title">Please Sign In</h3>
 					</div>
 					<div class="panel-body">
-						<form role="form">
+						<form ="form">
 							<fieldset>
 								<div class="form-group">
-									<input class="form-control" placeholder="E-mail" name="email"
-										type="email" autofocus>
+									<input class="form-control" placeholder="userName" name="userName" id="userName"
+										type="userName" autofocus>
 								</div>
 								<div class="form-group">
 									<input class="form-control" placeholder="Password"
-										name="password" type="password" value="">
+										name="password" id="password" type="password" value="">
 								</div>
-								<div class="checkbox">
+		<!-- 						<div class="checkbox">
 									<label> <input name="remember" type="checkbox"
 										value="Remember Me">Remember Me
 									</label>
-								</div>
+								</div> -->
 								<!-- Change this to a button or input when using this as a form -->
-								<a href="index.html" class="btn btn-lg btn-success btn-block">Login</a>
+								<button onclick="userLogin();" class="btn btn-lg btn-success btn-block">Login</button>
 							</fieldset>
 						</form>
 					</div>
@@ -78,7 +78,64 @@
 
 	<!-- Custom Theme JavaScript -->
 	<script src="../dist/js/sb-admin-2.js"></script>
-
+   <script type="text/javascript">
+   var pathName = document.location.pathname;
+     pathName= pathName.substring(0,pathName.substring(1).indexOf("/")+1);
+    function userLogin(){
+           var url = pathName+"/user/login"
+          var username = $("#userName").val();
+           var passwd = $("#password").val();
+           $.ajax({
+        	    url:url,
+        	    type:'POST', //GET
+        	    contentType: "application/json",  
+                dataType: "json",  
+        	    data:{
+        	        'userName':username,'password':passwd},
+        	    beforeSend:function(xhr){
+        	        console.log(xhr)
+        	        console.log('发送前');
+        	       
+        	    },
+        	    success:function(data,textStatus,jqXHR){
+        	    	 debugger;
+        	        console.log(data)
+        	        console.log(textStatus)
+        	        console.log(jqXHR)
+        	        window.location= pathName+"/pages/index.html";
+        	    },
+        	    error:function(data){
+        	    	 debugger;
+        	    	 if(data.status==200){ 
+        	    		 debugger;
+        	             var errorstr = data.responseText;  
+        	             var data = eval(errorstr);  
+        	             if(data.result=="success") {  
+        	                   
+        	             } else {  
+        	                               
+        	             }  
+        	         } else {  
+        	               
+        	         }  
+        	    	
+        	    	window.location= pathName+"/pages/index.html";
+        	    },
+        	    complete:function(){
+        	        console.log('结束')
+        	    }
+        	})
+    	
+    }
+   function showStuInfo(){
+	   
+   }
+   
+   function errorFunc(){
+	   
+   }
+   
+   </script>
 </body>
 
 </html>

@@ -104,62 +104,73 @@ public class UserController{
 	}
 
 
-	@ApiOperation(value = "获取shiro的登录信息", httpMethod = "GET", produces = "application/json")
-	@ApiResponse(code = 200, message = "success", response = Result.class)
+	@ApiOperation(value = "获取shiro的登录信息", httpMethod = "POST", produces = "application/json")
+	@ApiResponse(code = 200, message = "success")
 	@ResponseBody
-	@RequestMapping(value = "/login", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
 	public 		User login(Model model,HttpServletRequest request,@ApiParam(name = "userName", required = true, value = "用户名") @RequestParam("userName") String  userName,@ApiParam(name = "password", required = true, value = "密码") @RequestParam("password")String  password) throws Exception{
 		    User user = null;
 		    String msg = "";  
 		    String result = "";
 		    System.out.println(userName);  
-		    System.out.println(password);  
-		    UsernamePasswordToken token = new UsernamePasswordToken(userName, password);  
-		    Subject subject = SecurityUtils.getSubject();  
-		    try {  
-		    	/**
-		    	 * 在login的时候。校验登录
-		    	 */
-		        subject.login(token);  
-		        
-		        user = userService.getUserByUserName(token.getUsername());
-		        //是否验证通过 tru：是；false：否则
-		        if (subject.isAuthenticated()) {  
-		        	result =  "redirect:/";  
-		        } else {  
-		        	result =  "login";  
-		        }  
-		    } catch (IncorrectCredentialsException e) {  
-		        msg = "登录密码错误. Password for account " + token.getPrincipal() + " was incorrect.";  
-		        model.addAttribute("message", msg);  
-		        System.out.println(msg);  
-		    } catch (ExcessiveAttemptsException e) {  
-		        msg = "登录失败次数过多";  
-		        model.addAttribute("message", msg);  
-		        System.out.println(msg);  
-		    } catch (LockedAccountException e) {  
-		        msg = "帐号已被锁定. The account for username " + token.getPrincipal() + " was locked.";  
-		        model.addAttribute("message", msg);  
-		        System.out.println(msg);  
-		    } catch (DisabledAccountException e) {  
-		        msg = "帐号已被禁用. The account for username " + token.getPrincipal() + " was disabled.";  
-		        model.addAttribute("message", msg);  
-		        System.out.println(msg);  
-		    } catch (ExpiredCredentialsException e) {  
-		        msg = "帐号已过期. the account for username " + token.getPrincipal() + "  was expired.";  
-		        model.addAttribute("message", msg);  
-		        System.out.println(msg);  
-		    } catch (UnknownAccountException e) {  
-		        msg = "帐号不存在. There is no user with username of " + token.getPrincipal();  
-		        model.addAttribute("message", msg);  
-		        System.out.println(msg);  
-		    } catch (UnauthorizedException e) {  
-		        msg = "您没有得到相应的授权！" + e.getMessage();  
-		        model.addAttribute("message", msg);  
-		        System.out.println(msg);  
-		    }  
-		System.out.println(result);
-		return user;
+		    System.out.println(password);   
+		 // get the currently executing user:
+			Subject currentUser = SecurityUtils.getSubject();
+			
+			// Do some stuff with a Session (no need for a web or EJB container!!!)
+			Session session = currentUser.getSession();
+			String value = (String) session.getAttribute("someKey");
+			if (value!=null&&value.equals("aValue")) {
+				log.info("Retrieved the correct value! [" + value + "]");
+			}
+
+			// let's login the current user so we can check against roles and permissions:
+			if (!currentUser.isAuthenticated()) {
+				UsernamePasswordToken token = new   UsernamePasswordToken(userName, password);
+				//token.setRememberMe(true);
+				
+				session.setAttribute("someKey", "aValue");
+				String value2 = (String) session.getAttribute("someKey");
+				if (value2!=null&&value2.equals("aValue")) {
+					log.info("Retrieved the correct value! [" + value2 + "]");
+				}
+				try {
+					currentUser.login(token);
+				} catch (IncorrectCredentialsException e) {  
+			        msg = "登录密码错误. Password for account " + token.getPrincipal() + " was incorrect.";  
+			        model.addAttribute("message", msg);  
+			        System.out.println(msg);  
+			    } catch (ExcessiveAttemptsException e) {  
+			        msg = "登录失败次数过多";  
+			        model.addAttribute("message", msg);  
+			        System.out.println(msg);  
+			    } catch (LockedAccountException e) {  
+			        msg = "帐号已被锁定. The account for username " + token.getPrincipal() + " was locked.";  
+			        model.addAttribute("message", msg);  
+			        System.out.println(msg);  
+			    } catch (DisabledAccountException e) {  
+			        msg = "帐号已被禁用. The account for username " + token.getPrincipal() + " was disabled.";  
+			        model.addAttribute("message", msg);  
+			        System.out.println(msg);  
+			    } catch (ExpiredCredentialsException e) {  
+			        msg = "帐号已过期. the account for username " + token.getPrincipal() + "  was expired.";  
+			        model.addAttribute("message", msg);  
+			        System.out.println(msg);  
+			    } catch (UnknownAccountException e) {  
+			        msg = "帐号不存在. There is no user with username of " + token.getPrincipal();  
+			        model.addAttribute("message", msg);  
+			        System.out.println(msg);  
+			    } catch (UnauthorizedException e) {  
+			        msg = "您没有得到相应的授权！" + e.getMessage();  
+			        model.addAttribute("message", msg);  
+			        System.out.println(msg);  
+			    }  
+			}
+			//say who they are:
+			//print their identifying principal (in this case, a username):
+			log.info("User [" + currentUser.getPrincipal() + "] logged in successfully."); 
+		      System.out.println(result);
+		      return user;
 	}
 	
 	@ApiOperation(value = "根据用户名获取用户信息", httpMethod = "GET", produces = "application/json")
@@ -170,7 +181,15 @@ public class UserController{
 		User user = userService.getUserByUserName(userName);
 		return user;
 	}
-	
+	@ApiOperation(value = "退出系统",  produces = "application/json")
+	@ApiResponse(code = 200, message = "success", response = Result.class)
+	@ResponseBody
+	@RequestMapping(value = "/logout", produces = "application/json")
+	public  String logout(){
+		Subject currentUser = SecurityUtils.getSubject();
+		System.out.println(currentUser);
+		return "success";
+	}
 	
 	@ApiOperation(value = "根据用户名和密码获取用户信息", httpMethod = "GET", produces = "application/json")
 	@ApiResponse(code = 200, message = "success", response = Result.class)
