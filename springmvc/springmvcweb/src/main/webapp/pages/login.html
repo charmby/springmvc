@@ -69,7 +69,7 @@
 	</div>
 
 
-<script type="text/javascript" src="../jquery/jquery-3.2.0.min.js"></script>
+<script type="text/javascript" src="../jquery/jquery.js"></script>
 <script type="text/javascript" src="../jqueryui/jquery-ui.js"></script>
 <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
 
@@ -85,13 +85,12 @@
            var url = pathName+"/user/login"
           var username = $("#userName").val();
            var passwd = $("#password").val();
-           $.ajax({
+           var obj = {'userName':username,'password':passwd};
+/*            $.ajax({
         	    url:url,
         	    type:'POST', //GET
-        	    contentType: "application/json",  
-                dataType: "json",  
-        	    data:{
-        	        'userName':username,'password':passwd},
+        	    contentType: "application/json", 
+        	    data:JSON.stringify({'userName':username,'password':passwd}),
         	    beforeSend:function(xhr){
         	        console.log(xhr)
         	        console.log('发送前');
@@ -108,13 +107,7 @@
         	    	 debugger;
         	    	 if(data.status==200){ 
         	    		 debugger;
-        	             var errorstr = data.responseText;  
-        	             var data = eval(errorstr);  
-        	             if(data.result=="success") {  
-        	                   
-        	             } else {  
-        	                               
-        	             }  
+        	             
         	         } else {  
         	               
         	         }  
@@ -124,7 +117,28 @@
         	    complete:function(){
         	        console.log('结束')
         	    }
-        	})
+        	}); */
+           
+           $.ajax({
+         	   contentType: "application/json",  
+               async: false,
+               type: "GET",
+               url: url,
+               data: {'userName':username,'password':passwd},
+               dataType: "json",
+               success: function (data) {
+            	   debugger;
+                   if (data != null) {
+                       console.log("请求已提交！我们会尽快与您取得联系");
+                   }
+                   window.location= pathName+"/pages/index.html";
+               },
+               error: function (data) {
+            	   debugger;
+                   $("#request-process-patent").html("提交数据失败！");
+                   window.location= pathName+"/pages/index.html";
+               }
+           });
     	
     }
    function showStuInfo(){

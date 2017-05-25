@@ -104,12 +104,11 @@ public class UserController{
 	}
 
 
-	@ApiOperation(value = "获取shiro的登录信息", httpMethod = "POST", produces = "application/json")
+	@ApiOperation(value = "获取shiro的登录信息", httpMethod = "GET")
 	@ApiResponse(code = 200, message = "success")
 	@ResponseBody
-	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public 		User login(Model model,HttpServletRequest request,@ApiParam(name = "userName", required = true, value = "用户名") @RequestParam("userName") String  userName,@ApiParam(name = "password", required = true, value = "密码") @RequestParam("password")String  password) throws Exception{
-		    User user = null;
 		    String msg = "";  
 		    String result = "";
 		    System.out.println(userName);  
@@ -168,9 +167,11 @@ public class UserController{
 			}
 			//say who they are:
 			//print their identifying principal (in this case, a username):
-			log.info("User [" + currentUser.getPrincipal() + "] logged in successfully."); 
+			  log.info("User [" + currentUser.getPrincipal() + "] logged in successfully."); 
 		      System.out.println(result);
-		      return user;
+		      
+		      User user2 = userService.getUserByUserName(userName);
+		      return user2;
 	}
 	
 	@ApiOperation(value = "根据用户名获取用户信息", httpMethod = "GET", produces = "application/json")
