@@ -45,6 +45,9 @@ public class UserRealm  extends AuthorizingRealm{
 		//到数据库查是否有此对象  
 		User user=userService.getUserByUserName(loginName);  
 		if(user!=null){  
+			int id =user.getId();
+			/*List<Role> role = roleService.
+			List<Permission> ps = permissionService.*/
 			//权限信息对象info,用来存放查出的用户的所有的角色（role）及权限（permission）  
 			SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();  	
 			/*            //用户的角色集合  
@@ -54,8 +57,8 @@ public class UserRealm  extends AuthorizingRealm{
             for (Role role : roleList) {  
                 info.addStringPermissions(role.getPermissionsName());  
             }  */
-			
-			
+			info.addStringPermission("user:method");
+			info.addRole("admin");
 			return info;  
 		}  
 		return null;  

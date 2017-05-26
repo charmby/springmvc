@@ -165,6 +165,9 @@ public class UserController{
 			        System.out.println(msg);  
 			    }  
 			}
+/*			
+			 currentUser.checkPermission("lightsaber:weild");
+			 currentUser.checkPermissions("user:delete", "user:update");  */
 			//say who they are:
 			//print their identifying principal (in this case, a username):
 			  log.info("User [" + currentUser.getPrincipal() + "] logged in successfully."); 
