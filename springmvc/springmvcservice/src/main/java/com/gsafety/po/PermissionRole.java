@@ -16,19 +16,20 @@ public class PermissionRole implements Serializable{
 	@ApiModelProperty(value = "关系Id", example = "1",position = 1)
     private Integer id;
 	@ApiModelProperty(value = "角色Id", example = "2",position = 1)
-	private String roleId;
+	private Integer roleId;
 	@ApiModelProperty(value = "权限Id", example = "3",position = 1)
-	private String permissionId;
-	public String getRoleId() {
+	private Integer permissionId;
+	
+	public Integer getRoleId() {
 		return roleId;
 	}
-	public void setRoleId(String roleId) {
+	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
-	public String getPermissionId() {
+	public Integer getPermissionId() {
 		return permissionId;
 	}
-	public void setPermissionId(String permissionId) {
+	public void setPermissionId(Integer permissionId) {
 		this.permissionId = permissionId;
 	}
 	public Integer getId() {
