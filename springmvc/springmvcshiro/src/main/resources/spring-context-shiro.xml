@@ -8,7 +8,7 @@
 	<bean name="shiroFilterChainDefinitions" class="java.lang.String">
 		<constructor-arg>
 			<value>
-			    /springmvcweb=casFilter
+			   <!--  /springmvcweb=casFilter -->
 				/user/logout=logout 
 				/index.html=anon 
 				/pages/login.html =anon 
@@ -17,6 +17,7 @@
 				/pages/blank.html =anon
 				/pages/forms.html =perms[user:deleteUser]
 				/pages/buttons.html=roles[sysadmin]
+				/pages/tables.html=roles[sa]
 				/pages/**=authc
 				/user/login=anon
 				/logout=logout 
@@ -34,7 +35,6 @@
 		<property name="successUrl" value="/pages/index.html" />
 		<!-- unauthorizedUrl，系统未认证时跳转的页面 -->
 		<property name="unauthorizedUrl" value="/pages/blank.html" />
-
 		<property name="filters">
 			<map>
 				<!-- 是否启用验证码检验 -->
@@ -74,8 +74,8 @@
 	<!-- 定义Shiro安全管理配置 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 	<!-- 1、shiro自己的数据库认证。否则走cas-server的认证 -->
-	<!-- 	<property name="realm" ref="userRealm" /> -->
-	<property name="realm" ref="casRealm" />
+	<property name="realm" ref="userRealm" />
+	<!-- <property name="realm" ref="casRealm" /> -->
 	</bean>
 	<!-- shiro-cas登录过滤器 -->
 	<bean id="casFilter" class="org.apache.shiro.cas.CasFilter"><!-- 配置验证错误时的失败页面 ，这里配置为登录页面 -->

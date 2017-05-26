@@ -53,29 +53,6 @@ public class UserRealm  extends AuthorizingRealm{
 	 */  
 	@Override  
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {  
-		/*		//获取登录时输入的用户名  
-		String loginName=(String) principalCollection.fromRealm(getName()).iterator().next();  
-		//到数据库查是否有此对象  
-		User user=userService.getUserByUserName(loginName);  
-		if(user!=null){  
-			int id =user.getId();
-			List<Role> role = roleService.
-			List<Permission> ps = permissionService.
-			//权限信息对象info,用来存放查出的用户的所有的角色（role）及权限（permission）  
-			SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();  	
-			            //用户的角色集合  
-            info.setRoles(user.getRolesName());  
-            //用户的角色对应的所有权限，如果只使用角色定义访问权限，下面的四行可以不要  
-            List<Role> roleList=user.getRoleList();  
-            for (Role role : roleList) {  
-                info.addStringPermissions(role.getPermissionsName());  
-            }  
-			info.addStringPermission("user:method");
-			info.addRole("admin");
-			return info;  
-		}  
-		return null;  */
-
 		String username = (String) principalCollection.getPrimaryPrincipal();
 		if(username!=null&&!username.equals("")){
 			User user = userService.getUserByUserName(username);

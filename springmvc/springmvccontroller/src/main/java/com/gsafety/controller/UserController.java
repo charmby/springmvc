@@ -127,7 +127,6 @@ public class UserController{
 			if (!currentUser.isAuthenticated()) {
 				UsernamePasswordToken token = new   UsernamePasswordToken(userName, password);
 				//token.setRememberMe(true);
-				
 				session.setAttribute("someKey", "aValue");
 				String value2 = (String) session.getAttribute("someKey");
 				if (value2!=null&&value2.equals("aValue")) {
@@ -165,9 +164,6 @@ public class UserController{
 			        System.out.println(msg);  
 			    }  
 			}
-/*			
-			 currentUser.checkPermission("lightsaber:weild");
-			 currentUser.checkPermissions("user:delete", "user:update");  */
 			//say who they are:
 			//print their identifying principal (in this case, a username):
 			  log.info("User [" + currentUser.getPrincipal() + "] logged in successfully."); 
