@@ -1,12 +1,11 @@
 package com.gsafety.po;
 
-import java.io.Serializable;
-import java.util.List;
-
-import com.gsafety.commonabstractclass.AbstractCommonAttr;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.io.Serializable;
+
+import com.gsafety.commonabstractclass.AbstractCommonAttr;
 
 @ApiModel(description = "用户",parent= AbstractCommonAttr.class/*,value="用户信息"*/)
 public class User extends AbstractCommonAttr implements Serializable{
@@ -25,8 +24,6 @@ public class User extends AbstractCommonAttr implements Serializable{
 	@ApiModelProperty(value = "手机号", example = "2",position = 4)
 	private String phone;
 
-	private List<Role> roleList;
-
 
 	public String getPhone() {
 		return phone;
@@ -34,13 +31,6 @@ public class User extends AbstractCommonAttr implements Serializable{
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public List<Role> getRoleList() {
-		return roleList;
-	}
-	public void setRoleList(List<Role> roleList) {
-		this.roleList = roleList;
-	}
-
 
 	@Override
 	public Integer getId() {
