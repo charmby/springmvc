@@ -131,12 +131,14 @@
                    if (data != null) {
                        console.log("请求已提交！我们会尽快与您取得联系");
                    }
-                   window.location= pathName+"/pages/index.html";
+                   window.location.href= pathName+"/pages/index.html";
+                   window.event.returnValue=false
                },
                error: function (data) {
             	   debugger;
                    $("#request-process-patent").html("提交数据失败！");
-                   window.location= pathName+"/pages/index.html";
+                   window.location.href= pathName+"/pages/index.html";
+                   window.event.returnValue=false
                }
            });
     	
