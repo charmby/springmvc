@@ -77,7 +77,7 @@ public class UserRealm  extends AuthorizingRealm{
 		return null;  */
 
 		String username = (String) principalCollection.getPrimaryPrincipal();
-		if(username!=null&&username.equals("")){
+		if(username!=null&&!username.equals("")){
 			User user = userService.getUserByUserName(username);
 			if (user != null) {
 				SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();

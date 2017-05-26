@@ -54,82 +54,84 @@ public class CASRealm extends CasRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		String username = (String) principals.getPrimaryPrincipal();
-		User user = userService.getUserByUserName(username);
+		if(username!=null&&!username.equals("")){
+			User user = userService.getUserByUserName(username);
 
-		if (user != null) {
-			SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-			// 设置用户的角色
-			List<UserRole> roles = userRoleService.selectByUserId(user.getId());
-			for(UserRole ur :roles){
-				Integer roleId = ur.getRoleId();
-				Role roleEntity = roleService.getRoleById(roleId);
-				if (null != roleEntity)
-					authorizationInfo.addRole(roleEntity.getRoleCode());
+			if (user != null) {
+				SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+				// 设置用户的角色
+				List<UserRole> roles = userRoleService.selectByUserId(user.getId());
+				for(UserRole ur :roles){
+					Integer roleId = ur.getRoleId();
+					Role roleEntity = roleService.getRoleById(roleId);
+					if (null != roleEntity)
+						authorizationInfo.addRole(roleEntity.getRoleCode());
 
-				// 设置用户对应的角色的权限集合
-				List<PermissionRole> permissons;
-				try {
-					permissons = permissionRoleService.selectByRoleId(roleId);
-					for (PermissionRole permissionRole : permissons) {
-						if(permissionRole!=null){
-							Integer permissionId = permissionRole.getPermissionId();
-							if(permissionId!=null){
-								Permission permission = permissionService.getPermissionById(permissionId);
-								if(permission!=null){
-									authorizationInfo.addStringPermission(permission.getPermissionCode());
+					// 设置用户对应的角色的权限集合
+					List<PermissionRole> permissons;
+					try {
+						permissons = permissionRoleService.selectByRoleId(roleId);
+						for (PermissionRole permissionRole : permissons) {
+							if(permissionRole!=null){
+								Integer permissionId = permissionRole.getPermissionId();
+								if(permissionId!=null){
+									Permission permission = permissionService.getPermissionById(permissionId);
+									if(permission!=null){
+										authorizationInfo.addStringPermission(permission.getPermissionCode());
+									}
 								}
 							}
+
 						}
-
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
-				} catch (Exception e) {
-					e.printStackTrace();
 				}
+				return authorizationInfo;
 			}
-			return authorizationInfo;
 		}
-	return null;
+		return null;
 
-}
+	}
 
-/**
- * 验证用户身份
- */
-@Override
-protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-	return super.doGetAuthenticationInfo(token);
-}
+	/**
+	 * 验证用户身份
+	 */
+	@Override
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+		return super.doGetAuthenticationInfo(token);
+	}
 
-@Override
-public void clearCachedAuthorizationInfo(PrincipalCollection principals) {
-	super.clearCachedAuthorizationInfo(principals);
-}
+	@Override
+	public void clearCachedAuthorizationInfo(PrincipalCollection principals) {
+		super.clearCachedAuthorizationInfo(principals);
+	}
 
-@Override
-public void clearCachedAuthenticationInfo(PrincipalCollection principals) {
-	super.clearCachedAuthenticationInfo(principals);
-}
+	@Override
+	public void clearCachedAuthenticationInfo(PrincipalCollection principals) {
+		super.clearCachedAuthenticationInfo(principals);
+	}
 
-@Override
-public void clearCache(PrincipalCollection principals) {
-	super.clearCache(principals);
-}
+	@Override
+	public void clearCache(PrincipalCollection principals) {
+		super.clearCache(principals);
+	}
 
-public void clearAllCachedAuthorizationInfo() {
-	getAuthorizationCache().clear();
-}
+	public void clearAllCachedAuthorizationInfo() {
+		getAuthorizationCache().clear();
+	}
 
-public void clearAllCachedAuthenticationInfo() {
-	getAuthenticationCache().clear();
-}
+	public void clearAllCachedAuthenticationInfo() {
+		getAuthenticationCache().clear();
+	}
 
-public void clearAllCachedKickoutInfo() {
+	public void clearAllCachedKickoutInfo() {
 
-}
+	}
 
-public void clearAllCache() {
-	clearAllCachedAuthenticationInfo();
-	clearAllCachedAuthorizationInfo();
-	clearAllCachedKickoutInfo();
-}
+	public void clearAllCache() {
+		clearAllCachedAuthenticationInfo();
+		clearAllCachedAuthorizationInfo();
+		clearAllCachedKickoutInfo();
+	}
 }
