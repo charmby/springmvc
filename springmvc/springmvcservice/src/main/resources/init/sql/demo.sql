@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2017-05-25 09:57:34
+Date: 2017-05-27 10:13:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,7 +26,7 @@ CREATE TABLE `permission_role_t` (
   PRIMARY KEY (`id`),
   KEY `role_id` (`role_id`),
   KEY `permission_id` (`permission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of permission_role_t
@@ -40,6 +40,7 @@ INSERT INTO `permission_role_t` VALUES ('6', '2', '2');
 INSERT INTO `permission_role_t` VALUES ('7', '2', '3');
 INSERT INTO `permission_role_t` VALUES ('8', '3', '4');
 INSERT INTO `permission_role_t` VALUES ('9', '4', '1');
+INSERT INTO `permission_role_t` VALUES ('10', '1', '5');
 
 -- ----------------------------
 -- Table structure for `permission_t`
@@ -52,7 +53,7 @@ CREATE TABLE `permission_t` (
   `permission_url` varchar(255) DEFAULT NULL,
   `permission_desc` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of permission_t
@@ -61,6 +62,8 @@ INSERT INTO `permission_t` VALUES ('1', '新增用户', 'user:insertUser', '/use
 INSERT INTO `permission_t` VALUES ('2', '根据用户名查询用户', 'user:selectUserByUserName', '/user/selectUserByUserName', '根据用户名查询用户');
 INSERT INTO `permission_t` VALUES ('3', '根据用户名和密码获取用户信息', 'user:showUserByUserNameAndPassWord', '/user/showUserByUserNameAndPassWord', '根据用户名和密码获取用户信息');
 INSERT INTO `permission_t` VALUES ('4', '删除用户', 'user:deleteUser', '/user/deleteUser', '删除用户');
+INSERT INTO `permission_t` VALUES ('5', '查询所有用户', 'user:allUsers', '/user/getAllUser', '查询所有用户');
+INSERT INTO `permission_t` VALUES ('6', '根据用户id获得用户', 'user:getUserById', '/user/getUserById', '根据用户id获得用户');
 
 -- ----------------------------
 -- Table structure for `role_t`
