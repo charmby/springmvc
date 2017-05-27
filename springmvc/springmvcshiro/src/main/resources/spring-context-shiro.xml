@@ -16,8 +16,11 @@
 	<bean name="shiroFilterChainDefinitions" class="java.lang.String">
 		<constructor-arg>
 			<value>
-				<!-- /springmvcweb=casFilter -->
+				/common/**=anon
+				/dist/**=anon
+				/theme/**=anon
 				/user/logout=logout
+				/user/login=anon
 				/index.html=anon
 				/pages/login.html=anon
 				/static/**=anon
@@ -27,8 +30,6 @@
 				/pages/buttons.html=roles[sysadmin] 
 				/pages/tables.html=roles[sa] 
 				/pages/**=authc
-				/user/login=anon
-				/logout=logout 
 				/**=anon
 			</value>
 		</constructor-arg>
