@@ -7,6 +7,13 @@ $(function() {
     $('#side-menu').metisMenu();
 });
 
+$(function() {
+	var pathName=window.document.location.pathname; 
+	var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+	var url = projectName+"/user/logout"
+    $('a#logoutaction').attr("href",projectName);
+});
+
 //Loads the correct sidebar on window load,
 //collapses the sidebar on window resize.
 // Sets the min-height of #page-wrapper to window size
