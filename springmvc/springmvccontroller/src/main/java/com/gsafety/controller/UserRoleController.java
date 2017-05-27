@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,7 +35,8 @@ public class UserRoleController{
 	@ApiResponse(code = 200, message = "success")
 	@ResponseBody
 	@RequestMapping(value = "/getUserRoleByUserId", method = RequestMethod.GET, produces = "application/json")
-	public 	List<UserRole> getUserRoleByUserId(HttpServletRequest request,@ApiParam(name = "id", required = true, value = "用户Id") @RequestParam("id") Integer id) throws Exception{
+	@RequiresPermissions("item:update")
+	public 	List<UserRole> getUserRoleByUserId(HttpServletRequest request,@ApiParam(name = "id", required = true, value = "用户Id值，int类型") @RequestParam("id") Integer id) throws Exception{
 		log.error(id+"的查询结z构！");
 		List<UserRole> role = this.userRoleService.selectByUserId(id);
 		log.info("返回role对象："+role.toString());

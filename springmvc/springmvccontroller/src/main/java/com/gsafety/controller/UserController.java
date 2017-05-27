@@ -21,6 +21,7 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.UnauthorizedException;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.jasig.cas.client.authentication.AttributePrincipal;
@@ -51,9 +52,9 @@ public class UserController{
 	@ApiResponse(code = 200, message = "success", response = Result.class)
 	@ResponseBody
 	@RequestMapping(value = "/getUserById", method = RequestMethod.GET, produces = "application/json")
+	@RequiresPermissions("user:getUserById")
 	public 		User toIndex(HttpServletRequest request,@ApiParam(name = "id", required = true, value = "用户Id") @RequestParam("id") Integer id) throws Exception{
 		log.error(id+"的查询结z构！");
-
 		AttributePrincipal principal = 	AssertionHolder.getAssertion().getPrincipal();
 		if(principal!=null){
 			String userName = principal.getName();
@@ -69,6 +70,7 @@ public class UserController{
 	@ApiResponse(code = 200, message = "success")
 	@ResponseBody
 	@RequestMapping(value = "/getAllUser", method = RequestMethod.GET, produces = "application/json")
+	@RequiresPermissions("user:allUsers")
 	public 		List<User> getAllUser() throws Exception{
 		List<User>  userList =userService.getAllUser();
 		return 		userList;
@@ -98,6 +100,7 @@ public class UserController{
 	@ApiResponse(code = 200, message = "success")
 	@ResponseBody
 	@RequestMapping(value = "/deleteUser", method = RequestMethod.GET, produces = "application/json")
+	@RequiresPermissions("user:deleteUser")
 	public 		int deleteUser(HttpServletRequest request,Integer userId) throws Exception{
 		int id = userService.deleteByPrimaryKey(userId);
 		return 	id;
@@ -111,11 +114,8 @@ public class UserController{
 	public 		User login(Model model,HttpServletRequest request,@ApiParam(name = "userName", required = true, value = "用户名") @RequestParam("userName") String  userName,@ApiParam(name = "password", required = true, value = "密码") @RequestParam("password")String  password) throws Exception{
 		    String msg = "";  
 		    String result = "";
-		    System.out.println(userName);  
-		    System.out.println(password);   
 		 // get the currently executing user:
 			Subject currentUser = SecurityUtils.getSubject();
-			
 			// Do some stuff with a Session (no need for a web or EJB container!!!)
 			Session session = currentUser.getSession();
 			String value = (String) session.getAttribute("someKey");

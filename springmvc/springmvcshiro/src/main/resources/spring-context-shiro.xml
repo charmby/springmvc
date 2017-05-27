@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
 	xsi:schemaLocation="
-           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-       ">
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       
+       
+       
+   	<!-- 开启shiro注解支持 -->
+	<bean
+		class=" org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>    
+     
 	<!-- 缓存 在spring-context配置文件中，还有一个是需要配置-cacheManager,因为shiro的session是自己实现的，所以我们还需要一个缓存框架，所以在spring的配置文件一定要注意配置哦，用的是ehcache -->
 	<!-- Shiro权限过滤过滤器定义 -->
 	<bean name="shiroFilterChainDefinitions" class="java.lang.String">
 		<constructor-arg>
 			<value>
-			   <!--  /springmvcweb=casFilter -->
-				/user/logout=logout 
-				/index.html=anon 
-				/pages/login.html =anon 
-				/static/**=anon 
-				/pages/index.html=anon 
-				/pages/blank.html =anon
-				/pages/forms.html =perms[user:deleteUser]
-				/pages/buttons.html=roles[sysadmin]
-				/pages/tables.html=roles[sa]
+				<!-- /springmvcweb=casFilter -->
+				/user/logout=logout
+				/index.html=anon
+				/pages/login.html=anon
+				/static/**=anon
+				/pages/index.html=anon
+				/pages/blank.html=anon 
+				/pages/forms.html=perms[user:deleteUser]
+				/pages/buttons.html=roles[sysadmin] 
+				/pages/tables.html=roles[sa] 
 				/pages/**=authc
 				/user/login=anon
 				/logout=logout 
@@ -67,15 +75,15 @@
 	<!-- 可以进行自定义 引入匿名对象 -->
 
 	<bean id="myAnonFilter" class="org.apache.shiro.web.filter.authc.AnonymousFilter" />
-    <bean id="myPermsFilter" class="org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter" />
-    <bean id="myUserFilter" class="org.apache.shiro.web.filter.authc.UserFilter" />
-    <bean id="myRolesFilter" class="org.apache.shiro.web.filter.authz.RolesAuthorizationFilter" />
+	<bean id="myPermsFilter" class="org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter" />
+	<bean id="myUserFilter" class="org.apache.shiro.web.filter.authc.UserFilter" />
+	<bean id="myRolesFilter" class="org.apache.shiro.web.filter.authz.RolesAuthorizationFilter" />
 	<bean id="mylogoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter" />
 	<!-- 定义Shiro安全管理配置 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-	<!-- 1、shiro自己的数据库认证。否则走cas-server的认证 -->
-	<property name="realm" ref="userRealm" />
-	<!-- <property name="realm" ref="casRealm" /> -->
+		<!-- 1、shiro自己的数据库认证。否则走cas-server的认证 -->
+		<property name="realm" ref="userRealm" />
+		<!-- <property name="realm" ref="casRealm" /> -->
 	</bean>
 	<!-- shiro-cas登录过滤器 -->
 	<bean id="casFilter" class="org.apache.shiro.cas.CasFilter"><!-- 配置验证错误时的失败页面 ，这里配置为登录页面 -->
@@ -88,14 +96,14 @@
 			value="http://localhost:8080/cas/logout?service=http://localhost:8180/springmvcweb/index.html" />
 	</bean>
 
- <!-- 自定义casRealm -->
-    <bean id="casRealm" class="com.gsafety.shiro.realms.CASRealm">
-        <!-- <property name="defaultRoles" value="ROLE_USER" /> -->
-        <!-- 配置cas服务器地址 -->
-        <property name="casServerUrlPrefix" value="http://localhost:8080/cas" />
-        <!-- 客户端的回调地址设置，必须和上面的shiro-cas过滤器casFilter拦截的地址一致 -->
-        <property name="casService" value="http://localhost:8180/springmvcweb" />
-    </bean>
+	<!-- 自定义casRealm -->
+	<bean id="casRealm" class="com.gsafety.shiro.realms.CASRealm">
+		<!-- <property name="defaultRoles" value="ROLE_USER" /> -->
+		<!-- 配置cas服务器地址 -->
+		<property name="casServerUrlPrefix" value="http://localhost:8080/cas" />
+		<!-- 客户端的回调地址设置，必须和上面的shiro-cas过滤器casFilter拦截的地址一致 -->
+		<property name="casService" value="http://localhost:8180/springmvcweb" />
+	</bean>
 	<!-- Shiro生命周期处理器 -->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 </beans>

@@ -40,7 +40,6 @@
 		的package路径 -->
 	<context:component-scan
 		base-package="com.gsafety.**.controller,com.gsafety.po,com.gsafety.**.po" />
-
 	<!-- 还需要在spring-mvc.xml中添加映射静态的配置： -->
 
 	<mvc:default-servlet-handler />
