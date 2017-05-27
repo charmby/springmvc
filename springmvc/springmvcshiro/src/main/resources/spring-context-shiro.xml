@@ -22,7 +22,6 @@
 				/dist/**=anon
 				/theme/**=anon
 				/user/login=anon
-				/index.html=anon
 				/static/**=anon
 				/pages/blank.html=anon
 				/user/logout=logout
