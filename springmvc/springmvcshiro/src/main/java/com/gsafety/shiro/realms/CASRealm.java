@@ -98,7 +98,8 @@ public class CASRealm extends CasRealm {
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-		return super.doGetAuthenticationInfo(token);
+		AuthenticationInfo result =  super.doGetAuthenticationInfo(token);
+		return result;
 	}
 
 	@Override
