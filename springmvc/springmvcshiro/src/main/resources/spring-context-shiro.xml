@@ -41,7 +41,7 @@
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<!-- loginUrl登录页面，successUrl登录成功的页面 -->
-		<property name="loginUrl" value="http://localhost:8080/cas/login?service=http://localhost:8180/springmvcweb/cas" />
+		<property name="loginUrl" value="http://localhost:8080/cas/login?service=http://localhost:8280/springmvcweb/cas" />
 		<!-- 成功页面在集成cas的时候，要去掉，否则一直在重定向。但是在单独使用shiro的时候要保留。 -->
 		<property name="successUrl" value="/" />
 		<!-- unauthorizedUrl，系统未认证时跳转的页面 -->
@@ -103,7 +103,7 @@
 	<!-- 退出登录过滤器 -->
 	<bean id="casLogout" class="org.apache.shiro.web.filter.authc.LogoutFilter">
 		<property name="redirectUrl"
-			value="http://localhost:8080/cas/logout?service=http://localhost:8180/springmvcweb/index.html" />
+			value="http://localhost:8080/cas/logout?service=http://localhost:8280/springmvcweb/index.html" />
 	</bean>
 
 
@@ -117,7 +117,7 @@
 		<!-- 配置cas服务器地址 -->
 		<property name="casServerUrlPrefix" value="http://localhost:8080/cas" />
 		<!-- 客户端的回调地址设置，必须和上面的shiro-cas过滤器casFilter拦截的地址一致 -->
-		<property name="casService" value="http://localhost:8180/springmvcweb/cas" />
+		<property name="casService" value="http://localhost:8280/springmvcweb/cas" />
 	</bean>
 	   <!-- 相当于调用SecurityUtils.setSecurityManager(securityManager) -->
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
