@@ -24,6 +24,7 @@
 				/user/login=anon
 				/static/**=anon
 				/pages/blank.html=anon
+				/index.html=user
 				/user/logout=logout
 				/cas=casFilter
 				/pages/forms.html=perms[user:deleteUser]
