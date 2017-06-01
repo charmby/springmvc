@@ -86,7 +86,7 @@
 	<!-- 配置 Shiro 的 Filter 结束 -->
 
 	<welcome-file-list>
-		<welcome-file>/pages/index.html</welcome-file>
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
 	<!--用于单点退出，该过滤器用于实现单点登出功能，可选配置 -->
