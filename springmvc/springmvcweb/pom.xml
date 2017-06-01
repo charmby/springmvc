@@ -25,40 +25,20 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
-<!-- 		<dependency>
-			<groupId>com.gsafety</groupId>
-			<artifactId>springmvcweb2</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<type>war</type>
-			<scope>import</scope>
-		</dependency> -->
+		<!-- <dependency> <groupId>com.gsafety</groupId> <artifactId>springmvcweb2</artifactId> 
+			<version>0.0.1-SNAPSHOT</version> <type>war</type> <scope>import</scope> 
+			</dependency> -->
 		<dependency>
 			<groupId>com.gsafety</groupId>
 			<artifactId>springmvcshiro</artifactId>
 		</dependency>
-
 	</dependencies>
 	<build>
 		<finalName>springmvcweb</finalName>
-<!-- 	
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<overlays>
-						<overlay>
-							<groupId>com.gsafety</groupId>
-							<artifactId>springmvcweb2</artifactId>
-						</overlay>
-					</overlays>
+		<!-- <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-war-plugin</artifactId> 
+			<configuration> <overlays> <overlay> <groupId>com.gsafety</groupId> <artifactId>springmvcweb2</artifactId> 
+			</overlay> </overlays> </configuration> </plugin> </plugins> -->
 
-				</configuration>
-
-			</plugin>
-		</plugins>
-	 -->
-
-</build>
+	</build>
 
 </project>
