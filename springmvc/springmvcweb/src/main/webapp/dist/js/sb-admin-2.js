@@ -8,6 +8,7 @@ $(function() {
 });
 
 $(function() {
+	debugger;
 	var pathName=window.document.location.pathname; 
 	var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
 	var url = projectName+"/user/logout"
