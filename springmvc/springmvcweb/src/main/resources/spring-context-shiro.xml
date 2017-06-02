@@ -53,7 +53,7 @@
 				<!-- 匿名的校验 -->
 				<entry key="anon" value-ref="myAnonFilter" />
 				<!-- 匿名的校验 -->
-				<entry key="authc" value-ref="myAuthcFilter" />
+			    <entry key="authc" value-ref="myAuthcFilter" /> 
 				<!-- 登出的校验 -->
 				<entry key="logout" value-ref="casLogout" />
 				<!-- 用户的校验 -->
