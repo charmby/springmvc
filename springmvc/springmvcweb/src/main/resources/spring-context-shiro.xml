@@ -17,6 +17,12 @@
 	<bean name="shiroFilterChainDefinitions" class="java.lang.String">
 		<constructor-arg>
 			<value>
+			    /jqueryui/**=anon
+			    /jquery/**=anon
+			    /fonts/**=anon
+			    /bootstrap/**=anon
+			    /vendor/**=anon
+			    /font/**=anon
 			    /pages/errors.html=anon
 			    /common/**=anon
 				/dist/**=anon
