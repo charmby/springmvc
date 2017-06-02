@@ -17,6 +17,7 @@
 	<bean name="shiroFilterChainDefinitions" class="java.lang.String">
 		<constructor-arg>
 			<value>
+			    /swagger-ui.html=anon
 			    /jqueryui/**=anon
 			    /jquery/**=anon
 			    /fonts/**=anon
