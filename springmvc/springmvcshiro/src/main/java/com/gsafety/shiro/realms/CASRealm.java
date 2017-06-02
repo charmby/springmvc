@@ -24,11 +24,7 @@ import com.gsafety.service.IRoleService;
 import com.gsafety.service.IUserRoleService;
 import com.gsafety.service.IUserService;
 
-
-
-//@Service
 @SuppressWarnings("deprecation")
-@Transactional(value = "nhmzTM")
 public class CASRealm extends CasRealm {
 
 	@Resource(name="userService")

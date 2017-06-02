@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -52,10 +53,20 @@ public class UserController{
 	@ApiResponse(code = 200, message = "success", response = Result.class)
 	@ResponseBody
 	@RequestMapping(value = "/getUserById", method = RequestMethod.GET, produces = "application/json")
-	@RequiresPermissions("user:getUserById")
+	/*@RequiresPermissions("user:getUserById")*/
 	public 		User toIndex(HttpServletRequest request,@ApiParam(name = "id", required = true, value = "用户Id") @RequestParam("id") Integer id) throws Exception{
 		log.error(id+"的查询结z构！");
+		
+		AttributePrincipal principal2 = (AttributePrincipal)request.getUserPrincipal();  
+	    Map<String, Object> attributes = principal2.getAttributes();  
+		if(attributes!=null){
+			for(Map.Entry<String,Object> entry : attributes.entrySet()){  
+		        //服务端返回中文时需要encode,客户端接收显示中文时需要decode,否则会乱码  
+		        System.out.println(entry.getKey() + "=" + entry.getValue().toString()+ "<br/>");  
+		    }  
+		}
 		AttributePrincipal principal = 	AssertionHolder.getAssertion().getPrincipal();
+		
 		if(principal!=null){
 			String userName = principal.getName();
 			System.out.println(userName);
