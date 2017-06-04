@@ -57,14 +57,14 @@ public class UserController{
 	public 		User toIndex(HttpServletRequest request,@ApiParam(name = "id", required = true, value = "用户Id") @RequestParam("id") Integer id) throws Exception{
 		log.error(id+"的查询结z构！");
 		
-		AttributePrincipal principal2 = (AttributePrincipal)request.getUserPrincipal();  
+	/*	AttributePrincipal principal2 = (AttributePrincipal)request.getUserPrincipal();  
 	    Map<String, Object> attributes = principal2.getAttributes();  
 		if(attributes!=null){
 			for(Map.Entry<String,Object> entry : attributes.entrySet()){  
 		        //服务端返回中文时需要encode,客户端接收显示中文时需要decode,否则会乱码  
 		        System.out.println(entry.getKey() + "=" + entry.getValue().toString()+ "<br/>");  
 		    }  
-		}
+		}*/
 		AttributePrincipal principal = 	AssertionHolder.getAssertion().getPrincipal();
 		
 		if(principal!=null){
@@ -128,7 +128,9 @@ public class UserController{
 		 // get the currently executing user:
 			Subject currentUser = SecurityUtils.getSubject();
 			// Do some stuff with a Session (no need for a web or EJB container!!!)
+			
 			Session session = currentUser.getSession();
+			System.out.println("UserController中的"+"我的测试线程="+Thread.currentThread().getName()); 
 			String value = (String) session.getAttribute("someKey");
 			if (value!=null&&value.equals("aValue")) {
 				log.info("Retrieved the correct value! [" + value + "]");

@@ -89,7 +89,9 @@
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
-	<!--用于单点退出，该过滤器用于实现单点登出功能，可选配置 -->
+
+	<!-- 此配置仅仅用于未集成shiro时，使用-开始 -->
+	<!--用于单点退出，该过滤器用于实现单点登出功能，可选配置- -->
 	<!-- <listener> <listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class> 
 		</listener> -->
 
@@ -130,7 +132,25 @@
 
 	<!-- ======================== 单点登录结束 ======================== -->
 
+	<!-- 此配置仅仅用于未集成shiro时，使用-结束 -->
+	<filter>
+		<filter-name>CASHttpServletRequestWrapperFilter</filter-name>
+		<filter-class>org.jasig.cas.client.util.HttpServletRequestWrapperFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CASHttpServletRequestWrapperFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
+	<!-- 该过滤器使得开发者可以通过org.jasig.cas.client.util.AssertionHolder来获取用户的登录名。 比如AssertionHolder.getAssertion().getPrincipal().getName()。 -->
+	<filter>
+		<filter-name>CASAssertionThreadLocalFilter</filter-name>
+		<filter-class>org.jasig.cas.client.util.AssertionThreadLocalFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CASAssertionThreadLocalFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	<!-- 获取返回信息 -->
 	<servlet>
 		<servlet-name>helloWorldGetName</servlet-name>

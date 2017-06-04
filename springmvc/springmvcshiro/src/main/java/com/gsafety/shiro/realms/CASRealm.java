@@ -95,6 +95,7 @@ public class CASRealm extends CasRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		AuthenticationInfo result =  super.doGetAuthenticationInfo(token);
+		System.out.println("CasRealm中的"+"我的测试线程="+Thread.currentThread().getName()); 
 		return result;
 	}
 
