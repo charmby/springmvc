@@ -43,13 +43,13 @@
 			</value>
 		</constructor-arg>
 	</bean>
-
+<!-- 
 	<bean id="userRealm" class="com.gsafety.shiro.realms.UserRealm" >
 	 <property name="rolePermissionResolver" ref=""></property>
 	
 	</bean>
 	
-	<bean id="rolePermissionResolver" class=""/>
+	<bean id="rolePermissionResolver" class=""/> -->
 	
 	<!-- 安全认证过滤器 -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
