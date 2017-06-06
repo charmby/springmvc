@@ -86,38 +86,7 @@
           var username = $("#userName").val();
            var passwd = $("#password").val();
            var obj = {'userName':username,'password':passwd};
-/*            $.ajax({
-        	    url:url,
-        	    type:'POST', //GET
-        	    contentType: "application/json", 
-        	    data:JSON.stringify({'userName':username,'password':passwd}),
-        	    beforeSend:function(xhr){
-        	        console.log(xhr)
-        	        console.log('发送前');
-        	       
-        	    },
-        	    success:function(data,textStatus,jqXHR){
-        	    	 debugger;
-        	        console.log(data)
-        	        console.log(textStatus)
-        	        console.log(jqXHR)
-        	        window.location= pathName+"/pages/index.html";
-        	    },
-        	    error:function(data){
-        	    	 debugger;
-        	    	 if(data.status==200){ 
-        	    		 debugger;
-        	             
-        	         } else {  
-        	               
-        	         }  
-        	    	
-        	    	window.location= pathName+"/pages/index.html";
-        	    },
-        	    complete:function(){
-        	        console.log('结束')
-        	    }
-        	}); */
+
            
            $.ajax({
          	   contentType: "application/json",  
@@ -131,13 +100,13 @@
                    if (data != null) {
                        console.log("请求已提交！我们会尽快与您取得联系");
                    }
-                   window.location.href= pathName+"/pages/index.html";
+                   window.location.href= pathName+"/pagere/main.html";
                    window.event.returnValue=false
                },
                error: function (data) {
             	   debugger;
                    $("#request-process-patent").html("提交数据失败！");
-                   window.location.href= pathName+"/pages/index.html";
+                   window.location.href= pathName+"/pagere/main.html";
                    window.event.returnValue=false
                }
            });

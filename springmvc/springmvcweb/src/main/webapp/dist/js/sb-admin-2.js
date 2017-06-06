@@ -12,7 +12,17 @@ $(function() {
 	var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
 	var url = projectName+"/user/logout"
     $('a#logoutaction').attr("href",url);
+    
+
+	
+	
 });
+
+function loadpageonclick(page){
+	debugger;
+	$("#page-wrapper").load(page);
+	return false;
+}
 
 //Loads the correct sidebar on window load,
 //collapses the sidebar on window resize.
