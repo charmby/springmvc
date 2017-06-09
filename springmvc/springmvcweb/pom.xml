@@ -32,6 +32,10 @@
 			<groupId>com.gsafety</groupId>
 			<artifactId>springmvcshiro</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.gsafety</groupId>
+			<artifactId>springmvcresthttpclient</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>springmvcweb</finalName>
