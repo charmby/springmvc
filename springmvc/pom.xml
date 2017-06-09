@@ -50,6 +50,7 @@
 		<module>springmvcweb2</module>
 		<module>springmvcweb3</module>
 		<module>springmvcshiro</module>
+		<module>springmvcresthttpclient</module>
 	</modules>
 
 	<build>
