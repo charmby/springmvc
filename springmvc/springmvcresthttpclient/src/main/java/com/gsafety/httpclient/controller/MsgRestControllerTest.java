@@ -49,7 +49,7 @@ public class MsgRestControllerTest {
 	@ResponseBody
 	@RequestMapping(value = "/testzzlPost", method = RequestMethod.POST, produces = "application/json")
 	public void testzzlPost(){
-		HttpRestUtils.zzlPost();
+
 		/*       String resp = HttpRestUtils.post("http://localhost:6080/cloud-push-server/realTimeMessage", JSONUtil.toJSONString(msg));
         System.out.println(resp);*/
 	}
