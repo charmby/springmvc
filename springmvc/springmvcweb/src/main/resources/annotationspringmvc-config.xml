@@ -39,7 +39,7 @@
 	<!-- 扫包 com.gsafety.**.controller代表了 1、com.gsafety.bak.controller； 2、com.gsafety.controller；3、com.gsafety.a.b.xxx.controller 
 		的package路径 -->
 	<context:component-scan
-		base-package="com.gsafety.**.controller,com.gsafety.po,com.gsafety.**.po" />
+		base-package="com.gsafety.**.controller,com.gsafety.**.Controller,com.gsafety.po,com.gsafety.**.po" />
 	<!-- 还需要在spring-mvc.xml中添加映射静态的配置： -->
 
 	<mvc:default-servlet-handler />
