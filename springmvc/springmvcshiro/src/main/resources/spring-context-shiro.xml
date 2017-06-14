@@ -4,9 +4,7 @@
 	xsi:schemaLocation="
            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
-
-	<!-- 开启shiro注解支持 -->
+	<!-- 开启shiro注解支持。shiro和cas的整合项目。 -->
 	<bean
 		class=" org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
 		<property name="securityManager" ref="securityManager" />
