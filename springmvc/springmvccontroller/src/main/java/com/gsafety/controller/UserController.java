@@ -6,10 +6,10 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import org.testng.Assert;
 
 import com.gsafety.po.Result;
@@ -87,7 +88,7 @@ public class UserController{
 		return 		userList;
 	}
 
-	@ApiOperation(value = "更新用户信息", httpMethod = "post", produces = "application/json")
+	@ApiOperation(value = "更新用户信息", httpMethod = "get", produces = "application/json")
 	@ApiResponse(code = 200, message = "success")
 	@ResponseBody
 	@RequestMapping(value = "/updateUser", method = RequestMethod.GET, produces = "application/json")
@@ -95,7 +96,19 @@ public class UserController{
 		int id =	userService.updateByPrimaryKeySelective(user);
 		return 		id;
 	}
-
+	@ApiOperation(value = "response直接返回信息", httpMethod = "get")
+	@ApiResponse(code = 200, message = "success")
+	@ResponseBody
+	@RequestMapping(value = "/response的Write", method = RequestMethod.GET)
+	public 	ModelAndView  updateUser2(HttpServletRequest request,HttpServletResponse response) throws Exception{
+		//这句话的意思，是让浏览器用utf8来解析返回的数据  
+		response.setHeader("Content-type", "text/html;charset=UTF-8");  
+		//这句话的意思，是告诉servlet用UTF-8转码，而不是用默认的ISO8859  
+		response.setCharacterEncoding("UTF-8");  
+		response.getWriter().write("我是肖东红！");
+		//如果想直接在该处理器/控制器写响应 可以通过返回null告诉DispatcherServlet自己已经写出响应了，不需要它进行视图解析
+		return 		null;
+	}
 
 	@ApiOperation(value = "新增用户信息", httpMethod = "post", produces = "application/json")
 	@ApiResponse(code = 200, message = "success")
