@@ -15,7 +15,9 @@
 	<bean name="shiroFilterChainDefinitions" class="java.lang.String">
 		<constructor-arg>
 			<value>
-			     /data/**=anon
+			    /data/**=anon
+			    /pages/login.html=anon
+			    /index.html=anon
 			    /swagger-ui.html=anon
 			    /jqueryui/**=anon
 			    /jquery/**=anon
@@ -30,7 +32,6 @@
 				/user/login=anon
 				/static/**=anon
 				/pages/blank.html=anon
-				/index.html=user
 				/user/logout=logout
 				/pages/forms.html=perms[user:deleteUser]
 				/pages/buttons.html=roles[sa]
