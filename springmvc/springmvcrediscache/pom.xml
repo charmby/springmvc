@@ -7,20 +7,29 @@
     <artifactId>springmvc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>com.gsafety</groupId>
   <artifactId>springmvcrediscache</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>springmvcrediscache</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
+		
+		<!-- 引入mybatis的缓存 -->
+			<!-- spring-redis实现 -->
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-redis</artifactId>
+			</dependency>
+			<!-- redis客户端jar -->
+			<dependency>
+				<groupId>redis.clients</groupId>
+				<artifactId>jedis</artifactId>
+			</dependency>
+			<!-- Ehcache实现,用于参考 -->
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis-ehcache</artifactId>
+			</dependency>
+			<!-- 引入mybatis的缓存 结束-->
   </dependencies>
 </project>

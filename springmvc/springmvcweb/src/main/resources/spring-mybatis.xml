@@ -16,15 +16,11 @@
                         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<!-- 自动扫描 -->
 	<!-- 引入配置文件 -->
-	<bean id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:jdbc.properties" />
-	</bean>
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/demo" />
+		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 		<!-- 初始化连接大小 -->

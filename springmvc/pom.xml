@@ -163,7 +163,6 @@
 	<dependencyManagement>
 		<dependencies>
 		
-		
 		<!-- 引入mybatis的缓存 -->
 			<!-- spring-redis实现 -->
 			<dependency>
@@ -183,8 +182,9 @@
 				<artifactId>mybatis-ehcache</artifactId>
 				<version>1.0.0</version>
 			</dependency>
+			<!-- 引入mybatis的缓存 结束-->
 			
-			<!-- 引入mybatis的缓存 -->
+			
 			<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson 用于json对象的解析和处理，开始 -->
 			<dependency>
 				<groupId>com.google.code.gson</groupId>

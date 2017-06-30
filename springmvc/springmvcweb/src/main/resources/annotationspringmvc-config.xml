@@ -86,15 +86,9 @@
 			<mvc:mapping path="/**" />
 			<bean class="com.gsafety.util.interceptor.LogHandlerInterceptorAdapter"></bean>
 		</mvc:interceptor>
-
-
 	</mvc:interceptors>
-
-
 	<!-- 拦截器结束 -->
-
 	<!-- xml和json转化 -->
-
 	<!-- <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"> 
 		<property name="supportedMediaTypes"> <list> <value>text/html;charset=UTF-8</value> 
 		<value>application/json;charset=UTF-8</value> </list> </property> </bean> -->
@@ -110,7 +104,6 @@
 	</bean>
 
 	<!-- 处理异常信息 -->
-
 	<!-- 国际化开始 -->
 	<!-- 用于接收浏览器的国际化语言 -->
 	<bean id="messageSource"
