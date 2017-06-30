@@ -13,9 +13,7 @@
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-	<!-- 该文件只会扫描springmvc的注释，并不会扫描spring的service等注释 -->
 	<!-- 开启注解模式驱动 -->
-	<!-- <mvc:annotation-driven /> -->
 	<mvc:annotation-driven>
 		<!-- 定义message转换 -->
 		<mvc:message-converters>
@@ -33,8 +31,6 @@
 				class="org.springframework.http.converter.ResourceHttpMessageConverter" />
 		</mvc:message-converters>
 	</mvc:annotation-driven>
-
-
 
 	<!-- 扫包 com.gsafety.**.controller代表了 1、com.gsafety.bak.controller； 2、com.gsafety.controller；3、com.gsafety.a.b.xxx.controller 
 		的package路径 -->

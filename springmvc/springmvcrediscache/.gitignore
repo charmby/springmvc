@@ -1,0 +1,5 @@
+/.settings/
+/.project
+/target/
+rebel.xml
+rebel-remote.xml
