@@ -5,13 +5,13 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(description = "JSON返回结果信息")
 public class JSONResult {
-	 @ApiModelProperty(value = "结果信息")
+	@ApiModelProperty(value = "结果信息")
 	private String message;
-	 @ApiModelProperty(value = "返回编码")
+	@ApiModelProperty(value = "返回编码")
 	private int code = -1;
-	 @ApiModelProperty(value = "消息编码")
+	@ApiModelProperty(value = "消息编码")
 	private String messageCode;
-	 @ApiModelProperty(value = "返回体信息")
+	@ApiModelProperty(value = "返回体信息")
 	private Object body;
 	public String getMessage() {
 		return message;
